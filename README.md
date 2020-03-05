@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+More coming soon! See below for a glimpse...
 
-Things you may want to cover:
+See-The-Ethe, an Etherscan clone, is a blockchain explorer that provides rich data feeds, and analytics about accounts, miners, contracts and their transactions. A user can label, comment, and track accounts. Stretch features include allowing users to curate contracts, dapps, and dexas that they can prove ownership of and also allow direct interaction with read and write functions of smart contracts.
 
-* Ruby version
+# See-The-Ethe Design Documents
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* [MVP list](https://github.com/emostov/see-ethe/wiki/MVPs)
+* [Schema](https://github.com/emostov/see-ethe/wiki/Schema)
+* [Sample State](https://github.com/emostov/see-ethe/wiki/Sample-State)
+* [Frontend routes and components](https://github.com/emostov/see-ethe/wiki/Frontend-routes-and-components)
+* [Backend routes](https://github.com/emostov/see-ethe/wiki/Backend-routes)
