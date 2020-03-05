@@ -27,7 +27,7 @@ const NetworkOverview = () => {
 
                   {/* <Media object data-src="assets/ethe-price.svg"  /> */}
                 </Media>
-                <Media body>
+                <Media body className='width-100pe'>
                   <Media heading className='net-overview-secondary-txt'>
                     ETHER Price
                     </Media>
@@ -47,7 +47,7 @@ const NetworkOverview = () => {
                     <img className='' src="assets/world-marked.png" />
                   </figure>
                 </Media>
-                <Media body>
+                <Media body className='width-100pe'>
                   <Media heading className='net-overview-secondary-txt'>
                     Market Cap
                     </Media>
@@ -69,34 +69,53 @@ const NetworkOverview = () => {
                     <img className='' src="assets/latest-block.png" />
                   </figure>
                 </Media>
-                <Media body>
+
+                <Media body className='width-latest-block '>
                   <Media heading className='net-overview-secondary-txt'>
                     Latest Block
                     </Media>
                   <a className='net-overview-primary-link-txt'>9609400</a>
                   <span className='secondary-small'> (13.0s)</span>
-
                 </Media>
+
+                <div className='text-right'>
+                  <Media heading className='net-overview-secondary-txt'>
+                    Transaction
+                    </Media>
+                  <a className='net-overview-primary-link-txt'>651.178</a>
+                  <span className='secondary-small'> (8.8 TPS)</span>
+                </div>
+
               </Media>
 
 
             </div>
             <hr className='hr-space-lg'></hr>
             <div className='media align-items-center'>
+
               <Media>
                 <Media left href="#">
                   <figure className='u-sm-avatar mr-2'>
                     <img className='' src="assets/mine-icon.png" />
                   </figure>
                 </Media>
-                <Media body>
+
+                <Media body className='width-difficulty'>
                   <Media heading className='net-overview-secondary-txt'>
                     Difficulty
                     </Media>
                   <a className='net-overview-primary-link-txt'>2,295</a>
                 </Media>
-              </Media>
 
+                <div className='text-right'>
+                  <Media heading className='net-overview-secondary-txt'>
+                    Hash Rate
+                    </Media>
+                  <a className='net-overview-primary-link-txt'>2,295</a>
+                </div>
+
+
+              </Media>
             </div>
 
           </Col >

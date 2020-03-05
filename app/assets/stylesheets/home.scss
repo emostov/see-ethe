@@ -1,3 +1,5 @@
+// This file has css for home, network_health, and home_search_bar
+
 $spacer: 5px;
 
 .gradient-half-primary-body{
@@ -14,17 +16,22 @@ $spacer: 5px;
   border-radius: 0px;
 }
 
-// .gradient-half-primary-body .form-group {
-//   border-radius: 0px;
-// }
+.text-right {
+  text-align: right;
+  min-width: 50%;
+}
 
-// .form-inline .form-control {
-//   border-radius: 0px;
-// }
+.space-between {
+  display: flex;
+  justify-content: space-between;
+}
+.width-latest-block {
+  min-width: 55%;
+}
+.width-difficulty{
+  min-width: 102%;
+}
 
-// .form-control {
-//   background-clip: border-box;
-// }
 
 .md-4.card {
   padding: 12px;
@@ -88,9 +95,7 @@ $spacer: 5px;
   color: #fff!important;
 }
 
-// f-13 {
-//   font-size: 13!important;
-// }
+
 
 h5.white-text{
   font-size: 1.01563rem;
@@ -100,12 +105,6 @@ h5.white-text{
 div.search-bar.input-group {
   font-size: 13px;
 }
-
-// #searchSelect , #searchInput {
-//   font-size: 13px;
-//   padding: 12px 16px;
-// }
-
 
 
 .white-btn {
@@ -118,8 +117,6 @@ div.search-bar.input-group {
   font-size: 13px!important;
   background-color: #3498db!important;
   border-color: #3498db!important;
-  // border-top-left-radius: 0!important;
-  // border-bottom-left-radius: 0!important;
 }
 
 
@@ -148,12 +145,12 @@ ul.small-text{
 
 ul.small-text li {
   display: block;
-  flex: 0 1 auto; /* Default */
+  flex: 0 1 auto; 
 }
 
 li.small-text {
   display: block;
-  flex: 0 1 auto; /* Default */
+  flex: 0 1 auto; 
   margin-left: 7.5px;
 }
 

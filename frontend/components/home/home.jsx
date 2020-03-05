@@ -12,6 +12,7 @@ import {
 
 import HomeSearchBar from './home_search_bar';
 import NetworkOverview from './network_overview';
+// import BlockAndTransactionFeeds from './'
 
 const Home = () => {
 
