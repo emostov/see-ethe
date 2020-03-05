@@ -1,0 +1,53 @@
+.card-header-title {
+  font-size: .8125rem;
+  font-weight: 600;
+  margin-bottom: 0;
+  margin-top: 0;
+  color: #4a4f55;
+}
+
+.feed-footer-btn {
+  cursor: pointer;
+  border-radius: .125rem!important;
+  font-size: .72rem!important;
+  font-weight: 400!important;
+  padding: .3rem .6rem!important;
+  color: #3498db!important;
+  background: rgba(52,152,219,.1)!important;
+  border-color: transparent!important;
+  text-decoration: none!important;
+}
+
+.card-scroll-holder{
+  overflow: hidden!important;
+  height: 400px!important;
+  position: relative!important;
+  // overflow: visible!important;
+  
+}
+
+.scroll-conatiner {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  max-width: 100%;
+  outline: none;
+  direction: ltr;
+  max-height: none;
+}
+
+.scroll-items-container {
+  position: relative;
+  top: -67px;
+  left: 0px;
+  direction: ltr;
+  // unicode-bidi: isolate;
+}
+
+
+
+
+::selection {
+  color: #fff;
+  background-color: #3498db;
+}

@@ -12,7 +12,7 @@ import {
 
 const NetworkOverview = () => {
   return (
-    <Container fluid='lg'>
+    <Container fluid='lg' className='md-4'>
       <Card className='md-4'>
         <Row className='mx-gutters-md-1'>
 
@@ -57,7 +57,7 @@ const NetworkOverview = () => {
               </Media>
 
             </div>
-            <hr class='d-none d-md-none hr-space-lg' />
+            <hr className='d-none d-md-none hr-space-lg' />
             {/* ::after */}
           </Col>
 
