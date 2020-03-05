@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row, Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
+import { Col, Row, Button, Form, FormGroup, Label, Input, Alert, Container } from 'reactstrap';
 import DemoUserContainer from './demo_user_container';
 
 
@@ -81,20 +81,21 @@ class SessionForm extends React.Component {
 
     return (
       <div className='form-nav-text-and-link' className="std-ft-size" >
-        <Row >
-          <Col>
-            {textInner}
-            <br />
-            {this.props.navLink}
-          </Col>
-          <Col>
-            <div className='flex-right'>
-              <Button className="std-ft-size" size="sm" type='submit' color="primary">
-                {this.submitBtnText()}
-              </Button>
-            </div>
-          </Col>
-        </Row>
+
+          <Row >
+            <Col>
+              {textInner}
+              <br />
+              {this.props.navLink}
+            </Col>
+            <Col>
+              <div className='flex-right'>
+                <Button className="std-ft-size" size="sm" type='submit' color="primary">
+                  {this.submitBtnText()}
+                </Button>
+              </div>
+            </Col>
+          </Row>
 
       </div>
     )
