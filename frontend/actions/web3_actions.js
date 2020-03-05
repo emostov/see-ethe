@@ -22,7 +22,7 @@ const processBlock = (dispatch) => (err, block) => {
   if (!err) {
     dispatch(receiveBlock(block));
   } else {
-    // console.log('processBlock got the following ERROR: ', err);
+    console.error('Block reciept ERROR: ', err);
   }
 };
 

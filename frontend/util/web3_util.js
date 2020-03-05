@@ -1,17 +1,11 @@
 import Web3 from 'web3';
 
 import infuraEndPoint from './web3_identity';
+
 const web3 = new Web3(new Web3.providers.HttpProvider(infuraEndPoint));
 
 
-export const start = () => {
-  console.log(infuraEndpoint);
-
-  web3.eth.getBlock(web3.eth.getBlock)
-    .then(console.log);
-};
-
-
+// utility for creating a number range to loop over
 const range = (start, end) => {
   const result = [];
   for (let i = start; i <= end; i += 1) {
@@ -20,19 +14,12 @@ const range = (start, end) => {
   return result;
 };
 
-export const processGetBlockResoponse = (err, block) => {
-  // console.log('err', err);
-  console.log('block', block);
-};
-
 // https://ethereum.stackexchange.com/questions/1587/how-can-i-get-the-data-of-the-latest-10-blocks-via-web3-js
-
 
 export const getNLatestBlocks = (n, processBlockCB) => {
   const batch = new web3.BatchRequest();
 
   web3.eth.getBlockNumber().then((latestBlockNum) => {
-    console.log('testing, 2', latestBlockNum);
     const blockRange = range(latestBlockNum - n, latestBlockNum + 1);
     const returnTransactionObjects = true;
     blockRange.forEach((blockNum) => {
@@ -78,15 +65,4 @@ export const requestBatcher = (...args) => {
 //   const { transactions } = block;
 
 // }
-
-
-
-// https://ethereum.stackexchange.com/questions/38403/best-way-to-get-latest-block-data
-// NOTE - filter is decremented and infura subscription does not support subscribe
-// export const watchForNewBlocks = () => {
-//   web3v2.eth.subscribe('newBlockHeaders', (blockHeader, other) => {
-//     console.log(blockHeader);
-//     console.log(other);
-//   })
-// };
 
