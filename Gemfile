@@ -11,7 +11,7 @@ gem 'figaro'
 gem 'font-awesome-sass', '~> 5.12.0'
 gem 'sprockets-rails', require: 'sprockets/railtie'
 
-gem 'rails_12factor'
+# gem 'rails_12factor'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.1'
