@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SeeEthe</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= favicon_link_tag asset_path('site-logo.png') %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Slabo+27px&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

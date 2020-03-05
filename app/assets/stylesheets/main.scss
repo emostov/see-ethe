@@ -1,0 +1,90 @@
+html, body {
+    margin: 0;
+    // height: 100%;
+}
+
+body {
+  font-family: Helvetica Neue,bHelvetica, Arial, sans-serif!important;
+  color: #1e2022;
+  font-size: .8125rem;
+  line-height: 1.5;
+  background-color: #fff;
+
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
+
+main {
+  flex: 1 1 auto;
+  background-color: #f8f9fa;
+  position: relative;
+  min-height: 1000px;
+  
+}
+
+.blue-footer {
+  flex: 0 1 25%;
+  background-image: linear-gradient(150deg,#19a0ff,#2d1582);
+  background-repeat: repeat-x;
+  background-attachment: fixed;
+  padding-bottom: 1.25rem!important;
+  padding-top: 1.25rem!important;
+  display: block;
+  min-height: 300px;
+  box-sizing: border-box;
+
+}
+
+.width-90 {
+  width: 90%;
+}
+
+.container {
+  max-width: 960px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+main > .container {
+
+  padding-top: 3.25rem;
+  padding-bottom: 3.25em;
+  padding-left: 7px;
+  padding-bottom: 7px;
+}
+
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.flex-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nf {
+  cursor: no-drop!important;
+}
+
+// a.active {
+//   background: #3498db;
+// }
+
+.list-group-item.active{
+  background-color: #3498db!important;
+  border-color: #3498db!important;
+}
+#run-web3 {
+  display: none;
+}

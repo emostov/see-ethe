@@ -1,0 +1,53 @@
+
+div.row {
+  min-width: 960px;
+}
+.col-md-3 {
+  min-width: 200px!important;
+  padding: 0px 7.5px!important;
+}
+
+.col-md-9 {
+  min-width: 700px;
+  padding: 0px 7.5px!important;
+}
+
+
+.pain-nav-link {
+  // padding: 12px;
+  padding: .75rem;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: .3s;
+  color: rgba(74,79,85,.8)!important;
+}
+
+.pain-nav-link.active {
+  border-bottom-color: #3498db;
+  color: #3498db!important;
+}
+
+.card-txt-2 {
+  font-size: 13px;
+  color: #6c757e;
+}
+
+th, td {
+  font-size: 13px!important;
+  color: #1e2022;
+  font-weight: 400!important;
+}
+
+.card-header {
+  background: #FFFFFF!important;
+}
+
+.list-group-item {
+  font-size: .75156rem;
+}
+
+.blue-icon {
+  display: flex;
+  justify-content: flex-end;
+  color: #3498db;
+}

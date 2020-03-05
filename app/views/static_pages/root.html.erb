@@ -1,0 +1,12 @@
+<% if logged_in? %>
+  <script id="bootstrap-current-user" type="text/javascript">
+  	window.currentUser = <%= render("api/users/user.json.jbuilder",
+  		user: current_user).html_safe %>
+  </script>
+<% end %>
+
+<script id="bootstrap-api" type="text/javascript">
+  window.INFURA_PROJECT_ID = '<%= ENV['INFURA_PROJECT_ID'] %>'
+</script>
+
+<main id="root">broke boy</main>

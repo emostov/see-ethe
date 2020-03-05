@@ -1,0 +1,48 @@
+.gradient-half-primary-body{
+  background-image: linear-gradient(150deg, #19a0ff, #2d1582);
+  background-repeat: repeat-x;
+  background-attachment: fixed;
+}
+
+.card, main-contents {
+  box-shadow: 0 0.5rem 1.2rem rgba(189,197,209,.2)!important;
+}
+
+#searchInput {
+  border-radius: 0px;
+}
+
+.gradient-half-primary-body .form-group {
+  border-radius: 0px;
+}
+
+.form-inline .form-control {
+  border-radius: 0px;
+}
+
+.searchHeader {
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.white-text {
+  color: #fff!important;
+}
+
+.quick-links {
+  display: flex;
+}
+  
+  // .arrow-select {
+  //   background: #fff url(data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' …1.26 111.256a13.741 13.741 0 0 1-19.432 0z' fill='%2377838f'/%3E%3C/svg%3E) no-repeat right 1rem center;
+  //   background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' …1.26 111.256a13.741 13.741 0 0 1-19.432 0z' fill='%2377838f'/%3E%3C/svg%3E);
+  //   background-position-x: right 1rem;
+  //   background-position-y: center;
+  //   background-size: 8px 15px;
+  //   // background-repeat-x: no-repeat;
+  //   // background-repeat-y: no-repeat;
+  //   background-attachment: initial;
+  //   background-origin: initial;
+  //   background-clip: initial;
+  //   background-color: rgb(255, 255, 255);
+  // }
