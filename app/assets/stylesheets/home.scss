@@ -38,7 +38,23 @@ $spacer: 5px;
   width: 17px;
 }
 
+.secondary-small {
+  color: #77838f!important;
+  font-size: 65%;
+  font-weight: 400;
+}
 
+.secondary-size-1{
+  color: #77838f!important;
+  font-size: .875rem;
+}
+
+.net-overview-primary-link-txt {
+  color: #1e2022;
+  font-size: .875rem;
+  text-decoration: none;
+  background-color: transparent;
+}
 
 .net-overview-secondary-txt {
   font-size: .71094rem;
@@ -72,9 +88,10 @@ $spacer: 5px;
   color: #fff!important;
 }
 
-f-13 {
-  font-size: 13!important;
-}
+// f-13 {
+//   font-size: 13!important;
+// }
+
 h5.white-text{
   font-size: 1.01563rem;
   font-weight: 400;

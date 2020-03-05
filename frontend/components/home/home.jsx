@@ -83,7 +83,8 @@ const Home = () => {
                     <Media heading className='net-overview-secondary-txt'>
                       ETHER Price
                     </Media>
-                    $227.43 @ 0.02549 BTC 
+                    <a className='net-overview-primary-link-txt'>$227.43</a>
+                    <span className='secondary-size-1'> @ 0.02549 BTC </span>
                   </Media>
                 </Media>
 
@@ -102,7 +103,8 @@ const Home = () => {
                     <Media heading className='net-overview-secondary-txt'>
                       Market Cap
                     </Media>
-                    $25,009,241,081.699
+                    <a className='net-overview-primary-link-txt'>$25,009,241,081.699</a>
+
                   </Media>
                 </Media>
 
@@ -123,7 +125,9 @@ const Home = () => {
                     <Media heading className='net-overview-secondary-txt'>
                       Latest Block
                     </Media>
-                    9609400 (13.0s)
+                    <a className='net-overview-primary-link-txt'>9609400</a>
+                    <span className='secondary-small'> (13.0s)</span>
+                    
                   </Media>
                 </Media>
 
@@ -141,7 +145,7 @@ const Home = () => {
                     <Media heading className='net-overview-secondary-txt'>
                       Difficulty
                     </Media>
-                    2,295
+                    <a className='net-overview-primary-link-txt'>2,295</a>
                   </Media>
                 </Media>
 

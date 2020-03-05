@@ -19,10 +19,7 @@ import {
   Card,
   CardBody,
   CardHeader,
-  CardTitle,
   CardText,
-  CardFooter,
-  Button,
   Table,
   ListGroup,
   ListGroupItem,
@@ -150,7 +147,7 @@ class MyAccount extends React.Component {
     return (
       <div>
         <Container>
-          <Row>
+          <Row className='account'>
             <Col md="3">
               {/* col-md-3 */}
               {/* side nav */}
