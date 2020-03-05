@@ -6,7 +6,7 @@
 ruby '2.5.1'
 
 gem 'bootstrap', '~> 4.4.1'
-
+source 'https://rubygems.org'
 gem 'figaro'
 gem 'font-awesome-sass', '~> 5.12.0'
 gem 'sprockets-rails', require: 'sprockets/railtie'
