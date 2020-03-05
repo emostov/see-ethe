@@ -13,8 +13,8 @@ import {
   CardFooter,
 } from 'reactstrap';
 
-import HomeFeedCard from './home_feed_card'
-
+// import HomeFeedCard from './home_feed_card'
+import BlocksFeedContainer from './blocks_feed_container'
 
 
 
@@ -24,11 +24,11 @@ const HomeFeeds = () => {
     <Container fluid="lg" className='md-4'>
       <Row>
         <Col lg='6'>
-          <HomeFeedCard />
+          <BlocksFeedContainer />
         </Col>
 
         <Col lg='6'>
-          <HomeFeedCard />
+          <BlocksFeedContainer />
         </Col>
       </Row>
     </Container>

@@ -1,12 +1,21 @@
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
-// const nMostRecentBlocksArray = (blocks, blockHashes, n) => {
-//   const sliceStart = blockHashes.length - n
-//   const recentBlockhHashes = blockHashes.slice(sliceStart);
-//   return recentBlockhHashes.map((hash) => blocks[hash]);
-// };
+import HomeFeedCard from './home_feed_card';
 
-// const mapStateToProps = (state) => ({
-//   blocks: nMostRecentBlocksArray(state.blocks, state.blockHashes)
-// });
 
+// move to selects file 
+const nMostRecentBlocksArray = ({blocks, blockHashes}, n) => {
+  const sliceStart = blockHashes.length - n;
+  const recentBlockhHashes = blockHashes.slice(sliceStart);
+  // reverse so most recent are at beggining
+  return recentBlockhHashes.map((hash) => blocks[hash]).reverse();
+};
+
+const mapStateToProps = (state) => {
+  return {
+    items: nMostRecentBlocksArray(state.entities, 10),
+    feedType: 'Blocks',
+  };
+};
+
+export default connect(mapStateToProps, null)(HomeFeedCard);
