@@ -26,30 +26,17 @@
   
 }
 
-.scroll-conatiner {
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-  max-width: 100%;
-  outline: none;
-  direction: ltr;
-  max-height: none;
+.h-100 {
+  .card-header, .card-body, .card-footer {
+    padding: 12px;
+  }
 }
 
 .scroll-items-container {
   position: relative;
-  // scroll bar here
-
-  // top: -67px;
-  // left: 0px;
-  // direction: ltr;
-  // unicode-bidi: isolate;
+  overflow-y: auto;
+  max-height: 400px;
 }
-
-// ::selection {
-//   color: #fff;
-//   background-color: #3498db;
-// }
 
 .feed-hr {
   margin-top: .75rem;
@@ -60,7 +47,6 @@
 hr {
   border: 0;
   border-top: 1px solid #e7eaf3;
-  // double check if needed
 }
 
 .txt-2{

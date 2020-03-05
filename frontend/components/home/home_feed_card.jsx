@@ -80,7 +80,6 @@ export default class HomeFeedCard extends React.Component {
     if (items === null) { return '' }
     return feedType === 'Blocks' ? (
       this.mapItems()
-
     ) : (
         ""
       )
@@ -95,7 +94,7 @@ export default class HomeFeedCard extends React.Component {
         </CardHeader>
         <CardBody className='card-scroll-holder'>
 
-          <div className='scroll-container'>
+          <div className=''>
             <div className='scroll-items-container'>
               {this.itemsComponents()}
 

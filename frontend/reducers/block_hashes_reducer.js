@@ -5,6 +5,7 @@ const blockHashesReducer = (state = [], action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_BLOCK:
+      if (state.includes(action.block.hash)) return state;
       return [...state, action.block.hash];
     default:
       return state;

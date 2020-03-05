@@ -42,7 +42,6 @@ export const extractTxnObjectsFromBlock = (block) => {
   if ((typeof transactions[0] === 'object' && transactions[0] !== null)) {
     const txnsObject = {};
     const txnsHashArray = [];
-
     transactions.forEach((txn) => {
       txnsHashArray.push(txn.hash);
       txnsObject[txn.hash] = txn;
