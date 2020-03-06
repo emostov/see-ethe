@@ -71,40 +71,24 @@ export default class HomeFeedCard extends React.Component {
     let txReward = new BN(0, 10)
     block.transactions.forEach((txHash) => {
       if (transactions[txHash] && transactions[txHash].costOfGasUsed) {
-        console.log(transactions[txHash].costOfGasUsed)
-        const bnGasPayed = new BN(transactions[txHash].costOfGasUsed, 10);
-        console.log(bnGasPayed);
+        const costOfGasUsed = transactions[txHash].costOfGasUsed
+        // console.log('costOfGasUsed', costOfGasUsed)
+        const bnGasPayed = new BN(costOfGasUsed, 10);
+        // console.log('bnGasPayed', bnGasPayed);
         txReward = txReward.add(bnGasPayed)
+        // console.log('curr txReward', txReward)
       }
     })
+    // console.log('total tx reward', txReward)
+    const rewardForUncles = new BN(block.uncles.length * (2 / 32), 10);
+    console.log('uncle ', rewardForUncles)
+    txReward.add(rewardForUncles)
+    txReward = web3.utils.fromWei(txReward, 'ether')
+    // // .add(rewardForBlock)
 
-    // const txRewards = block.transactions.reduce((reward, txHash) => {
-    // if (transactions[txHash] && transactions[txHash].costOfGasUsed) {
-    //   console.log('cost of gas use XX', transactions[txHash].costOfGasUsed);
-    //   if (!BN.isBN(reward)) {
-    //     reward = new BN(reward, 10);
-    //   }
-    //   // const bnGasPayed = new BN(transactions[txHash].costOfGasUsed, 10);
-    //   // const bnSum = reward.add(bnGasPayed)
-    //   // return bnSum
-    // } else {
-    //   return new BN(0, 10);
-    // }
-    // })
+    console.log('final tx reward', txReward)
+    console.log(txReward.toString(10))
 
-    const rewardForUncles = block.uncles.length * (2 / 32)
-    // convert to ether
-    // const stringTxFees = web3.utils.fromWei(totalReward.toString(), 'ether')
-    // convert string to big num so can add 2
-    // console.log('totalReward', txReward)
-    // const etheTxFees = totalReward / 1000000000000000000
-    // console.log('stringTxFees', stringTxFees)
-    // console.log('etheTxFees', etheTxFees)
-
-    // const intTxFees = parseInt(stringTxFees, 10);
-    // const bnTxFees = new BN(stringTxFees, 10).add(new BN(2, 10))
-    // convert back to string for usage in component
-    // return intTxFees + 2;
   }
 
   mapItems() {  //TODO modify for Txns
