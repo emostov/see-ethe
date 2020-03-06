@@ -10,6 +10,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "@fortawesome/react-fontawesome": "^0.1.8",
     "babel-loader": "^8.0.4",
+    "bn.js": "^5.1.1",
     "font-awesome": "^4.7.0",
     "jquery": "^1.9.1",
     "react": "^16.13.0",

@@ -16,9 +16,11 @@ export const receiveBlock = (blk, fetchTxRecieptDispatch) => {
   } = Web3Util.extractTxnObjectsFromBlock(blk);
 
   // for every transaction in block now go fetch its reciepts
-  txnsHashArray.forEach((txHash) => {
-    fetchTxRecieptDispatch(txHash);
-  });
+  if (txnsHashArray) {
+    txnsHashArray.forEach((txHash) => {
+      fetchTxRecieptDispatch(txHash);
+    });
+  }
 
   return {
     type: RECEIVE_BLOCK,

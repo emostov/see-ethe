@@ -2,7 +2,7 @@ import Web3 from 'web3';
 
 import infuraEndPoint from './web3_identity';
 
-const web3 = new Web3(new Web3.providers.HttpProvider(infuraEndPoint));
+export const web3 = new Web3(new Web3.providers.HttpProvider(infuraEndPoint));
 
 // utility for creating a number range to loop over
 // TODO move to a general utility file
@@ -65,7 +65,7 @@ const calcGasUsed = (txObj) => {
 };
 
 export const mergeTxAndReciept = (tx, reciept) => {
-  if (tx.hash !== reciept.hash) return tx;
+  if (tx.hash !== reciept.transactionHash) return tx;
   return calcGasUsed({ ...tx, ...reciept });
 };
 

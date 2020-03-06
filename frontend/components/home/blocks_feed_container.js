@@ -12,9 +12,11 @@ const nMostRecentBlocksArray = ({ blocks, blockHashes }, n) => {
 };
 
 const mapStateToProps = (state) => {
+
   return {
     items: nMostRecentBlocksArray(state.entities, 10),
     feedType: 'Blocks',
+    transactions: state.entities.transactions,
   };
 };
 
