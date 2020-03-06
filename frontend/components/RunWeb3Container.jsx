@@ -14,13 +14,13 @@ class RunWeb3 extends React.Component {
 
   componentDidMount() {
     //this.props.fetchBlocks(100) 
-    this.props.fetchBlocks(10)
+    this.props.fetchBlocks(1)
+    this.props.fetchBlocks(100)
+    this.props.fetchBlocks(1)
     // this.state.intervalID = setInterval(() => {
     //   this.props.fetchBlocks(1)
     // }, 8 * 1000)
   }
-
-
 
   componentWillUnmount() {
     // take down interval Fetch
@@ -30,7 +30,7 @@ class RunWeb3 extends React.Component {
   render() {
     return (
       <div id='run-web3'>
-        {/* {this.props.fetchBlocks(3)} */}
+      
       </div>
     )
   }

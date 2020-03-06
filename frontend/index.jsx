@@ -22,9 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
     store = configureStore();
   }
 
-  Web3Util.getNLatestBlocks(100);
-
-  // Web3Util.watchForNewBlocks();
-
+ 
   ReactDOM.render(<Root store={store} />, root);
 });

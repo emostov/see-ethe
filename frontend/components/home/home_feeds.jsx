@@ -1,22 +1,7 @@
 import React, { useState } from 'react';
-import {
-  Container, Form, FormGroup, Card, Label, Input, Button, Row, Col,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButtonDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Media,
-  CardHeader,
-  CardBody,
-  CardFooter,
-} from 'reactstrap';
+import { Container, Row, Col, } from 'reactstrap';
 
-// import HomeFeedCard from './home_feed_card'
 import BlocksFeedContainer from './blocks_feed_container'
-
-
 
 const HomeFeeds = () => {
 

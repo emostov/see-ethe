@@ -1,17 +1,5 @@
-import React, { useState } from 'react';
-import {
-  Container, Form, FormGroup, Card, Label, Input, Button, Row, Col,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButtonDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Media,
-  CardHeader,
-  CardBody,
-  CardFooter,
-} from 'reactstrap';
+import React from 'react';
+import { Row, Col, Media, } from 'reactstrap';
 
 // TODO move this to a utility
 const sliceToDisplayAddress = (address) => {
@@ -20,9 +8,7 @@ const sliceToDisplayAddress = (address) => {
 
 const BlockItem = ({ block, age, mineTime }) => {
   const { miner, transactions, number } = block
-  // console.log(miner)
   const minerDisplayName = sliceToDisplayAddress(miner)
-  console.log(minerDisplayName)
   return (
     <div>
       <Row className='feed'>
@@ -66,11 +52,10 @@ const BlockItem = ({ block, age, mineTime }) => {
             </div>
           </div>
         </Col>
-        
+
       </Row>
       <hr className='feed-hr' />
     </div>
-
   )
 }
 
