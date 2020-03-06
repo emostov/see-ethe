@@ -12,7 +12,7 @@ import {
 
 import HomeSearchBar from './home_search_bar';
 import NetworkOverview from './network_overview';
-// import BlockAndTransactionFeeds from './'
+import HomeFeeds from './home_feeds';
 
 const Home = () => {
 
@@ -20,11 +20,9 @@ const Home = () => {
   return (
     // <Container className='container'>
     <div>
-      {HomeSearchBar()}
-
-      {NetworkOverview()}
-      {/* Network Overview */}
-      {/* BlockAndTransactionFeeds */}
+      <HomeSearchBar />
+      <NetworkOverview />
+      <HomeFeeds />
     </div>
     // </Container>
   )

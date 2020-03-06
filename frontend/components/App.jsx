@@ -1,13 +1,8 @@
 import React from 'react';
 import Header from './nav/header.jsx';
-import {
-  Route,
-  Switch,
-} from 'react-router-dom';
+import { Route, Switch, } from 'react-router-dom';
 
-
-
-import { AuthRoute, ProtectedRoute } from '../util/route_util'
+import { AuthRoute, ProtectedRoute, } from '../util/route_util'
 import RunWeb3Container from './RunWeb3Container'
 import SignUpFormContainer from './session/sign_up_form_container';
 import LogInFormContainer from './session/login_form_container';
@@ -22,13 +17,14 @@ const App = () => (
     </header >
     <main>
       <div className='container'>
+
         <Switch>
           <AuthRoute exact path="/login" component={LogInFormContainer} />
           <AuthRoute exact path="/signup" component={SignUpFormContainer} />
           <ProtectedRoute path='/myaccount' component={MyAccountContainer} />
           <Route path='/' component={Home} />
         </Switch>
-        
+
       </div>
     </main>
     <footer className='blue-footer'>
@@ -36,7 +32,6 @@ const App = () => (
     </footer>
 
   </div>
-
 );
 
 export default App;
