@@ -9,7 +9,7 @@ import {
 } from 'reactstrap';
 
 
-import { web3 } from '../../util/web3_util'
+import { web3, range } from '../../util/web3_util'
 import BlockItem from './block_item'
 import TransactionItem from './transaction_item'
 import {
@@ -31,13 +31,13 @@ export default class HomeFeedCard extends React.Component {
 
   componentDidMount() {
 
-    const intervalID = setInterval(() => {
-      this.setState({
-        count: this.state.count + 1
-      })
-    }, 15 * 1000) //TODO change back to one sec 
+    // const intervalID = setInterval(() => {
+    //   this.setState({
+    //     count: this.state.count + 1
+    //   })
+    // }, 15 * 1000) //TODO change back to one sec 
 
-    this.setState({ intervalID });
+    // this.setState({ intervalID });
   }
 
   componentWillUnmount() {
@@ -116,20 +116,26 @@ export default class HomeFeedCard extends React.Component {
   mapTransactions() {
     const { blocks, transactions } = this.props;
     let latestTxs = []
+    const block = blocks[0]
+    const age = itemAgeToString(block);
+    const loop_len = block.transactions.length >= 10 ? 10 : block
+    range(0, loop_len).forEach()
+    // // blocks are start with most recent, so txs will start with most recent
+    // blocks.forEach((block) => {
+    //   const age = itemAgeToString(block);
 
-    // blocks are start with most recent, so txs will start with most recent
-    blocks.forEach((block) => {
-      const age = itemAgeToString(block);
+    //   const Txs = blocks[0].transactions.map((txHash) => {
+    //     const tx = transactions[txHash]
+    //     return < TransactionItem tx={tx} age={age} key={txHash} />
+    //   })
 
-      const Txs = block.transactions.map((txHash) => {
-        const tx = transactions[txHash]
-        return < TransactionItem tx={tx} age={age} key={txHash} />
-      })
+    //   latestTxs = latestTxs.concat(Txs)
+    // })
 
-      latestTxs = latestTxs.concat(Txs)
-    })
+    // return latestTxs
 
-    return latestTxs
+    // change to loop of 15 items
+
   }
 
   blockComponents() { //TODO modify for Txns

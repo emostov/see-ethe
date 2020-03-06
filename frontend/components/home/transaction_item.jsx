@@ -13,7 +13,7 @@ const TransactionItem = ({ tx, age }) => {
           <Media className='mb-sm-0 mr-4 align-items-sm-center feed'>
             <div className='mr-2 d-sm-flex'>
               <span className='feed-btn'>
-                <span className='feed-btn-txt'>Tx</span>
+                <span className='feed-btn-txt circle'>Tx</span>
               </span>
             </div>
             <Media body className='feed ml-1'>
