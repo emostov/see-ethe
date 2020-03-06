@@ -83,11 +83,9 @@ export default class HomeFeedCard extends React.Component {
     const rewardForUncles = new BN(block.uncles.length * (2 / 32), 10);
     console.log('uncle ', rewardForUncles)
     txReward.add(rewardForUncles)
-    txReward = web3.utils.fromWei(txReward, 'ether')
-    // // .add(rewardForBlock)
-
-    console.log('final tx reward', txReward)
-    console.log(txReward.toString(10))
+    const txAndUncleRewardEther = web3.utils.fromWei(txReward, 'ether')
+    console.log(txAndUncleRewardEther)
+    // txAndUncleRewardEther.slice();
 
   }
 
