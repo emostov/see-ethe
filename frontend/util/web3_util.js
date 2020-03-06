@@ -64,6 +64,11 @@ const calcGasUsed = (txObj) => {
   return newTxObj;
 };
 
+export const mergeTxAndReciept = (tx, reciept) => {
+  if (tx.hash !== reciept.hash) return tx;
+  return calcGasUsed({ ...tx, ...reciept });
+};
+
 export const getTransactionReciept = (txHash) => (
   web3.eth.getTransactionReceipt(txHash)
 );
