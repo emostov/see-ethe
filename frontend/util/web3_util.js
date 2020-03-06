@@ -75,9 +75,9 @@ export const getTransactionReciept = (txHash) => (
 
 
 
-export const requestBatcher = (...args) => {
-  const batch = new web3.BatchRequest();
-  args.forEach((req) => batch.add(req));
-  return batch;
-};
+// export const requestBatcher = (...args) => {
+//   const batch = new web3.BatchRequest();
+//   args.forEach((req) => batch.add(req));
+//   return batch;
+// };
 
