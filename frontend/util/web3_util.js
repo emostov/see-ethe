@@ -42,6 +42,7 @@ export const extractTxnObjectsFromBlock = (block) => {
     const txnsObject = {};
     const txnsHashArray = [];
     transactions.forEach((txn) => {
+      // txReciept = await web3.eth.getTransactionReceipt(txn)
       txnsHashArray.push(txn.hash);
       txnsObject[txn.hash] = txn;
     });
@@ -52,6 +53,22 @@ export const extractTxnObjectsFromBlock = (block) => {
   // return something to key into to prevent undefined errors later
   return { txnsObject: {}, txnsHashArray: {}, block };
 };
+
+const calcGasUsed = (txObj) => {
+  const { gasUsed, gasPrice } = txObj;
+  const intGasUsed = parseInt(gasUsed, 10);
+  const intGasPrice = parseInt(gasPrice, 10);
+  const newTxObj = { ...txObj };
+  newTxObj.costOfGasUsed = intGasPrice * intGasUsed;
+
+  return newTxObj;
+};
+
+export const getTransactionReciept = (txHash) => (
+  web3.eth.getTransactionReceipt(txHash)
+);
+
+
 
 export const requestBatcher = (...args) => {
   const batch = new web3.BatchRequest();
