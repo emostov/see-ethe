@@ -98,3 +98,52 @@ a.feed {
   transform: translate(-50%,-50%);
   color: #1e2022!important;
 }
+
+.w-max-100 {
+  max-width: 100px;
+}
+
+.feed.tx-cnt, feed.name {
+  color: #3498db;
+  background-color: transparent;
+  white-space: nowrap!important;
+  font-size: .8125rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.norm-txt {
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-size: .8125rem;
+  font-weight: 400;
+  color: #1e2022;
+}
+
+.u-label--badge-in:after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: "";
+  border-top: .7rem solid transparent;
+  border-bottom: .7rem solid transparent;
+  border-left: .7rem solid #fff;
+}
+
+.reward-badge {
+  position: relative;
+  padding-left: 1.15rem;
+  letter-spacing: .8px;
+  border-top-right-radius: .25rem;
+  border-bottom-right-radius: .25rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  font-weight: 500;
+  color: #77838f;
+  background-color: rgba(119,131,143,.1);
+  font-size: .60938rem;
+  line-height: 1.7;
+  padding: .2rem .5rem;
+  display: inline-block;
+  transition: .2s ease-in-out;
+  z-index: 3;
+}

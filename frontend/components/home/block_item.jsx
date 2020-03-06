@@ -13,8 +13,15 @@ import {
   CardFooter,
 } from 'reactstrap';
 
+// TODO move this to a utility
+const sliceToDisplayAddress = (address) => {
+  return miner.length > 13 ? `${miner.slice(0, 10)}...` : miner
+}
 
-const BlockItem = ({ block, age }) => {
+const BlockItem = ({ block, age, mineTime }) => {
+  const { miner, transactions, number } = block
+  // console.log(miner)
+  // const minerDisplayName = sliceToDisplayAddress(miner)
   return (
     <div>
       <Row>
@@ -26,19 +33,39 @@ const BlockItem = ({ block, age }) => {
               </span>
             </div>
             <Media body>
-              <a className='feed ml-1'>{block.number}</a>
-
-              {/* time elapsed  */}
+              <a className='feed ml-1'>{number}</a>
               <span
                 className='d-sm-block txt-2 ml-1 ml-sm-9 text-nowrap secondary-small'>
-                {age}
+                {age} {/* time elapsed  */}
               </span>
             </Media>
           </Media>
         </Col>
 
         <Col sm='8'>
+          <div className='d-flex justify-content-between'>
+            <div className='text-nowrap w-max-100'>
+              <span className='d-block mb-1 mb-sm-0 norm-txt'>
+                {/* Miner <a className=' '>{block.miner}</a> */}
+                Miner <banana className=' '>{block.miner}</banana>
+                {/* text-truncate feed name */}
+                {/* miner address */}
+              </span>
+              <a className='feed tx-cnt'>{transactions.length} txns </a>
+              <span
+                className='secondary-small'>
+                in {mineTime} secs
+              </span>
+            </div>
 
+            <div className='d-none d-sm-block'>
+              <span
+                className='reward-badge text-center text-nowrap'
+              >
+                "2"<b>.</b>"02682 Eth"
+              </span>
+            </div>
+          </div>
         </Col>
       </Row>
       <hr className='feed-hr' />

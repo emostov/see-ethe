@@ -39,6 +39,10 @@ const itemAgeToString = (item) => {
   return minutesAndSeconds(diff)
 }
 
+const timeDiff = (curr, prev) => {
+  return curr.timestamp - prev.timestamp
+}
+
 export default class HomeFeedCard extends React.Component {
   constructor(props) {
     super(props)
@@ -66,18 +70,27 @@ export default class HomeFeedCard extends React.Component {
   }
 
   mapItems() {  //TODO modify for Txns
-    return this.props.items.map((item) => {
-      const age = itemAgeToString(item)
-
+    const { items } = this.props;
+    return items.map((item, idx) => {
       // ternary goes here for block / txn items
-      return <BlockItem block={item} key={item.hash} age={age} />
+
+      const mineTime = idx === items.length - 1 ? ('~15')
+        : (timeDiff(items[idx], items[idx + 1]))
+
+      const age = itemAgeToString(item)
+      return (<BlockItem
+        block={item}
+        key={item.hash}
+        age={age}
+        mineTime={mineTime}
+      />)
     });
 
   }
 
   itemsComponents() { //TODO modify for Txns
     const { items, feedType } = this.props;
-    if (items === null) { return '' }
+    if (items === null || items.length < 1) { return '' }
     return feedType === 'Blocks' ? (
       this.mapItems()
     ) : (
