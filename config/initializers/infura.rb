@@ -1,4 +1,0 @@
-# frozen_string_literal: true
-# Infura.PROJECT_ID = ENV['INFURA_PROJECT_ID']
-# Infura.MAINNET = ENV['INFURA_MAINNET']
-# Infura.PROJECT_SECRET = ENV['INFURA_PROJECT_SECRET']

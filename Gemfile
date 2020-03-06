@@ -8,7 +8,7 @@ ruby '2.5.1'
 
 gem 'bootstrap', '~> 4.4.1'
 
-gem 'figaro'
+# gem 'figaro'
 
 # gem 'sprockets-rails', require: 'sprockets/railtie'
 
