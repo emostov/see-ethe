@@ -47,7 +47,7 @@ const BlockItem = ({ block, age, mineTime, reward }) => {
               <span
                 className='reward-badge text-center text-nowrap'
               >
-                {reward}
+                {reward} Eth
                 {/* 2<b>.</b>02682 Eth */}
               </span>
             </div>
