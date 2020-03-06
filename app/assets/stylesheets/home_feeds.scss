@@ -81,6 +81,7 @@ a.feed {
     border: 1px solid transparent;
 
     transition: all .2s ease-in-out;
+    // left: 5px;
 
     // color: #1e2022!important;
     // position: absolute;
@@ -103,7 +104,7 @@ a.feed {
   max-width: 100px;
 }
 
-.feed.tx-cnt, feed.name {
+.feed.tx-cnt, .feed.name {
   color: #3498db;
   background-color: transparent;
   white-space: nowrap!important;
@@ -119,7 +120,7 @@ a.feed {
   color: #1e2022;
 }
 
-.u-label--badge-in:after {
+.reward-badge:after {
   position: absolute;
   left: 0;
   top: 0;
@@ -127,9 +128,12 @@ a.feed {
   border-top: .7rem solid transparent;
   border-bottom: .7rem solid transparent;
   border-left: .7rem solid #fff;
+  // width: 15px;
 }
 
+
 .reward-badge {
+  min-width: 88px;
   position: relative;
   padding-left: 1.15rem;
   letter-spacing: .8px;
@@ -146,4 +150,33 @@ a.feed {
   display: inline-block;
   transition: .2s ease-in-out;
   z-index: 3;
+  padding-left: 20px;
+}
+
+.row.feed{
+  max-width: 101%;
+}
+
+div.media.mr-4.feed {
+  min-width: 100px;
+}
+
+.col-lg-6.feed {
+  padding-right: 7.5px;
+  padding-left: 7.5px;
+}
+
+.feed .col-sm-4 {
+  padding-right: 7.5px;
+  padding-left: 7.5px;
+}
+
+.feed .col-sm-7 {
+  padding-left: 15px;
+  padding-right: 0px;
+}
+
+.d-none.d-sm-block.reward {
+  position: relative;
+  left: 10px;
 }

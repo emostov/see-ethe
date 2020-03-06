@@ -23,11 +23,11 @@ const HomeFeeds = () => {
   return (
     <Container fluid="lg" className='md-4'>
       <Row>
-        <Col lg='6'>
+        <Col lg='6' className='feed'>
           <BlocksFeedContainer />
         </Col>
 
-        <Col lg='6'>
+        <Col lg='6' className='feed'>
           <BlocksFeedContainer />
         </Col>
       </Row>

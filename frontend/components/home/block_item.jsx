@@ -15,24 +15,25 @@ import {
 
 // TODO move this to a utility
 const sliceToDisplayAddress = (address) => {
-  return miner.length > 13 ? `${miner.slice(0, 10)}...` : miner
+  return address.length > 13 ? `${address.slice(0, 10)}...` : address
 }
 
 const BlockItem = ({ block, age, mineTime }) => {
   const { miner, transactions, number } = block
   // console.log(miner)
-  // const minerDisplayName = sliceToDisplayAddress(miner)
+  const minerDisplayName = sliceToDisplayAddress(miner)
+  console.log(minerDisplayName)
   return (
     <div>
-      <Row>
-        <Col sm='4'>
-          <Media className='mb-sm-0 mr-4 align-items-sm-center'>
+      <Row className='feed'>
+        <Col sm='5'>
+          <Media className='mb-sm-0 mr-4 align-items-sm-center feed'>
             <div className='mr-2 d-sm-flex'>
               <span className='feed-btn'>
                 <span className='feed-btn-txt'>Bk</span>
               </span>
             </div>
-            <Media body>
+            <Media body className='feed ml-1'>
               <a className='feed ml-1'>{number}</a>
               <span
                 className='d-sm-block txt-2 ml-1 ml-sm-9 text-nowrap secondary-small'>
@@ -42,14 +43,12 @@ const BlockItem = ({ block, age, mineTime }) => {
           </Media>
         </Col>
 
-        <Col sm='8'>
+        <Col sm='7'>
           <div className='d-flex justify-content-between'>
             <div className='text-nowrap w-max-100'>
               <span className='d-block mb-1 mb-sm-0 norm-txt'>
-                {/* Miner <a className=' '>{block.miner}</a> */}
-                Miner <banana className=' '>{block.miner}</banana>
-                {/* text-truncate feed name */}
-                {/* miner address */}
+                Miner <a className='text-truncate feed name '>{minerDisplayName}</a>
+
               </span>
               <a className='feed tx-cnt'>{transactions.length} txns </a>
               <span
@@ -58,15 +57,16 @@ const BlockItem = ({ block, age, mineTime }) => {
               </span>
             </div>
 
-            <div className='d-none d-sm-block'>
+            <div className='d-none d-sm-block reward'>
               <span
                 className='reward-badge text-center text-nowrap'
               >
-                "2"<b>.</b>"02682 Eth"
+                2<b>.</b>02682 Eth
               </span>
             </div>
           </div>
         </Col>
+        
       </Row>
       <hr className='feed-hr' />
     </div>

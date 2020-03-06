@@ -16,7 +16,7 @@ const NetworkOverview = () => {
       <Card className='md-4'>
         <Row className='mx-gutters-md-1'>
 
-          <Col lg='4'>
+          <Col lg='4' md='6'>
             <div className='media align-items-center'>
 
               <Media>
@@ -61,7 +61,7 @@ const NetworkOverview = () => {
             {/* ::after */}
           </Col>
 
-          <Col lg='4'>
+          <Col lg='4' md='6'>
             <div className='media align-items-center'>
               <Media>
                 <Media left href="#">
@@ -119,7 +119,7 @@ const NetworkOverview = () => {
             </div>
 
           </Col >
-          <Col lg='4'>
+          <Col lg='4' md='12'>
             Graph
             </Col>
         </Row>
