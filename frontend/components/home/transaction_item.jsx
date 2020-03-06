@@ -2,11 +2,10 @@ import React from 'react';
 import { Row, Col, Media, } from 'reactstrap';
 
 import { sliceToDisplayAddress } from '../../util/general_util'
-
-
-const BlockItem = ({ block, age, mineTime, reward }) => {
-  const { miner, transactions, number } = block
-  const minerDisplayName = sliceToDisplayAddress(miner)
+const TransactionItem = ({ tx, age }) => {
+  const { hash } = tx;
+  // console.log(tx)
+  // console.log('transactionHash', hash)
   return (
     <div>
       <Row className='feed'>
@@ -14,11 +13,11 @@ const BlockItem = ({ block, age, mineTime, reward }) => {
           <Media className='mb-sm-0 mr-4 align-items-sm-center feed'>
             <div className='mr-2 d-sm-flex'>
               <span className='feed-btn'>
-                <span className='feed-btn-txt'>Bk</span>
+                <span className='feed-btn-txt'>Tx</span>
               </span>
             </div>
             <Media body className='feed ml-1'>
-              <a className='feed ml-1'>{number}</a>
+              <a className='feed ml-1'>{sliceToDisplayAddress(hash)}</a>
               <span
                 className='d-sm-block txt-2 ml-1 ml-sm-9 text-nowrap secondary-small'>
                 {age} {/* time elapsed  */}
@@ -28,7 +27,7 @@ const BlockItem = ({ block, age, mineTime, reward }) => {
         </Col>
 
         <Col sm='7'>
-          <div className='d-flex justify-content-between'>
+          {/* <div className='d-flex justify-content-between'>
             <div className='text-nowrap w-max-100'>
               <span className='d-block mb-1 mb-sm-0 norm-txt'>
                 Miner <a className='text-truncate feed name '>{minerDisplayName}</a>
@@ -46,10 +45,9 @@ const BlockItem = ({ block, age, mineTime, reward }) => {
                 className='reward-badge text-center text-nowrap'
               >
                 {reward} Eth
-                {/* 2<b>.</b>02682 Eth */}
               </span>
             </div>
-          </div>
+          </div> */}
         </Col>
 
       </Row>
@@ -58,4 +56,4 @@ const BlockItem = ({ block, age, mineTime, reward }) => {
   )
 }
 
-export default BlockItem
+export default TransactionItem;

@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 
 import { receiveBlockReward } from '../../actions/web3_actions';
 import HomeFeedCard from './home_feed_card';
-
 import { selectNMostRecentBlocksArray } from '../../reducers/selectors';
 
 

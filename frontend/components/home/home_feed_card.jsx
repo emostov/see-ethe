@@ -11,33 +11,12 @@ import {
 
 import { web3 } from '../../util/web3_util'
 import BlockItem from './block_item'
-
-// utility functions
-// TODO move these to a utility file
-const minutesAndSeconds = (nSeconds) => {
-  const minutes = Math.floor(nSeconds / 60);
-  const seconds = nSeconds - (minutes * 60);
-  const minuteStr = minutes === 0 ? '' : `${minutes} min`
-  const secondStr = `${seconds} seconds ago`
-  return `${minuteStr} ${secondStr}`
-}
-
-const calculateTimeDiff = (item) => {
-  // both curr and timestamp are unix time in seconds
-  const { timestamp } = item;
-  const curr = Math.round((new Date()).getTime() / 1000);
-  const delta = curr - timestamp
-  return delta
-}
-
-const itemAgeToString = (item) => {
-  const diff = calculateTimeDiff(item);
-  return minutesAndSeconds(diff)
-}
-
-const timeDiff = (curr, prev) => {
-  return curr.timestamp - prev.timestamp
-}
+import TransactionItem from './transaction_item'
+import {
+  calculateTimeDiff,
+  itemAgeToString,
+  timeDiff
+} from '../../util/general_util'
 
 export default class HomeFeedCard extends React.Component {
   constructor(props) {
@@ -56,7 +35,7 @@ export default class HomeFeedCard extends React.Component {
       this.setState({
         count: this.state.count + 1
       })
-    }, 2 * 1000) //TODO change back to one sec 
+    }, 15 * 1000) //TODO change back to one sec 
 
     this.setState({ intervalID });
   }
@@ -134,14 +113,36 @@ export default class HomeFeedCard extends React.Component {
 
   }
 
-  itemsComponents() { //TODO modify for Txns
-    const { items, feedType } = this.props;
+  mapTransactions() {
+    const { blocks, transactions } = this.props;
+    let latestTxs = []
+
+    // blocks are start with most recent, so txs will start with most recent
+    blocks.forEach((block) => {
+      const age = itemAgeToString(block);
+
+      const Txs = block.transactions.map((txHash) => {
+        const tx = transactions[txHash]
+        return < TransactionItem tx={tx} age={age} key={txHash} />
+      })
+
+      latestTxs = latestTxs.concat(Txs)
+    })
+
+    return latestTxs
+  }
+
+  blockComponents() { //TODO modify for Txns
+    const { items } = this.props;
     if (items === null || items.length < 1) { return '' }
-    return feedType === 'Blocks' ? (
-      this.mapItems()
-    ) : (
-        ""
-      )
+    return this.mapItems()
+  }
+
+  // TODO dry up this code with block components
+  transactionComponents() {
+    const { blocks } = this.props;
+    if (blocks === null || blocks.length < 1) { return '' }
+    return this.mapTransactions()
   }
 
   render() {
@@ -155,7 +156,9 @@ export default class HomeFeedCard extends React.Component {
 
           <div className=''>
             <div className='scroll-items-container'>
-              {this.itemsComponents()}
+
+              {feedType === 'Blocks' ? this.blockComponents()
+                : this.transactionComponents()}
 
             </div>
           </div>
