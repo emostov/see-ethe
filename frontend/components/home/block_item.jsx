@@ -6,7 +6,7 @@ const sliceToDisplayAddress = (address) => {
   return address.length > 13 ? `${address.slice(0, 10)}...` : address
 }
 
-const BlockItem = ({ block, age, mineTime }) => {
+const BlockItem = ({ block, age, mineTime, reward }) => {
   const { miner, transactions, number } = block
   const minerDisplayName = sliceToDisplayAddress(miner)
   return (
@@ -47,7 +47,8 @@ const BlockItem = ({ block, age, mineTime }) => {
               <span
                 className='reward-badge text-center text-nowrap'
               >
-                2<b>.</b>02682 Eth
+                {reward}
+                {/* 2<b>.</b>02682 Eth */}
               </span>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import Big from 'big.js'
 import {
   Card,
   Button,
@@ -6,11 +7,10 @@ import {
   CardBody,
   CardFooter,
 } from 'reactstrap';
-import BN from 'bn.js'
+
 
 import { web3 } from '../../util/web3_util'
 import BlockItem from './block_item'
-
 
 // utility functions
 // TODO move these to a utility file
@@ -56,7 +56,7 @@ export default class HomeFeedCard extends React.Component {
       this.setState({
         count: this.state.count + 1
       })
-    }, 1000)
+    }, 2 * 1000) //TODO change back to one sec 
 
     this.setState({ intervalID });
   }
@@ -65,28 +65,52 @@ export default class HomeFeedCard extends React.Component {
     clearInterval(this.state.intervalID)
   }
 
+  // Inputs: block and implicitly needs transactions from state
+  // Return: total block reward
+  // Side Effects: for blocks over a 100 seconds old that don't already have
+  // a reward saved to state this function will dispatch an updated version of 
+  // the block with the reward. Once the block is over 100 seconds and has a 
+  // reward this function optimizes by simply returning that reward and skipping
+  // calculations.
+  // TODO - refactor to move this to utilities for reuse
+  // Uses Big.js to keep track of large numbers
+  // Note bn.js was having significant issues
   totalBlockReward(block) {
+
+    // optimize by stopping calculations after block > 100 seconds
+    const age = calculateTimeDiff(block)
+    if (age > 100 && block.reward) return block.reward;
+    const newBlock = { ...block }
     const { transactions } = this.props;
     // loop through txns and add up fees
-    let txReward = new BN(0, 10)
+
+    let txReward = new Big(0)
     block.transactions.forEach((txHash) => {
       if (transactions[txHash] && transactions[txHash].costOfGasUsed) {
         const costOfGasUsed = transactions[txHash].costOfGasUsed
-        // console.log('costOfGasUsed', costOfGasUsed)
-        const bnGasPayed = new BN(costOfGasUsed, 10);
-        // console.log('bnGasPayed', bnGasPayed);
-        txReward = txReward.add(bnGasPayed)
-        // console.log('curr txReward', txReward)
+        const bigcostOfGasUsed = new Big(costOfGasUsed)
+        txReward = txReward.add(bigcostOfGasUsed)
       }
-    })
-    // console.log('total tx reward', txReward)
-    const rewardForUncles = new BN(block.uncles.length * (2 / 32), 10);
-    console.log('uncle ', rewardForUncles)
-    txReward.add(rewardForUncles)
-    const txAndUncleRewardEther = web3.utils.fromWei(txReward, 'ether')
-    console.log(txAndUncleRewardEther)
-    // txAndUncleRewardEther.slice();
+    });
 
+    const txRewardEther = web3.utils.fromWei(txReward.toString(), 'ether')
+    const bigTxRewardEther = new Big(txRewardEther)
+    const bigRewardForUncles = new Big(block.uncles.length * (2 / 32), 10);
+    const bigRewardForBlock = new Big(2)
+
+    const total = bigRewardForBlock
+      .add(bigRewardForUncles)
+      .add(bigTxRewardEther)
+      .toFixed(5)
+      .toString()
+    newBlock.reward = total;
+
+    // save updated block to state to reduce future number of calculations
+    // but we only do this once bc we return at the beggining if the block
+    // is over 100 and has rewards calculated
+    if (age > 100) this.props.receiveBlockReward(newBlock)
+
+    return total;
   }
 
   mapItems() {  //TODO modify for Txns

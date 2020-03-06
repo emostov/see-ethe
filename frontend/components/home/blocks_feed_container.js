@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import { receiveBlockReward } from '../../actions/web3_actions';
 import HomeFeedCard from './home_feed_card';
 
 
@@ -20,4 +21,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(HomeFeedCard);
+const mapDispatchToProps = (dispatch) => ({
+  receiveBlockReward: (blockWithReward) => dispatch(
+    receiveBlockReward(blockWithReward)
+  ),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeFeedCard);

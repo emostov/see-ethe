@@ -2,10 +2,16 @@ import * as Web3Util from '../util/web3_util';
 
 export const RECEIVE_BLOCK = 'RECEIVE_BLOCK';
 export const RECEIVE_TRANSACTION_RECEIPT = 'RECEIVE_TRANSACTION_RECEIPT';
+export const RECEIVE_BLOCK_REWARD = 'RECEIVE_BLOCK_REWARD';
 
 const receiveTransactionReciept = (txReceipt) => ({
   type: RECEIVE_TRANSACTION_RECEIPT,
   txReceipt,
+});
+
+export const receiveBlockReward = (blockWithReward) => ({
+  type: RECEIVE_BLOCK_REWARD,
+  blockWithReward,
 });
 
 export const receiveBlock = (blk, fetchTxRecieptDispatch) => {
