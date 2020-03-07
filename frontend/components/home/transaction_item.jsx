@@ -1,7 +1,11 @@
 import React from 'react';
 import { Row, Col, Media, } from 'reactstrap';
 
-import { sliceToDisplayAddress } from '../../util/general_util'
+import { sliceToDisplayAddress } from '../../util/general_util';
+import { web3 } from '../../util/web3_util'
+
+const convertWeiToShowValue = (wei) => web3.utils.fromWei(wei, 'ether').slice(0, 8)
+
 const TransactionItem = ({ tx, age }) => {
   const { hash } = tx;
   // console.log(tx)
@@ -12,8 +16,8 @@ const TransactionItem = ({ tx, age }) => {
         <Col sm='5'>
           <Media className='mb-sm-0 mr-4 align-items-sm-center feed'>
             <div className='mr-2 d-sm-flex'>
-              <span className='feed-btn'>
-                <span className='feed-btn-txt circle'>Tx</span>
+              <span className='feed-btn circle'>
+                <span className='feed-btn-txt '>Tx</span>
               </span>
             </div>
             <Media body className='feed ml-1'>
@@ -27,27 +31,23 @@ const TransactionItem = ({ tx, age }) => {
         </Col>
 
         <Col sm='7'>
-          {/* <div className='d-flex justify-content-between'>
+          <div className='d-flex justify-content-between'>
             <div className='text-nowrap w-max-100'>
               <span className='d-block mb-1 mb-sm-0 norm-txt'>
-                Miner <a className='text-truncate feed name '>{minerDisplayName}</a>
-
+                From: <a className='text-truncate feed name'>{sliceToDisplayAddress(tx.from)}</a>
               </span>
-              <a className='feed tx-cnt'>{transactions.length} txns </a>
-              <span
-                className='secondary-small'>
-                in {mineTime} secs
+              <span className='d-sm-block norm-txt'>
+                To: <a className='text-truncate feed name'>{sliceToDisplayAddress(tx.to)}</a>
               </span>
             </div>
 
             <div className='d-none d-sm-block reward'>
               <span
                 className='reward-badge text-center text-nowrap'
-              >
-                {reward} Eth
+              >{convertWeiToShowValue(tx.value)} Eth
               </span>
             </div>
-          </div> */}
+          </div>
         </Col>
 
       </Row>

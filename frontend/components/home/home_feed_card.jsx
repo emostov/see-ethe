@@ -31,13 +31,13 @@ export default class HomeFeedCard extends React.Component {
 
   componentDidMount() {
 
-    // const intervalID = setInterval(() => {
-    //   this.setState({
-    //     count: this.state.count + 1
-    //   })
-    // }, 15 * 1000) //TODO change back to one sec 
+    const intervalID = setInterval(() => {
+      this.setState({
+        count: this.state.count + 1
+      })
+    }, 20 * 1000) //TODO change back to one sec 
 
-    // this.setState({ intervalID });
+    this.setState({ intervalID });
   }
 
   componentWillUnmount() {
@@ -92,14 +92,14 @@ export default class HomeFeedCard extends React.Component {
     return total;
   }
 
-  mapItems() {  //TODO modify for Txns
+  mapItems() {  
     const { items } = this.props;
     return items.map((item, idx) => {
-      // ternary goes here for block / txn items
-
+      
+      // if its the last block in the array we just need to estimate mine time
       const mineTime = idx === items.length - 1 ? ('~15')
         : (timeDiff(items[idx], items[idx + 1]));
-
+        
       const reward = this.totalBlockReward(item);
       const age = itemAgeToString(item);
       return (<BlockItem
@@ -113,30 +113,20 @@ export default class HomeFeedCard extends React.Component {
 
   }
 
-  // mapTransactions() {
-  //   const { blocks, transactions } = this.props;
-  //   let latestTxs = []
-  //   const block = blocks[0]
-  //   const age = itemAgeToString(block);
-  //   const loop_len = block.transactions.length >= 10 ? 10 : block
-  //   range(0, loop_len).forEach()
-  //   // // blocks are start with most recent, so txs will start with most recent
-  //   // blocks.forEach((block) => {
-  //   //   const age = itemAgeToString(block);
-
-  //   //   const Txs = blocks[0].transactions.map((txHash) => {
-  //   //     const tx = transactions[txHash]
-  //   //     return < TransactionItem tx={tx} age={age} key={txHash} />
-  //   //   })
-
-  //   //   latestTxs = latestTxs.concat(Txs)
-  //   // })
-
-  //   // return latestTxs
-
-  //   // change to loop of 15 items
-
-  // }
+  // only does 11 of the most recent transactions
+  mapTransactions() {
+    const { blocks, transactions } = this.props;
+    let latestTxs = []
+    const block = blocks[0]
+    const age = itemAgeToString(block);
+    const loop_len = block.transactions.length >= 10 ? 10 : block
+    range(0, loop_len).forEach((i) => {
+      const txHash = block.transactions[i];
+      const tx = transactions[txHash];
+      latestTxs.push(< TransactionItem tx={tx} age={age} key={txHash} />);
+    })
+    return latestTxs;
+  }
 
   blockComponents() { //TODO modify for Txns
     const { items } = this.props;
@@ -159,7 +149,6 @@ export default class HomeFeedCard extends React.Component {
           Latest {feedType}
         </CardHeader>
         <CardBody className='card-scroll-holder'>
-
           <div className=''>
             <div className='scroll-items-container'>
 
@@ -168,7 +157,6 @@ export default class HomeFeedCard extends React.Component {
 
             </div>
           </div>
-
         </CardBody>
         <CardFooter className="">
           <Button tag='a' className='feed-footer-btn w-100'>

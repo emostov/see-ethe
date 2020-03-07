@@ -18,13 +18,12 @@ const Home = () => {
 
 
   return (
-    // <Container className='container'>
     <div>
       <HomeSearchBar />
+      {/* toggle component */}
       <NetworkOverview />
       <HomeFeeds />
     </div>
-    // </Container>
   )
 }
 

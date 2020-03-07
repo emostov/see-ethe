@@ -6,7 +6,7 @@ export const web3 = new Web3(new Web3.providers.HttpProvider(infuraEndPoint));
 
 // utility for creating a number range to loop over
 // TODO move to a general utility file
-const range = (start, end) => {
+export const range = (start, end) => {
   const result = [];
   for (let i = start; i <= end; i += 1) {
     result.push(i);
