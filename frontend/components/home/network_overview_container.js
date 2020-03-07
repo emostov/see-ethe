@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import NetworkOverview from './network_overview';
 import { selectNMostRecentBlocksArray } from '../../reducers/selectors';
+import { fetchPrices } from '../../actions/stats_actions';
 
 const mapStateToProps = (state) => {
   const latestBlocks = selectNMostRecentBlocksArray(state.entities, 10);
@@ -12,4 +13,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(NetworkOverview);
+const mapDispatchToProps = (dispatch) => ({
+  fetchPrices: () => dispatch(fetchPrices()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NetworkOverview);
