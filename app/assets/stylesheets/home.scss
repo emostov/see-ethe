@@ -29,7 +29,7 @@ $spacer: 5px;
   min-width: 55%;
 }
 .width-difficulty{
-  min-width: 102%;
+  min-width: 50%;
 }
 
 
@@ -156,6 +156,12 @@ li.small-text {
 
 li.small-text.dt {
     border-bottom: 1px dashed white;
+}
+
+.hash-rate {
+  position: relative;
+  // right: 100px;
+  min-width: 115px;
 }
 
   // .arrow-select {

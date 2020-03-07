@@ -58,7 +58,8 @@ export default class HomeFeedCard extends React.Component {
 
     // optimize by stopping calculations after block > 45 seconds
     const age = calculateTimeDiff(block)
-    if (age > 50 && block.reward) return block.reward;
+    const stopAge = 40
+    if (age > stopAge && block.reward) return block.reward;
     
     const { transactions } = this.props;
     // loop through txns and add up fees
@@ -87,7 +88,7 @@ export default class HomeFeedCard extends React.Component {
     // save updated block to state to reduce future number of calculations
     // but we only do this once bc we return at the beggining if the block
     // is over 100 and has rewards calculated
-    if (age > 50){
+    if (age > stopAge){
       const newBlock = { ...block }
       newBlock.reward = total;
       this.props.receiveBlockReward(newBlock)

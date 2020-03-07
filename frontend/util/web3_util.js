@@ -1,6 +1,10 @@
 import Web3 from 'web3';
-
+import Big from 'big.js';
+import {
+  timeDiff,
+} from './general_util';
 import infuraEndPoint from './web3_identity';
+
 
 export const web3 = new Web3(new Web3.providers.HttpProvider(infuraEndPoint));
 
@@ -36,6 +40,28 @@ export const getNLatestBlocks = (n, processBlockCB) => {
     });
     batch.execute();
   });
+};
+
+// AVG difficulty / AVG block time
+export const networkHashRate = (latestBlocks) => {
+  if (!latestBlocks.length) return '';
+  let bigTotalDifficulty = new Big(0, 10);
+  let totalBlockTime = 0;
+  const total = latestBlocks.length;
+  latestBlocks.forEach((block, idx) => {
+    const mineTime = idx === total - 1 ? (13)
+      : (timeDiff(latestBlocks[idx], latestBlocks[idx + 1]));
+    totalBlockTime += mineTime;
+    bigTotalDifficulty = bigTotalDifficulty.add(new Big(block.difficulty));
+  });
+
+  const avgBlockTime = totalBlockTime / total;
+  const bigAvgBlockTime = new Big(avgBlockTime, 0);
+  const avgDifficulty = bigTotalDifficulty.div(new Big(total, 0));
+
+  const bigNetworkHR = avgDifficulty.div(bigAvgBlockTime);
+  // console.log(bigNetworkHR.toString());
+  return bigNetworkHR.toString();
 };
 
 // extracts txn objects from an incoming block

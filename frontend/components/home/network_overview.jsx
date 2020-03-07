@@ -1,13 +1,36 @@
 import React from 'react';
 import { Container, Card, Row, Col, Media } from 'reactstrap';
+import Big from 'big.js';
 
-import { itemAgeToString, timeDiff } from '../../util/general_util';
+import { timeDiff } from '../../util/general_util';
+import { networkHashRate } from '../../util/web3_util'
 
-const NetworkOverview = ({ latestBlock, nextLatestBlock }) => {
 
+// TODO move to utilities
+const displayDifficulty = (difficulty) => {
+  const bigDifficulty = new Big(difficulty, 10)
+  const big100Bil = new Big('1000000000000', 10)
+  const bigDifficultyTh = bigDifficulty.div(big100Bil);
+  const str = bigDifficultyTh.toString()
+  return `${str[0]},${str.slice(1, 7)}`
+}
+
+const displayHashRate = (hashRate) => {
+  if (hashRate === '') return hashRate;
+  const bigHashRate = new Big(hashRate, 10);
+  const big100Thousand = new Big('100000000');
+  const bigHR100Thousand = bigHashRate.div(big100Thousand)
+  const str = bigHR100Thousand.toString()
+  return `${str.slice(0, 3)},${str.slice(3, 10)}`
+}
+
+const NetworkOverview = ({ latestBlock, nextLatestBlock, latestBlocks }) => {
+  const dispHashRate = displayHashRate(networkHashRate(latestBlocks));
   const lBNumber = latestBlock ? latestBlock.number : '...loading';
-  const lBDificulty = latestBlock ? latestBlock.difficulty : '...loading';
-  const mineTime = latestBlock && nextLatestBlock ? (timeDiff(latestBlock, nextLatestBlock)) : '...';
+  const lBDificulty = latestBlock ? displayDifficulty(latestBlock.difficulty)
+    : '...loading';
+  const mineTime = latestBlock && nextLatestBlock ?
+    (timeDiff(latestBlock, nextLatestBlock)) : '...';
 
   return (
     <Container fluid='lg' className='md-4'>
@@ -101,14 +124,14 @@ const NetworkOverview = ({ latestBlock, nextLatestBlock }) => {
                   <Media heading className='net-overview-secondary-txt'>
                     Difficulty
                     </Media>
-                  <a className='net-overview-primary-link-txt'>{lBDificulty}</a>
+                  <a className='net-overview-primary-link-txt'>{lBDificulty} TH</a>
                 </Media>
 
-                <div className='text-right'>
+                <div className='text-right hash-rate'>
                   <Media heading className='net-overview-secondary-txt'>
                     Hash Rate
                     </Media>
-                  <a className='net-overview-primary-link-txt'>2,295</a>
+                  <a className='net-overview-primary-link-txt'>{dispHashRate} GH/s</a>
                 </div>
 
 
