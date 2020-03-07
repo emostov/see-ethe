@@ -16,10 +16,18 @@ export const range = (start, end) => {
 
 // https://ethereum.stackexchange.com/questions/1587/how-can-i-get-the-data-of-the-latest-10-blocks-via-web3-js
 export const getNLatestBlocks = (n, processBlockCB) => {
-  const batch = new web3.BatchRequest();
-
+  // export const getNLatestBlocks = (n, recieveAndProcessBlk) => {
   web3.eth.getBlockNumber().then((latestBlockNum) => {
     const blockRange = range(latestBlockNum - n, latestBlockNum + 1);
+    // make sure tx objects included in blocks
+    // const returnTransactionObjects = true;
+    // blockRange.forEach((blockNum) => {
+    //   web3.eth.getBlock(blockNum, returnTransactionObjects)
+    //     .then(recieveAndProcessBlk);
+    // });
+
+    // COMMENT in for batch execution
+    const batch = new web3.BatchRequest();
     const returnTransactionObjects = true;
     blockRange.forEach((blockNum) => {
       batch.add(web3.eth.getBlock.request(blockNum,
@@ -73,11 +81,9 @@ export const getTransactionReciept = (txHash) => (
   web3.eth.getTransactionReceipt(txHash)
 );
 
-
-
-export const requestBatcher = (...args) => {
+export const requestBatcher = (args) => {
   const batch = new web3.BatchRequest();
   args.forEach((req) => batch.add(req));
-  return batch;
+  return batch.execute();
 };
 

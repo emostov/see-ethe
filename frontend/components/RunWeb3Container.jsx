@@ -14,11 +14,11 @@ class RunWeb3 extends React.Component {
 
   componentDidMount() {
     //this.props.fetchBlocks(100) 
-    this.props.fetchBlocks(20)
-
+    this.props.fetchBlocks(10)
+ 
     this.state.intervalID = setInterval(() => {
-      this.props.fetchBlocks(1)
-    }, 30 * 1000)
+      this.props.fetchBlocks(2)
+    }, 25 * 1000)
   }
 
   componentWillUnmount() {
@@ -34,7 +34,6 @@ class RunWeb3 extends React.Component {
     )
   }
 }
-
 
 const mapDispatchToProps = (dispatch) => ({
   fetchBlocks: (quantity) => dispatch(fetchBlocks(quantity)),

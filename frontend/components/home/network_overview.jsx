@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
-import {
-  Container, Form, FormGroup, Card, Label, Input, Button, Row, Col,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButtonDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Media
-} from 'reactstrap';
+import React from 'react';
+import { Container, Card, Row, Col, Media } from 'reactstrap';
 
-const NetworkOverview = () => {
+import { itemAgeToString, timeDiff } from '../../util/general_util';
+
+const NetworkOverview = ({ latestBlock, nextLatestBlock }) => {
+
+  const lBNumber = latestBlock ? latestBlock.number : '...loading';
+  const lBDificulty = latestBlock ? latestBlock.difficulty : '...loading';
+  const mineTime = latestBlock && nextLatestBlock ? (timeDiff(latestBlock, nextLatestBlock)) : '...';
+
   return (
     <Container fluid='lg' className='md-4'>
       <Card className='md-4'>
@@ -25,7 +23,6 @@ const NetworkOverview = () => {
                     <img className='price-av' src="assets/ethe-price.png" />
                   </figure>
 
-                  {/* <Media object data-src="assets/ethe-price.svg"  /> */}
                 </Media>
                 <Media body className='width-100pe'>
                   <Media heading className='net-overview-secondary-txt'>
@@ -74,14 +71,14 @@ const NetworkOverview = () => {
                   <Media heading className='net-overview-secondary-txt'>
                     Latest Block
                     </Media>
-                  <a className='net-overview-primary-link-txt'>9609400</a>
-                  <span className='secondary-small'> (13.0s)</span>
+                  <a className='net-overview-primary-link-txt'>{lBNumber}</a>
+                  <span className='secondary-small'>({mineTime}.0 s)</span>
                 </Media>
 
                 <div className='text-right'>
                   <Media heading className='net-overview-secondary-txt'>
                     Transaction
-                    </Media>
+                  </Media>
                   <a className='net-overview-primary-link-txt'>651.178</a>
                   <span className='secondary-small'> (8.8 TPS)</span>
                 </div>
@@ -104,7 +101,7 @@ const NetworkOverview = () => {
                   <Media heading className='net-overview-secondary-txt'>
                     Difficulty
                     </Media>
-                  <a className='net-overview-primary-link-txt'>2,295</a>
+                  <a className='net-overview-primary-link-txt'>{lBDificulty}</a>
                 </Media>
 
                 <div className='text-right'>
