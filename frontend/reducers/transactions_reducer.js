@@ -26,4 +26,3 @@ const transactionsReducer = (state = {}, action) => {
 };
 
 export default transactionsReducer;
-

@@ -29,6 +29,7 @@ export default class NetworkOverview extends React.Component {
   componentDidMount() {
     this.props.fetchPrices();
     this.props.fetchTotalSupply();
+    this.props.fetchBlockChairStats()
   }
 
   calculateMarketCap() {
@@ -46,13 +47,25 @@ export default class NetworkOverview extends React.Component {
       latestBlocks,
       ethbtc,
       ethusd,
+      totalTransactions,
+      transactions24H,
     } = this.props;
+
     const dispHashRate = displayHashRate(networkHashRate(latestBlocks));
     const lBNumber = latestBlock ? latestBlock.number : '...loading';
     const lBDificulty = latestBlock ? displayDifficulty(latestBlock.difficulty)
       : '...loading';
+
     const mineTime = latestBlock && nextLatestBlock ?
       (timeDiff(latestBlock, nextLatestBlock)) : '...';
+
+    const dispTotalTxns = (totalTransactions / 1000000)
+      .toString()
+      .slice(0, 6)
+
+    const txsPerSecond = (transactions24H / (60 * 60 * 24))
+      .toString()
+      .slice(0, 2);
 
     return (
       <Container fluid='lg' className='md-4'>
@@ -66,7 +79,7 @@ export default class NetworkOverview extends React.Component {
                   <Media left href="#">
                     <figure className='u-sm-avatar mr-2'>
                       <img className='price-av' src={window.imgs.ethePrice} />
-                      
+
                     </figure>
 
                   </Media>
@@ -88,7 +101,7 @@ export default class NetworkOverview extends React.Component {
                   <Media left href="#">
                     <figure className='u-sm-avatar mr-2'>
                       <img className='' src={window.imgs.worldMarked} />
-                      
+
                     </figure>
                   </Media>
                   <Media body className='width-100pe'>
@@ -104,7 +117,7 @@ export default class NetworkOverview extends React.Component {
 
               </div>
               <hr className='d-none d-md-none hr-space-lg' />
-    
+
             </Col>
 
             <Col lg='4' md='6'>
@@ -113,7 +126,7 @@ export default class NetworkOverview extends React.Component {
                   <Media left href="#">
                     <figure className='u-sm-avatar mr-2'>
                       <img className='' src={window.imgs.latestBlock} />
-                      
+
                     </figure>
                   </Media>
 
@@ -129,8 +142,8 @@ export default class NetworkOverview extends React.Component {
                     <Media heading className='net-overview-secondary-txt'>
                       Transaction
                   </Media>
-                    <a className='net-overview-primary-link-txt'>651.178</a>
-                    <span className='secondary-small'> (8.8 TPS)</span>
+                    <a className='net-overview-primary-link-txt'>{dispTotalTxns} M</a>
+                    <span className='secondary-small'> ({txsPerSecond} TPS)</span>
                   </div>
 
                 </Media>
@@ -144,7 +157,7 @@ export default class NetworkOverview extends React.Component {
                   <Media left href="#">
                     <figure className='u-sm-avatar mr-2'>
                       <img className='' src={window.imgs.mineIcon} />
-                      
+
                     </figure>
                   </Media>
 

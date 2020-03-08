@@ -17,3 +17,10 @@ export const totalSupply = () => (
   })
 );
 
+// https://github.com/Blockchair/Blockchair.Support/blob/master/API_DOCUMENTATION_EN.md#link_002
+export const blockChairStats = () => (
+  $.ajax({
+    method: 'GET',
+    url: 'https://api.blockchair.com/ethereum/stats',
+  })
+);

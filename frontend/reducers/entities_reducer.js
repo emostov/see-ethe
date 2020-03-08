@@ -6,6 +6,8 @@ import blockHashes from './block_hashes_reducer';
 import transactions from './transactions_reducer';
 import totalSupply from './total_supply_reducer';
 import prices from './prices_reducer';
+// import totalTransactions from './total_transactions_reducer';
+// import transactions24H from './transactions24H_reducer';
 
 export default combineReducers({
   users,
@@ -14,4 +16,6 @@ export default combineReducers({
   transactions,
   prices,
   totalSupply,
+  // totalTransactions,
+  // transactions24H,
 });
