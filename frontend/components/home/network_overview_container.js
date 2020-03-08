@@ -11,7 +11,12 @@ import {
 const mapStateToProps = (state) => {
   const latestBlocks = selectNMostRecentBlocksArray(state.entities, 10);
   const { ethbtc, ethusd } = state.entities.prices;
-  const { totalSupply, totalTransactions, transactions24H } = state.entities;
+  const { totalSupply } = state.entities;
+  const {
+    totalTransactions,
+    transactions24H,
+    mempoolTPS,
+  } = state.entities.transactionStats;
 
   return {
     latestBlock: latestBlocks[0],
@@ -22,6 +27,7 @@ const mapStateToProps = (state) => {
     totalSupply,
     totalTransactions,
     transactions24H,
+    mempoolTPS,
   };
 };
 

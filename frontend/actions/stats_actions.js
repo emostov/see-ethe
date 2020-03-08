@@ -15,7 +15,7 @@ export const receiveBlockChairStates = (replyObj) => {
     type: RECEIVE_BLOCK_CHAIR_STATS,
     totalTransactions: replyObj.data.transactions,
     transactions24H: replyObj.data.blocks_24h,
-    mempoolTPS: replyObj.data.mempoolTPS
+    mempoolTPS: replyObj.data.mempool_tps,
   }
 };
 

@@ -48,7 +48,7 @@ export default class NetworkOverview extends React.Component {
       ethbtc,
       ethusd,
       totalTransactions,
-      transactions24H,
+      mempoolTPS,
     } = this.props;
 
     const dispHashRate = displayHashRate(networkHashRate(latestBlocks));
@@ -63,9 +63,9 @@ export default class NetworkOverview extends React.Component {
       .toString()
       .slice(0, 6)
 
-    const txsPerSecond = (transactions24H / (60 * 60 * 24))
+    const tps = mempoolTPS ? mempoolTPS
       .toString()
-      .slice(0, 2);
+      .slice(0, 3) : '...';
 
     return (
       <Container fluid='lg' className='md-4'>
@@ -143,7 +143,7 @@ export default class NetworkOverview extends React.Component {
                       Transaction
                   </Media>
                     <a className='net-overview-primary-link-txt'>{dispTotalTxns} M</a>
-                    <span className='secondary-small'> ({txsPerSecond} TPS)</span>
+                    <span className='secondary-small'> ({tps} TPS)</span>
                   </div>
 
                 </Media>
