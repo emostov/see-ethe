@@ -47,7 +47,8 @@ const NavBar = () => {
         <Link to={'/'}>
           <div className='ethe-logo-box'>
             <button type="button" className="btn btn-icon btn-group-sm btn-light nf">
-              <img src="assets/ethe_logo.svg" className="ethe-img" />
+              <img src={window.imgs.etheLogo} className="ethe-img" />
+              
             </button>
 
           </div>

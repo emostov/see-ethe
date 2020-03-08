@@ -14,7 +14,8 @@ export default class Header extends React.Component {
           <div className='container'>
 
             <div className='header-logo'>
-              <img className='site-logo' src="assets/site-logo.png" />
+            <img className='site-logo' src={window.imgs.siteLogo} />
+          
               See<span>THE</span>Ethe
             </div>
             <NavBar />

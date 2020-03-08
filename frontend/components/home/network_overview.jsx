@@ -65,7 +65,8 @@ export default class NetworkOverview extends React.Component {
                 <Media>
                   <Media left href="#">
                     <figure className='u-sm-avatar mr-2'>
-                      <img className='price-av' src="assets/ethe-price.png" />
+                      <img className='price-av' src={window.imgs.ethePrice} />
+                      
                     </figure>
 
                   </Media>
@@ -86,7 +87,8 @@ export default class NetworkOverview extends React.Component {
                 <Media>
                   <Media left href="#">
                     <figure className='u-sm-avatar mr-2'>
-                      <img className='' src="assets/world-marked.png" />
+                      <img className='' src={window.imgs.worldMarked} />
+                      
                     </figure>
                   </Media>
                   <Media body className='width-100pe'>
@@ -102,7 +104,7 @@ export default class NetworkOverview extends React.Component {
 
               </div>
               <hr className='d-none d-md-none hr-space-lg' />
-              {/* ::after */}
+    
             </Col>
 
             <Col lg='4' md='6'>
@@ -110,7 +112,8 @@ export default class NetworkOverview extends React.Component {
                 <Media>
                   <Media left href="#">
                     <figure className='u-sm-avatar mr-2'>
-                      <img className='' src="assets/latest-block.png" />
+                      <img className='' src={window.imgs.latestBlock} />
+                      
                     </figure>
                   </Media>
 
@@ -140,7 +143,8 @@ export default class NetworkOverview extends React.Component {
                 <Media>
                   <Media left href="#">
                     <figure className='u-sm-avatar mr-2'>
-                      <img className='' src="assets/mine-icon.png" />
+                      <img className='' src={window.imgs.mineIcon} />
+                      
                     </figure>
                   </Media>
 
