@@ -35,7 +35,7 @@ export default class HomeFeedCard extends React.Component {
       this.setState({
         count: this.state.count + 1
       })
-    }, 5 * 1000) //TODO change back to one sec 
+    }, 1 * 1000) //TODO change back to one sec 
 
     this.setState({ intervalID });
   }
