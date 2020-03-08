@@ -15,4 +15,5 @@ export const totalSupply = () => (
     method: 'GET',
     url: getTotalSupply,
   })
-)
+);
+

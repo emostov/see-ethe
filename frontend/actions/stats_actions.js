@@ -4,13 +4,19 @@ export const RECEIVE_TOTAL_SUPPLY = 'RECEIVE_TOTAL_SUPPLY';
 
 export const receievePrice = (replyObj) => ({
   type: RECEIVE_PRICES,
-  prices: replyObj,
+  prices: replyObj.result,
 });
 
 export const receieveTotalSupply = (replyObj) => ({
   type: RECEIVE_TOTAL_SUPPLY,
-  supply: replyObj,
+  supply: replyObj.result,
 });
 
 export const fetchPrices = () => (dispatch) => statAPIUtil.lastPrices()
   .then((prices) => dispatch(receievePrice(prices)));
+
+export const fetchTotalSupply = () => (dispatch) => statAPIUtil.totalSupply()
+  .then((totalSupply) => dispatch(receieveTotalSupply(totalSupply)));
+
+
+
