@@ -1,8 +1,6 @@
 import Web3 from 'web3';
 import Big from 'big.js';
-import {
-  timeDiff,
-} from './general_util';
+import { timeDiff } from './general_util';
 import infuraEndPoint from './web3_identity';
 
 
@@ -109,9 +107,6 @@ export const requestBatcher = (args) => {
   args.forEach((req) => batch.add(req));
   return batch.execute();
 };
-
-
-
 
 export const calculateUpdatedRewad = (block, transaction) => {
   if (!block) return '2';

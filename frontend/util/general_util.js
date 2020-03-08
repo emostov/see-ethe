@@ -1,5 +1,5 @@
-import Big from 'big.js';
-import { web3 } from './web3_util';
+// import Big from 'big.js';
+// import { web3 } from './web3_util';
 
 export const sliceToDisplayAddress = (address) => {
   if (!(address && address.length)) return '';
