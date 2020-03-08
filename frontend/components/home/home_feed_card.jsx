@@ -54,65 +54,66 @@ export default class HomeFeedCard extends React.Component {
   // TODO - refactor to move this to utilities for reuse
   // Uses Big.js to keep track of large numbers
   // Note bn.js was having significant issues
-  totalBlockReward(block) {
+  // totalBlockReward(block) {
 
-    // optimize by stopping calculations after block > 45 seconds
-    const age = calculateTimeDiff(block)
-    const stopAge = 40
-    if (age > stopAge && block.reward) return block.reward;
-    
-    const { transactions } = this.props;
-    // loop through txns and add up fees
+  //   // optimize by stopping calculations after block > 45 seconds
+  //   const age = calculateTimeDiff(block)
+  //   const stopAge = 40
+  //   if (age > stopAge && block.reward) return block.reward;
 
-    let txReward = new Big(0)
-    block.transactions.forEach((txHash) => {
-      if (transactions[txHash] && transactions[txHash].costOfGasUsed) {
-        const costOfGasUsed = transactions[txHash].costOfGasUsed
-        const bigcostOfGasUsed = new Big(costOfGasUsed)
-        txReward = txReward.add(bigcostOfGasUsed)
-      }
-    });
+  //   const { transactions } = this.props;
+  //   // loop through txns and add up fees
 
-    const txRewardEther = web3.utils.fromWei(txReward.toString(), 'ether')
-    const bigTxRewardEther = new Big(txRewardEther)
-    const bigRewardForUncles = new Big(block.uncles.length * (2 / 32), 10);
-    const bigRewardForBlock = new Big(2)
+  //   let txReward = new Big(0)
+  //   block.transactions.forEach((txHash) => {
+  //     if (transactions[txHash] && transactions[txHash].costOfGasUsed) {
+  //       const costOfGasUsed = transactions[txHash].costOfGasUsed
+  //       const bigcostOfGasUsed = new Big(costOfGasUsed)
+  //       txReward = txReward.add(bigcostOfGasUsed)
+  //     }
+  //   });
 
-    const total = bigRewardForBlock
-      .add(bigRewardForUncles)
-      .add(bigTxRewardEther)
-      .toFixed(5)
-      .toString()
-    
+  //   const txRewardEther = web3.utils.fromWei(txReward.toString(), 'ether')
+  //   const bigTxRewardEther = new Big(txRewardEther)
+  //   const bigRewardForUncles = new Big(block.uncles.length * (2 / 32), 10);
+  //   const bigRewardForBlock = new Big(2)
 
-    // save updated block to state to reduce future number of calculations
-    // but we only do this once bc we return at the beggining if the block
-    // is over 100 and has rewards calculated
-    if (age > stopAge){
-      const newBlock = { ...block }
-      newBlock.reward = total;
-      this.props.receiveBlockReward(newBlock)
-    } 
+  //   const total = bigRewardForBlock
+  //     .add(bigRewardForUncles)
+  //     .add(bigTxRewardEther)
+  //     .toFixed(5)
+  //     .toString()
 
-    return total;
-  }
 
-  mapItems() {  
+  //   // save updated block to state to reduce future number of calculations
+  //   // but we only do this once bc we return at the beggining if the block
+  //   // is over 100 and has rewards calculated
+  //   if (age > stopAge){
+  //     const newBlock = { ...block }
+  //     newBlock.reward = total;
+  //     this.props.receiveBlockReward(newBlock)
+  //   } 
+
+  //   return total;
+  // }
+
+
+  mapItems() {
     const { items } = this.props;
     return items.map((item, idx) => {
-      
+
       // if its the last block in the array we just need to estimate mine time
       const mineTime = idx === items.length - 1 ? ('~15')
         : (timeDiff(items[idx], items[idx + 1]));
-        
-      const reward = this.totalBlockReward(item);
+
+      // const reward = this.totalBlockReward(item);
       const age = itemAgeToString(item);
       return (<BlockItem
         block={item}
         key={item.hash}
         age={age}
         mineTime={mineTime}
-        reward={reward}
+        reward={item.reward.slice(0, 7)}
       />)
     });
 

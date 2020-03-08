@@ -1,7 +1,6 @@
 import { RECEIVE_BLOCK, RECEIVE_TRANSACTION_RECEIPT } from '../actions/web3_actions';
 import { mergeTxAndReciept } from '../util/web3_util';
 
-
 const createNewStateWithTxReciept = (state, txReceipt) => {
   const { transactionHash } = txReceipt;
   const mergedTx = mergeTxAndReciept(state[transactionHash], txReceipt);

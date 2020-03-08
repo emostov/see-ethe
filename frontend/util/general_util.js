@@ -1,3 +1,5 @@
+// import Big from 'big.js';
+// import { web3 } from './web3_util';
 
 export const sliceToDisplayAddress = (address) => {
   if (!(address && address.length)) return '';
@@ -31,3 +33,4 @@ export const itemAgeToString = (item) => {
 
 // takes in blocks
 export const timeDiff = (curr, prev) => curr.timestamp - prev.timestamp;
+
