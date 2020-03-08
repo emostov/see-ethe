@@ -1,6 +1,10 @@
 import Web3 from 'web3';
-
+import Big from 'big.js';
+import {
+  timeDiff,
+} from './general_util';
 import infuraEndPoint from './web3_identity';
+
 
 export const web3 = new Web3(new Web3.providers.HttpProvider(infuraEndPoint));
 
@@ -16,10 +20,18 @@ export const range = (start, end) => {
 
 // https://ethereum.stackexchange.com/questions/1587/how-can-i-get-the-data-of-the-latest-10-blocks-via-web3-js
 export const getNLatestBlocks = (n, processBlockCB) => {
-  const batch = new web3.BatchRequest();
-
+  // export const getNLatestBlocks = (n, recieveAndProcessBlk) => {
   web3.eth.getBlockNumber().then((latestBlockNum) => {
     const blockRange = range(latestBlockNum - n, latestBlockNum + 1);
+    // make sure tx objects included in blocks
+    // const returnTransactionObjects = true;
+    // blockRange.forEach((blockNum) => {
+    //   web3.eth.getBlock(blockNum, returnTransactionObjects)
+    //     .then(recieveAndProcessBlk);
+    // });
+
+    // COMMENT in for batch execution
+    const batch = new web3.BatchRequest();
     const returnTransactionObjects = true;
     blockRange.forEach((blockNum) => {
       batch.add(web3.eth.getBlock.request(blockNum,
@@ -28,6 +40,28 @@ export const getNLatestBlocks = (n, processBlockCB) => {
     });
     batch.execute();
   });
+};
+
+// AVG difficulty / AVG block time
+export const networkHashRate = (latestBlocks) => {
+  if (!latestBlocks.length) return '';
+  let bigTotalDifficulty = new Big(0, 10);
+  let totalBlockTime = 0;
+  const total = latestBlocks.length;
+  latestBlocks.forEach((block, idx) => {
+    const mineTime = idx === total - 1 ? (13)
+      : (timeDiff(latestBlocks[idx], latestBlocks[idx + 1]));
+    totalBlockTime += mineTime;
+    bigTotalDifficulty = bigTotalDifficulty.add(new Big(block.difficulty));
+  });
+
+  const avgBlockTime = totalBlockTime / total;
+  const bigAvgBlockTime = new Big(avgBlockTime, 0);
+  const avgDifficulty = bigTotalDifficulty.div(new Big(total, 0));
+
+  const bigNetworkHR = avgDifficulty.div(bigAvgBlockTime);
+  // console.log(bigNetworkHR.toString());
+  return bigNetworkHR.toString();
 };
 
 // extracts txn objects from an incoming block
@@ -73,11 +107,9 @@ export const getTransactionReciept = (txHash) => (
   web3.eth.getTransactionReceipt(txHash)
 );
 
-
-
-export const requestBatcher = (...args) => {
+export const requestBatcher = (args) => {
   const batch = new web3.BatchRequest();
   args.forEach((req) => batch.add(req));
-  return batch;
+  return batch.execute();
 };
 

@@ -35,7 +35,7 @@ export default class HomeFeedCard extends React.Component {
       this.setState({
         count: this.state.count + 1
       })
-    }, 20 * 1000) //TODO change back to one sec 
+    }, 5 * 1000) //TODO change back to one sec 
 
     this.setState({ intervalID });
   }
@@ -56,10 +56,11 @@ export default class HomeFeedCard extends React.Component {
   // Note bn.js was having significant issues
   totalBlockReward(block) {
 
-    // optimize by stopping calculations after block > 100 seconds
+    // optimize by stopping calculations after block > 45 seconds
     const age = calculateTimeDiff(block)
-    if (age > 100 && block.reward) return block.reward;
-    const newBlock = { ...block }
+    const stopAge = 40
+    if (age > stopAge && block.reward) return block.reward;
+    
     const { transactions } = this.props;
     // loop through txns and add up fees
 
@@ -82,12 +83,16 @@ export default class HomeFeedCard extends React.Component {
       .add(bigTxRewardEther)
       .toFixed(5)
       .toString()
-    newBlock.reward = total;
+    
 
     // save updated block to state to reduce future number of calculations
     // but we only do this once bc we return at the beggining if the block
     // is over 100 and has rewards calculated
-    if (age > 100) this.props.receiveBlockReward(newBlock)
+    if (age > stopAge){
+      const newBlock = { ...block }
+      newBlock.reward = total;
+      this.props.receiveBlockReward(newBlock)
+    } 
 
     return total;
   }

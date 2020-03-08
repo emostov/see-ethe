@@ -8,12 +8,12 @@ const HomeFeeds = () => {
 
   return (
     <Container fluid="lg" className='md-4'>
-      <Row>
-        <Col lg='6' className='feed'>
+      <Row className='home '>
+        <Col lg='6' className='feed md-1'>
           <BlocksFeedContainer />
         </Col>
 
-        <Col lg='6' className='feed'>
+        <Col lg='6' className='feed md-1'>
           <TransactionsFeedContainer />
         </Col>
       </Row>

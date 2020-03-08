@@ -1,5 +1,8 @@
 
-export const sliceToDisplayAddress = (address) => (address.length > 13 ? `${address.slice(0, 10)}...` : address);
+export const sliceToDisplayAddress = (address) => {
+  if (!(address && address.length)) return '';
+  return address.length > 13 ? `${address.slice(0, 10)}...` : address;
+};
 
 export const minutesAndSeconds = (nSeconds) => {
   const minutes = Math.floor(nSeconds / 60);
@@ -21,6 +24,7 @@ export const calculateTimeDiff = (item) => {
 
 // takes in block
 export const itemAgeToString = (item) => {
+  if (!item) return '';
   const diff = calculateTimeDiff(item);
   return minutesAndSeconds(diff);
 };

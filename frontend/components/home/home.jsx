@@ -1,27 +1,17 @@
-import React, { useState } from 'react';
-import {
-  Container, Form, FormGroup, Card, Label, Input, Button, Row, Col,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButtonDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Media
-} from 'reactstrap';
+import React from 'react';
 
 import HomeSearchBar from './home_search_bar';
-import NetworkOverview from './network_overview';
+import NetworkOverviewContainer from './network_overview_container';
 import HomeFeeds from './home_feeds';
 
 const Home = () => {
-
-
   return (
     <div>
       <HomeSearchBar />
+
       {/* toggle component */}
-      <NetworkOverview />
+
+      <NetworkOverviewContainer/>
       <HomeFeeds />
     </div>
   )
