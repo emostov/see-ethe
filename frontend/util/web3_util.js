@@ -20,17 +20,9 @@ export const range = (start, end) => {
 
 // https://ethereum.stackexchange.com/questions/1587/how-can-i-get-the-data-of-the-latest-10-blocks-via-web3-js
 export const getNLatestBlocks = (n, processBlockCB) => {
-  // export const getNLatestBlocks = (n, recieveAndProcessBlk) => {
   web3.eth.getBlockNumber().then((latestBlockNum) => {
     const blockRange = range(latestBlockNum - n, latestBlockNum + 1);
-    // make sure tx objects included in blocks
-    // const returnTransactionObjects = true;
-    // blockRange.forEach((blockNum) => {
-    //   web3.eth.getBlock(blockNum, returnTransactionObjects)
-    //     .then(recieveAndProcessBlk);
-    // });
 
-    // COMMENT in for batch execution
     const batch = new web3.BatchRequest();
     const returnTransactionObjects = true;
     blockRange.forEach((blockNum) => {
@@ -60,7 +52,6 @@ export const networkHashRate = (latestBlocks) => {
   const avgDifficulty = bigTotalDifficulty.div(new Big(total, 0));
 
   const bigNetworkHR = avgDifficulty.div(bigAvgBlockTime);
-  // console.log(bigNetworkHR.toString());
   return bigNetworkHR.toString();
 };
 
@@ -82,6 +73,12 @@ export const extractTxnObjectsFromBlock = (block) => {
     });
 
     newBlock.transactions = [...txnsHashArray];
+    // also set reward while we have the block
+    const baseReward = new Big(newBlock.uncles.length * (2 / 32), 10)
+      .add(new Big(2, 10))
+      .toString();
+    newBlock.reward = baseReward;
+
     return { txnsObject, txnsHashArray, block: newBlock };
   }
   // return something to key into to prevent undefined errors later
@@ -113,3 +110,7 @@ export const requestBatcher = (args) => {
   return batch.execute();
 };
 
+
+export const weiToEther = (wei) => {
+  return web3.utils.fromWei(wei, 'ether');
+};

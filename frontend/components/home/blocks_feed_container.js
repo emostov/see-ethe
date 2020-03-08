@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 
-import { receiveBlockReward } from '../../actions/web3_actions';
 import HomeFeedCard from './home_feed_card';
 import { selectNMostRecentBlocksArray } from '../../reducers/selectors';
 
@@ -14,10 +13,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  receiveBlockReward: (blockWithReward) => dispatch(
-    receiveBlockReward(blockWithReward),
-  ),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeFeedCard);
+export default connect(mapStateToProps, null)(HomeFeedCard);

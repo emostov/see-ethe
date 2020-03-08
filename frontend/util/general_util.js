@@ -1,3 +1,5 @@
+import Big from 'big.js';
+import { web3 } from './web3_util';
 
 export const sliceToDisplayAddress = (address) => {
   if (!(address && address.length)) return '';
@@ -31,3 +33,20 @@ export const itemAgeToString = (item) => {
 
 // takes in blocks
 export const timeDiff = (curr, prev) => curr.timestamp - prev.timestamp;
+
+export const calculateUpdatedRewad = (block, transaction) => {
+
+  const costEthe = web3.utils.fromWei(
+    transaction.costOfGasUsed.toString(),
+    'ether',
+  );
+  const bigCost = new Big(costEthe, 10);
+
+  // if for some reason block does not have reward assume its 2
+
+  const blockReward = block.reward ? block.reward : 2;
+  const bigReward = new Big(blockReward, 10).toString();
+
+  const newReward = bigCost.add(bigReward);
+  return newReward.toString();
+}
