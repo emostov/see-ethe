@@ -126,8 +126,8 @@ export default class NetworkOverview extends React.Component {
             </Col>
 
             <Col lg='4' md='6' className='vertical-divider'>
-              {/* <div className='media align-items-center'> */}
-                <Media className='media align-items-center'>
+              <div className='media align-items-center'>
+                <Media>
                   <Media left href="#">
                     <figure className='u-sm-avatar mr-2'>
                       <img className='' src={window.imgs.latestBlock} />
@@ -143,7 +143,7 @@ export default class NetworkOverview extends React.Component {
                     <span className='secondary-small'>({mineTime}.0 s)</span>
                   </Media>
 
-                  <div className='text-right right'>
+                  <div className='text-right'>
                     <Media heading className='net-overview-secondary-txt'>
                       Transaction
                   </Media>
@@ -154,7 +154,7 @@ export default class NetworkOverview extends React.Component {
                 </Media>
 
 
-              {/* </div> */}
+              </div>
               <hr className='hr-space-lg'></hr>
               <div className='media align-items-center'>
 
@@ -173,7 +173,7 @@ export default class NetworkOverview extends React.Component {
                     <a className='net-overview-primary-link-txt'>{lBDificulty} TH</a>
                   </Media>
 
-                  <div className='text-right hash-rate right'>
+                  <div className='text-right hash-rate'>
                     <Media heading className='net-overview-secondary-txt'>
                       Hash Rate
                     </Media>
@@ -186,13 +186,8 @@ export default class NetworkOverview extends React.Component {
 
             </Col >
             <Col lg='4' md='12'>
-              {/* <div className='justify-contnet-between align-items-center d-flex tether'>
-                <h2 className='net-overview-secondary-txt text-nowrap text-truncate'>
-                  TETHER TRANSACTION HISTORY IN 14 DAYS
-                </h2>
-              </div> */}
 
-              {/* <TXHistoryGraph tetherTXHistory={tetherTXHistory} /> */}
+              <TXHistoryGraph tetherTXHistory={tetherTXHistory} />
             </Col>
           </Row>
         </Card>
