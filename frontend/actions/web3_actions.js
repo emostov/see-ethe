@@ -43,6 +43,10 @@ export const receiveBlock = (blk, fetchTxRecieptDispatch) => {
 export const fetchTransactionReciept = (dispatch, getState) => (txHash) => (
   Web3Util.getTransactionReciept(txHash)
     .then((txReceipt) => {
+      if (!txReceipt) {
+        console.err('Custom Error: TxReciept Error: recieved null');
+      }
+
       dispatch(receiveTransactionReciept(txReceipt));
 
       const { blockHash, transactionHash } = txReceipt;

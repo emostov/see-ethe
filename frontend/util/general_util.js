@@ -35,7 +35,10 @@ export const itemAgeToString = (item) => {
 export const timeDiff = (curr, prev) => curr.timestamp - prev.timestamp;
 
 export const calculateUpdatedRewad = (block, transaction) => {
-
+  // some validating
+  if (block && block.reward && !transaction) return block.reward;
+  if (!block) return '2';
+  // if (!block.reward) return '2';
   const costEthe = web3.utils.fromWei(
     transaction.costOfGasUsed.toString(),
     'ether',
