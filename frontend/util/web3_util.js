@@ -111,6 +111,21 @@ export const requestBatcher = (args) => {
 };
 
 
-export const weiToEther = (wei) => {
-  return web3.utils.fromWei(wei, 'ether');
-};
+
+
+export const calculateUpdatedRewad = (block, transaction) => {
+  if (!block) return '2';
+  if (block.reward && !transaction) return block.reward;
+  const costEthe = web3.utils.fromWei(
+    transaction.costOfGasUsed.toString(),
+    'ether',
+  );
+  const bigCost = new Big(costEthe, 10);
+
+  // if for some reason block does not have reward assume its 2
+  const blockReward = block.reward ? block.reward : 2;
+  const bigReward = new Big(blockReward, 10).toString();
+
+  const newReward = bigCost.add(bigReward);
+  return newReward.toString();
+}

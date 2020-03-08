@@ -1,5 +1,5 @@
 import * as Web3Util from '../util/web3_util';
-import { calculateUpdatedRewad } from '../util/general_util';
+import { calculateUpdatedRewad } from '../util/web3_util';
 
 export const RECEIVE_BLOCK = 'RECEIVE_BLOCK';
 export const RECEIVE_TRANSACTION_RECEIPT = 'RECEIVE_TRANSACTION_RECEIPT';
@@ -44,7 +44,8 @@ export const fetchTransactionReciept = (dispatch, getState) => (txHash) => (
   Web3Util.getTransactionReciept(txHash)
     .then((txReceipt) => {
       if (!txReceipt) {
-        console.err('Custom Error: TxReciept Error: recieved null');
+        //err
+        return;
       }
 
       dispatch(receiveTransactionReciept(txReceipt));
