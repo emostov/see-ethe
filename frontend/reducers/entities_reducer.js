@@ -7,6 +7,7 @@ import transactions from './transactions_reducer';
 import totalSupply from './total_supply_reducer';
 import prices from './prices_reducer';
 import transactionStats from './transaction_stats_reducer';
+import tetherTXHistory from './tether_tx_history_reducer.js';
 
 export default combineReducers({
   users,
@@ -16,5 +17,5 @@ export default combineReducers({
   prices,
   totalSupply,
   transactionStats,
-
+  tetherTXHistory,
 });

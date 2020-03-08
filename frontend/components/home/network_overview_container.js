@@ -6,12 +6,13 @@ import {
   fetchPrices,
   fetchTotalSupply,
   fetchBlockChairStats,
+  fetchTetherTxHistory,
 } from '../../actions/stats_actions';
 
 const mapStateToProps = (state) => {
   const latestBlocks = selectNMostRecentBlocksArray(state.entities, 10);
   const { ethbtc, ethusd } = state.entities.prices;
-  const { totalSupply } = state.entities;
+  const { totalSupply, tetherTXHistory } = state.entities;
   const {
     totalTransactions,
     transactions24H,
@@ -28,6 +29,7 @@ const mapStateToProps = (state) => {
     totalTransactions,
     transactions24H,
     mempoolTPS,
+    tetherTXHistory,
   };
 };
 
@@ -35,6 +37,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchPrices: () => dispatch(fetchPrices()),
   fetchTotalSupply: () => dispatch(fetchTotalSupply()),
   fetchBlockChairStats: () => dispatch(fetchBlockChairStats()),
+  fetchTetherTxHistory: () => dispatch(fetchTetherTxHistory()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NetworkOverview);
