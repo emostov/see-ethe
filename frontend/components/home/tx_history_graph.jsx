@@ -5,7 +5,7 @@ const months = Object.freeze(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', '
   'Oct', 'Nov', 'Dec']);
 
 const TXHistoryGraph = ({ tetherTXHistory }) => {
-  const recent = [...tetherTXHistory].reverse().slice(0, 14)
+  const recent = [...tetherTXHistory].reverse().slice(14)
   const cleanData = recent.map((data, idx) => {
     const { month, day } = data._id;
 
@@ -19,7 +19,7 @@ const TXHistoryGraph = ({ tetherTXHistory }) => {
 
   return (
 
-    <LineChart width={320} height={105} data={cleanData} >
+    <LineChart width={345} height={105} data={cleanData} >
       <Tooltip />
       <Line type="monotone" dataKey="txs_k" stroke="#1E2002" />
       <XAxis

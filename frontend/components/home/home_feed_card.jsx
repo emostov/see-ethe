@@ -1,5 +1,4 @@
 import React from 'react';
-import Big from 'big.js'
 import {
   Card,
   Button,
@@ -9,11 +8,10 @@ import {
 } from 'reactstrap';
 
 
-import { web3, range } from '../../util/web3_util'
+import { range } from '../../util/web3_util'
 import BlockItem from './block_item'
 import TransactionItem from './transaction_item'
 import {
-  calculateTimeDiff,
   itemAgeToString,
   timeDiff
 } from '../../util/general_util'
@@ -29,6 +27,10 @@ export default class HomeFeedCard extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.feedType === 'Blocks') {
+      this.props.fetchAddressTypeTags();
+    }
+
     const intervalID = setInterval(() => {
       this.setState({
         count: this.state.count + 1
@@ -37,19 +39,21 @@ export default class HomeFeedCard extends React.Component {
 
     this.setState({ intervalID });
   }
+
   componentWillUnmount() {
     clearInterval(this.state.intervalID)
   }
 
   mapItems() {
-    const { items } = this.props;
+    const { items, addressTypeTags } = this.props;
     return items.map((item, idx) => {
-
       // if its the last block in the array we just need to estimate mine time
       const mineTime = idx === items.length - 1 ? ('~15')
         : (timeDiff(items[idx], items[idx + 1]));
 
-      // const reward = this.totalBlockReward(item);
+      const minerTag = addressTypeTags[item.miner] ?
+        addressTypeTags[item.miner] : ''
+
       const age = itemAgeToString(item);
       return (<BlockItem
         block={item}
@@ -57,6 +61,7 @@ export default class HomeFeedCard extends React.Component {
         age={age}
         mineTime={mineTime}
         reward={item.reward.slice(0, 7)}
+        minerTag={minerTag}
       />)
     });
   }
@@ -91,6 +96,7 @@ export default class HomeFeedCard extends React.Component {
 
   render() {
     const { feedType } = this.props
+    // console.log(this.props.addressTypeTags)
     return (
       <Card className='h-100'>
         <CardHeader tag="h3" className='card-header-title'>

@@ -3,9 +3,11 @@ import { Row, Col, Media, } from 'reactstrap';
 
 import { sliceToDisplayAddress } from '../../util/general_util'
 
-const BlockItem = ({ block, age, mineTime, reward }) => {
+const BlockItem = ({ block, age, mineTime, reward, minerTag }) => {
   const { miner, transactions, number } = block
-  const minerDisplayName = sliceToDisplayAddress(miner)
+  const minerDisplayName = minerTag ? minerTag.name
+    : sliceToDisplayAddress(miner)
+    
   return (
     <div>
       <Row className='feed'>
@@ -20,7 +22,7 @@ const BlockItem = ({ block, age, mineTime, reward }) => {
               <a className='feed ml-1'>{number}</a>
               <span
                 className='d-sm-block txt-2 ml-1 ml-sm-9 text-nowrap secondary-small'>
-                {age} 
+                {age}
               </span>
             </Media>
           </Media>
