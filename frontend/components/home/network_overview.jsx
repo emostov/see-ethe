@@ -127,31 +127,31 @@ export default class NetworkOverview extends React.Component {
 
             <Col lg='4' md='6' className='vertical-divider'>
               {/* <div className='media align-items-center'> */}
-                <Media className='media align-items-center'>
-                  <Media left href="#">
-                    <figure className='u-sm-avatar mr-2'>
-                      <img className='' src={window.imgs.latestBlock} />
+              <Media className='media align-items-center'>
+                <Media left href="#">
+                  <figure className='u-sm-avatar mr-2'>
+                    <img className='' src={window.imgs.latestBlock} />
 
-                    </figure>
-                  </Media>
-
-                  <Media body className='width-latest-block '>
-                    <Media heading className='net-overview-secondary-txt'>
-                      Latest Block
-                    </Media>
-                    <a className='net-overview-primary-link-txt'>{lBNumber}</a>
-                    <span className='secondary-small'>({mineTime}.0 s)</span>
-                  </Media>
-
-                  <div className='text-right right'>
-                    <Media heading className='net-overview-secondary-txt'>
-                      Transaction
-                  </Media>
-                    <a className='net-overview-primary-link-txt'>{dispTotalTxns} M</a>
-                    <span className='secondary-small'> ({tps} TPS)</span>
-                  </div>
-
+                  </figure>
                 </Media>
+
+                <Media body className='width-latest-block '>
+                  <Media heading className='net-overview-secondary-txt'>
+                    Latest Block
+                    </Media>
+                  <a className='net-overview-primary-link-txt'>{lBNumber}</a>
+                  <span className='secondary-small'>({mineTime}.0 s)</span>
+                </Media>
+
+                <div className='text-right right'>
+                  <Media heading className='net-overview-secondary-txt'>
+                    Transaction
+                  </Media>
+                  <a className='net-overview-primary-link-txt'>{dispTotalTxns} M</a>
+                  <span className='secondary-small'> ({tps} TPS)</span>
+                </div>
+
+              </Media>
 
 
               {/* </div> */}
@@ -186,13 +186,13 @@ export default class NetworkOverview extends React.Component {
 
             </Col >
             <Col lg='4' md='12'>
-              {/* <div className='justify-contnet-between align-items-center d-flex tether'>
+              <div className='justify-contnet-between align-items-center d-flex tether'>
                 <h2 className='net-overview-secondary-txt text-nowrap text-truncate'>
                   TETHER TRANSACTION HISTORY IN 14 DAYS
                 </h2>
-              </div> */}
+              </div>
 
-              {/* <TXHistoryGraph tetherTXHistory={tetherTXHistory} /> */}
+              <TXHistoryGraph tetherTXHistory={tetherTXHistory} />
             </Col>
           </Row>
         </Card>
