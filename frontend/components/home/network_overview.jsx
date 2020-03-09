@@ -32,6 +32,17 @@ export default class NetworkOverview extends React.Component {
     this.props.fetchTotalSupply();
     this.props.fetchBlockChairStats()
     this.props.fetchTetherTxHistory();
+
+    this.intervalID = setInterval(() => {
+      this.props.fetchPrices();
+      this.props.fetchTotalSupply();
+      this.props.fetchBlockChairStats()
+      this.props.fetchTetherTxHistory();
+    }, 1 * 30 * 1000)
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.intervalID)
   }
 
   calculateMarketCap() {
