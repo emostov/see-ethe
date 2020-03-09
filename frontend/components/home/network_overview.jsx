@@ -4,6 +4,7 @@ import Big from 'big.js';
 
 import { timeDiff } from '../../util/general_util';
 import { networkHashRate, web3 } from '../../util/web3_util'
+import TXHistoryGraph from './tx_history_graph';
 
 
 // TODO move to utilities
@@ -30,6 +31,7 @@ export default class NetworkOverview extends React.Component {
     this.props.fetchPrices();
     this.props.fetchTotalSupply();
     this.props.fetchBlockChairStats()
+    this.props.fetchTetherTxHistory();
   }
 
   calculateMarketCap() {
@@ -41,6 +43,8 @@ export default class NetworkOverview extends React.Component {
     return bigMarketCap.toString();
   }
 
+
+
   render() {
     const { latestBlock,
       nextLatestBlock,
@@ -49,6 +53,7 @@ export default class NetworkOverview extends React.Component {
       ethusd,
       totalTransactions,
       mempoolTPS,
+      tetherTXHistory
     } = this.props;
 
     const dispHashRate = displayHashRate(networkHashRate(latestBlocks));
@@ -69,10 +74,10 @@ export default class NetworkOverview extends React.Component {
 
     return (
       <Container fluid='lg' className='md-4'>
-        <Card className='md-4'>
-          <Row className='mx-gutters-md-1'>
+        <Card className='md-4 vertical-divider'>
+          <Row className=''>
 
-            <Col lg='4' md='6'>
+            <Col lg='4' md='6' className='vertical-divider'>
               <div className='media align-items-center'>
 
                 <Media>
@@ -120,36 +125,36 @@ export default class NetworkOverview extends React.Component {
 
             </Col>
 
-            <Col lg='4' md='6'>
-              <div className='media align-items-center'>
-                <Media>
-                  <Media left href="#">
-                    <figure className='u-sm-avatar mr-2'>
-                      <img className='' src={window.imgs.latestBlock} />
+            <Col lg='4' md='6' className='vertical-divider'>
+              {/* <div className='media align-items-center'> */}
+              <Media className='media align-items-center'>
+                <Media left href="#">
+                  <figure className='u-sm-avatar mr-2'>
+                    <img className='' src={window.imgs.latestBlock} />
 
-                    </figure>
-                  </Media>
-
-                  <Media body className='width-latest-block '>
-                    <Media heading className='net-overview-secondary-txt'>
-                      Latest Block
-                    </Media>
-                    <a className='net-overview-primary-link-txt'>{lBNumber}</a>
-                    <span className='secondary-small'>({mineTime}.0 s)</span>
-                  </Media>
-
-                  <div className='text-right'>
-                    <Media heading className='net-overview-secondary-txt'>
-                      Transaction
-                  </Media>
-                    <a className='net-overview-primary-link-txt'>{dispTotalTxns} M</a>
-                    <span className='secondary-small'> ({tps} TPS)</span>
-                  </div>
-
+                  </figure>
                 </Media>
 
+                <Media body className='width-latest-block '>
+                  <Media heading className='net-overview-secondary-txt'>
+                    Latest Block
+                    </Media>
+                  <a className='net-overview-primary-link-txt'>{lBNumber}</a>
+                  <span className='secondary-small'>({mineTime}.0 s)</span>
+                </Media>
 
-              </div>
+                <div className='text-right right'>
+                  <Media heading className='net-overview-secondary-txt'>
+                    Transaction
+                  </Media>
+                  <a className='net-overview-primary-link-txt'>{dispTotalTxns} M</a>
+                  <span className='secondary-small'> ({tps} TPS)</span>
+                </div>
+
+              </Media>
+
+
+              {/* </div> */}
               <hr className='hr-space-lg'></hr>
               <div className='media align-items-center'>
 
@@ -168,7 +173,7 @@ export default class NetworkOverview extends React.Component {
                     <a className='net-overview-primary-link-txt'>{lBDificulty} TH</a>
                   </Media>
 
-                  <div className='text-right hash-rate'>
+                  <div className='text-right hash-rate right'>
                     <Media heading className='net-overview-secondary-txt'>
                       Hash Rate
                     </Media>
@@ -181,7 +186,13 @@ export default class NetworkOverview extends React.Component {
 
             </Col >
             <Col lg='4' md='12'>
-              Graph
+              <div className='justify-contnet-between align-items-center d-flex tether'>
+                <h2 className='net-overview-secondary-txt text-nowrap text-truncate'>
+                  TETHER TRANSACTION HISTORY IN 14 DAYS
+                </h2>
+              </div>
+
+              <TXHistoryGraph tetherTXHistory={tetherTXHistory} />
             </Col>
           </Row>
         </Card>

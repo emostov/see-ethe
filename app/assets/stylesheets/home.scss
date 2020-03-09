@@ -26,7 +26,7 @@ $spacer: 5px;
   justify-content: space-between;
 }
 .width-latest-block {
-  min-width: 55%;
+  min-width: 30%;
 }
 .width-difficulty{
   min-width: 50%;
@@ -96,6 +96,9 @@ $spacer: 5px;
 }
 
 
+.recharts-wrapper {
+  right: 20%;
+}
 
 h5.white-text{
   font-size: 1.01563rem;
@@ -164,16 +167,26 @@ li.small-text.dt {
   min-width: 115px;
 }
 
-  // .arrow-select {
-  //   background: #fff url(data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' …1.26 111.256a13.741 13.741 0 0 1-19.432 0z' fill='%2377838f'/%3E%3C/svg%3E) no-repeat right 1rem center;
-  //   background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' …1.26 111.256a13.741 13.741 0 0 1-19.432 0z' fill='%2377838f'/%3E%3C/svg%3E);
-  //   background-position-x: right 1rem;
-  //   background-position-y: center;
-  //   background-size: 8px 15px;
-  //   // background-repeat-x: no-repeat;
-  //   // background-repeat-y: no-repeat;
-  //   background-attachment: initial;
-  //   background-origin: initial;
-  //   background-clip: initial;
-  //   background-color: rgb(255, 255, 255);
-  // }
+.recharts-cartesian-axis-tick {    
+    font-size: 11px;
+    font-family:"Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+    // font-family: Helvetica Neue,bHelvetica, Arial, sans-serif!important;
+    color: #666666
+}
+
+.vertical-divider:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    border-right: 1px solid #e7eaf3;
+    content: "";
+}
+
+.tether {
+  max-height: 20px;
+}
+
+.recharts-surface{
+  max-height: 110px;
+}

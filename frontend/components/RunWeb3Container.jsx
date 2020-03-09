@@ -17,7 +17,7 @@ class RunWeb3 extends React.Component {
     // this.props.fetchBlocks(10)
     // this.props.fetchBlocks(5)
     this.props.fetchBlocks(1)
-
+ 
 
     // this.state.intervalID = setInterval(() => {
     //   this.props.fetchBlocks(1)
