@@ -1,0 +1,53 @@
+h1.grey {
+  color: #4a4f55;
+  font-size: 1.21875rem;
+  font-weight: 400;
+}
+
+.pt-pb-3 {
+  padding-bottom: .75rem!important;
+  padding-top: .75rem!important;
+}
+    
+.header.grey {
+  text-align: left;
+} 
+.dm-sm-flex.block, .block-header {
+  justify-content: start;
+  align-items: flex-start;
+}
+
+.sub-txt-3 {
+  color: #77838f!important;
+  font-size: 80%;
+  font-weight: 400;
+}
+
+.card.block {
+  min-width: 100%
+}
+
+.container.block {
+  min-width: 950px;
+}
+
+.g-b-f {
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-size: .8125rem;
+  line-height: 1.5;
+  color: #1e2022;
+  text-align: left;
+}
+
+.card-row {
+  width: 100%;
+  display: -webkit-box;
+}
+
+.bold-f {
+  font-weight: 700!important;
+}
+
+.grey {
+  color: #77838f!important;
+}
