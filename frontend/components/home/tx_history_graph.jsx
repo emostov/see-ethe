@@ -20,28 +20,29 @@ const TXHistoryGraph = ({ tetherTXHistory }) => {
 
   return (
 
-      <LineChart width={250} height={105} data={cleanData} >
-        <Tooltip />
-        <Line type="monotone" dataKey="txs_k" stroke="#1E2002" />
-        <XAxis
-          dataKey="date"
-          axisLine={false}
-          interval="preserveStart"
-          tickCount={3}
-          height={10}
-          tickSize
-          dy='25'
-        />
-        <YAxis
-          axisLine={false}
-          interval="preserveEnd"
-          tickCount={3}
-          type="number" domain={[60, 130]}
-          tickSize
-          padding={{ right: 20 }}
-        />
+    <LineChart width={320} height={105} data={cleanData} >
+      <Tooltip />
+      <Line type="monotone" dataKey="txs_k" stroke="#1E2002" />
+      <XAxis
+        dataKey="date"
+        axisLine={false}
+        interval="preserveStart"
+        tickCount={3}
+        height={10}
+        tickSize
+        dy='25'
+        padding={{ left: 30, right: 30, top: 5 }}
+      />
+      <YAxis
+        axisLine={false}
+        interval="preserveEnd"
+        tickCount={3}
+        type="number" domain={[60, 130]}
+        tickSize
+        padding={{ left: 30, right: 30 }}
+      />
 
-      </LineChart>
+    </LineChart>
   )
 }
 
