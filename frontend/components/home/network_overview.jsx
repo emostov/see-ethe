@@ -40,7 +40,10 @@ export default class NetworkOverview extends React.Component {
     const totalEthe = web3.utils.fromWei(totalSupply.toString(), 'ether');
     const bigTotalSupplyEth = new Big(totalEthe, 10);
     const bigMarketCap = bigTotalSupplyEth.mul(new Big(ethusd));
-    return bigMarketCap.toString();
+    const mc = bigMarketCap
+      .toString()
+      .slice(0, 14);
+    return `${mc.slice(0, 2)},${mc.slice(2, 5)},${mc.slice(5, 8)},${mc.slice(8)}`
   }
 
 

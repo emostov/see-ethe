@@ -5,7 +5,7 @@ const months = Object.freeze(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', '
   'Oct', 'Nov', 'Dec']);
 
 const TXHistoryGraph = ({ tetherTXHistory }) => {
-  const recent = [...tetherTXHistory].reverse().slice(0, 14)
+  const recent = [...tetherTXHistory].reverse().slice(14)
   const cleanData = recent.map((data, idx) => {
     const { month, day } = data._id;
 
