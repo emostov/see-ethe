@@ -31,17 +31,15 @@ export default class HomeFeedCard extends React.Component {
       this.props.fetchAddressTypeTags();
     }
 
+    const intervalID = setInterval(() => {
+      this.setState({
+        count: this.state.count + 1
+      })
+    }, 1 * 1000) //TODO change back to one sec 
 
-    // const intervalID = setInterval(() => {
-    //   this.setState({
-    //     count: this.state.count + 1
-    //   })
-    // }, 1 * 1000) //TODO change back to one sec 
-
-
-
-    // this.setState({ intervalID });
+    this.setState({ intervalID });
   }
+
   componentWillUnmount() {
     clearInterval(this.state.intervalID)
   }
@@ -49,7 +47,6 @@ export default class HomeFeedCard extends React.Component {
   mapItems() {
     const { items, addressTypeTags } = this.props;
     return items.map((item, idx) => {
-
       // if its the last block in the array we just need to estimate mine time
       const mineTime = idx === items.length - 1 ? ('~15')
         : (timeDiff(items[idx], items[idx + 1]));
