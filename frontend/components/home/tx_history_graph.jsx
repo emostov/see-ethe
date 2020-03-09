@@ -19,7 +19,7 @@ const TXHistoryGraph = ({ tetherTXHistory }) => {
 
   return (
 
-    <LineChart width={320} height={105} data={cleanData} >
+    <LineChart width={345} height={105} data={cleanData} >
       <Tooltip />
       <Line type="monotone" dataKey="txs_k" stroke="#1E2002" />
       <XAxis

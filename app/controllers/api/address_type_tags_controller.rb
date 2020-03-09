@@ -6,6 +6,6 @@ class Api::AddressTypeTagsController < ApplicationController
   end
 
   def show
-    @tag = tag.find_by(address: params[:address])
+    @tag = AddressTypeTag.find_by(address: params[:id])
   end
 end
