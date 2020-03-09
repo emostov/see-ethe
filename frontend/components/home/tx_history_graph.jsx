@@ -10,7 +10,6 @@ const TXHistoryGraph = ({ tetherTXHistory }) => {
     const { month, day } = data._id;
 
     const date = `${months[month - 1]} ${day}`;
-    console.log(date)
     const quant = (data.cnt / 1000)
       .toString()
       .slice(0, 3)

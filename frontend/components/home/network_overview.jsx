@@ -64,9 +64,9 @@ export default class NetworkOverview extends React.Component {
     const mineTime = latestBlock && nextLatestBlock ?
       (timeDiff(latestBlock, nextLatestBlock)) : '...';
 
-    const dispTotalTxns = (totalTransactions / 1000000)
+    const dispTotalTxns = totalTransactions ? (totalTransactions / 1000000)
       .toString()
-      .slice(0, 6)
+      .slice(0, 6) : '...loading'
 
     const tps = mempoolTPS ? mempoolTPS
       .toString()
