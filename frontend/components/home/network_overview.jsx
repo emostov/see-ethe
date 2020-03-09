@@ -46,8 +46,6 @@ export default class NetworkOverview extends React.Component {
     return `${mc.slice(0, 2)},${mc.slice(2, 5)},${mc.slice(5, 8)},${mc.slice(8)}`
   }
 
-
-
   render() {
     const { latestBlock,
       nextLatestBlock,
@@ -190,6 +188,9 @@ export default class NetworkOverview extends React.Component {
             </Col >
             <Col lg='4' md='12'>
               <div className='justify-contnet-between align-items-center d-flex tether'>
+                <figure className='tether-logo mr-1 mb-0'>
+                  <img className='tether-logo' src={window.imgs.tetherLogo} />
+                </figure>
                 <h2 className='net-overview-secondary-txt text-nowrap text-truncate'>
                   TETHER TRANSACTION HISTORY IN 14 DAYS
                 </h2>

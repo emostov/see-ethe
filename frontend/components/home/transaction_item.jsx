@@ -7,6 +7,9 @@ import { web3 } from '../../util/web3_util'
 const convertWeiToShowValue = (wei) => web3.utils.fromWei(wei, 'ether').slice(0, 8)
 
 const TransactionItem = ({ tx, age }) => {
+  if (!tx) return(
+    <div> </div>
+  )
   const { hash } = tx;
   // console.log(tx)
   // console.log('transactionHash', hash)
