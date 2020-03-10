@@ -21,7 +21,6 @@ const BlockItem = ({ block, age, mineTime, reward, minerTag }) => {
             <Media body className='feed ml-1'>
               <Link className='feed ml-1'
                 to={`/block/${block.hash}`}>{number}</Link>
-              {/* <a className='feed ml-1'>{number}</a> */}
               <span
                 className='d-sm-block txt-2 ml-1 ml-sm-9 text-nowrap secondary-small'>
                 {age}
@@ -39,7 +38,7 @@ const BlockItem = ({ block, age, mineTime, reward, minerTag }) => {
               </span>
               {/* <a className='feed tx-cnt'>{transactions.length} txns </a> */}
               <Link className='feed tx-cnt'
-                to={`/block/${block.hash}`}>{transactions.length} txns</Link>
+                to={`/block/${block.hash}`}>{transactions.length} txns </Link>
               <span
                 className='secondary-small'>
                 in {mineTime} secs

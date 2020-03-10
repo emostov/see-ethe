@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './nav/header.jsx';
 import { Route, Switch, } from 'react-router-dom';
+import { Redirect } from 'react-router'
 
 import { AuthRoute, ProtectedRoute, } from '../util/route_util'
 import RunWeb3Container from './RunWeb3Container'
@@ -26,7 +27,8 @@ const App = () => (
           <ProtectedRoute path='/myaccount' component={MyAccountContainer} />
           <Route exact path='/block' component={BlockPageContainer} />
           <Route path='/block/:hash' component={BlockPageRouteContainer} />
-          <Route exact path='/' component={Home} />
+          <Route path='/home' component={Home} />
+          <Route path='/' render={() => <Redirect to="/home" />} />
         </Switch>
 
       </div>

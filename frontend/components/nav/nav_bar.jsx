@@ -31,7 +31,7 @@ const NavBar = () => {
 
     <ul className='nav-bar'>
       <li>
-        <NavLink className='nav-link home-link' activeClassName={'active-link'} to={'/'} >
+        <NavLink className='nav-link home-link' activeClassName={'active-link'} to={'/home'} >
           Home
         </NavLink>
       </li>
