@@ -11,14 +11,10 @@ import {
 
 import React, { useState } from 'react';
 
-const HomeSearchBar = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [splitButtonOpen, setSplitButtonOpen] = useState(false);
+export default class HomeSearchBar extends React.Component {
 
-  const toggleDropDown = () => setDropdownOpen(!dropdownOpen);
 
-  const toggleSplit = () => setSplitButtonOpen(!splitButtonOpen);
-  return (
+  render(){
     <Container fluid="lg" className='md-4'>
       <div className='main-contents'>
         <Card body className='gradient-half-primary-body' >
@@ -39,7 +35,7 @@ const HomeSearchBar = () => {
               isOpen={splitButtonOpen} toggle={toggleSplit}>
               <DropdownToggle split className='white-btn mid-search-txt' >All Filters  </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem className='nf' disabled>...</DropdownItem>
+                <DropdownItem className='nf' disabled>Comming soon...</DropdownItem>
                 <DropdownItem className='nf' disabled>...</DropdownItem>
                 <DropdownItem className='nf' disabled>...</DropdownItem>
                 <DropdownItem className='nf' disabled>...</DropdownItem>
@@ -55,6 +51,18 @@ const HomeSearchBar = () => {
         </Card>
       </div>
     </Container>
+  }
+}
+
+const HomeSearchBar = () => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [splitButtonOpen, setSplitButtonOpen] = useState(false);
+
+  const toggleDropDown = () => setDropdownOpen(!dropdownOpen);
+
+  const toggleSplit = () => setSplitButtonOpen(!splitButtonOpen);
+  return (
+
   )
 }
 
