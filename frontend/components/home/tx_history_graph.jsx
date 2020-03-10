@@ -36,9 +36,11 @@ const TXHistoryGraph = ({ tetherTXHistory }) => {
         axisLine={false}
         interval="preserveEnd"
         tickCount={3}
-        type="number" domain={[60, 130]}
+
+        type="number" domain={['dataMin', 'dataMax + 5']}
+
         tickSize
-        padding={{ left: 30, right: 30 }}
+        padding={{ left: 0, right: 15 }}
       />
 
     </LineChart>

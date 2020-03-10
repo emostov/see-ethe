@@ -2,12 +2,13 @@ import React from 'react';
 import { Container, Card, Row, Col, Media } from 'reactstrap';
 import Big from 'big.js';
 
-import { timeDiff } from '../../util/general_util';
+import { timeDiff, numberWithCommas } from '../../util/general_util';
 import { networkHashRate, web3 } from '../../util/web3_util'
 import TXHistoryGraph from './tx_history_graph';
 
 
 // TODO move to utilities
+// TODO replace string slice with numberWithCommas
 const displayDifficulty = (difficulty) => {
   const bigDifficulty = new Big(difficulty, 10)
   const big100Bil = new Big('1000000000000', 10)
@@ -41,7 +42,7 @@ export default class NetworkOverview extends React.Component {
     }, 1 * 30 * 1000)
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     clearInterval(this.intervalID)
   }
 
@@ -54,7 +55,7 @@ export default class NetworkOverview extends React.Component {
     const mc = bigMarketCap
       .toString()
       .slice(0, 14);
-    return `${mc.slice(0, 2)},${mc.slice(2, 5)},${mc.slice(5, 8)},${mc.slice(8)}`
+    return numberWithCommas(mc)
   }
 
   render() {

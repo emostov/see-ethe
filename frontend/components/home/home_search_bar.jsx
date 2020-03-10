@@ -37,17 +37,17 @@ const HomeSearchBar = () => {
           <InputGroup>
             <InputGroupButtonDropdown addonType="prepend"
               isOpen={splitButtonOpen} toggle={toggleSplit}>
-              <DropdownToggle split className='white-btn f-13' >All Filters  </DropdownToggle>
+              <DropdownToggle split className='white-btn mid-search-txt' >All Filters  </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem className='nf' disabled>Action</DropdownItem>
-                <DropdownItem className='nf' disabled>Action</DropdownItem>
-                <DropdownItem className='nf' disabled>Action</DropdownItem>
-                <DropdownItem className='nf' disabled>Action</DropdownItem>
-                <DropdownItem className='nf' disabled>Action</DropdownItem>
+                <DropdownItem className='nf' disabled>...</DropdownItem>
+                <DropdownItem className='nf' disabled>...</DropdownItem>
+                <DropdownItem className='nf' disabled>...</DropdownItem>
+                <DropdownItem className='nf' disabled>...</DropdownItem>
+                <DropdownItem className='nf' disabled>...</DropdownItem>
 
               </DropdownMenu>
             </InputGroupButtonDropdown >
-            <Input className='f-13' placeholder="Search by Address / Txn Hash / Block / Token / Ethe" />
+            <Input className='mid-search-txt' placeholder="Search by block height or hash (use the feed for block info)" />
             <InputGroupAddon addonType="append">
               <Button className='search-btn' color="secondary">Search</Button>
             </InputGroupAddon>

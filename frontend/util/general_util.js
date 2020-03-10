@@ -1,5 +1,3 @@
-// import Big from 'big.js';
-// import { web3 } from './web3_util';
 
 export const sliceToDisplayAddress = (address) => {
   if (!(address && address.length)) return '';
@@ -34,3 +32,8 @@ export const itemAgeToString = (item) => {
 // takes in blocks
 export const timeDiff = (curr, prev) => curr.timestamp - prev.timestamp;
 
+// taken from
+// https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+export const numberWithCommas = (x) => x
+  .toString()
+  .replace(/\B(?=(\d{3})+(?!\d))/g, ',');

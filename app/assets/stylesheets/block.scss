@@ -1,0 +1,136 @@
+h1.grey {
+  color: #4a4f55;
+  font-size: 1.21875rem;
+  font-weight: 400;
+}
+
+.pt-pb-3 {
+  padding-bottom: .75rem!important;
+  padding-top: .75rem!important;
+}
+    
+.header.grey {
+  text-align: left;
+} 
+.dm-sm-flex.block, .block-header {
+  justify-content: start;
+  align-items: flex-start;
+}
+
+.sub-txt-3 {
+  color: #77838f!important;
+  font-size: 80%;
+  font-weight: 400;
+}
+
+.card.block {
+  min-width: 100%
+}
+
+.container.block {
+  // min-width: 900px;
+  min-width: 100% !important;
+}
+
+.g-b-f {
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-size: .8125rem;
+  line-height: 1.5;
+  color: #1e2022;
+  text-align: left;
+}
+.container.inner{
+  padding: 0px!important;
+}
+.card-row {
+  width: 100%;
+  display: -webkit-box;
+}
+
+.bold-f {
+  font-weight: 700!important;
+}
+
+.grey {
+  color: #77838f!important;
+}
+
+.blue-chevron {
+  cursor: no-drop;
+  // font-size: .60938rem;
+  width: 1.21875rem;
+  height: 1.21875rem;
+  position: relative;
+  line-height: 0;
+  padding: 0;
+  color: #3498db;
+  background: rgba(52,152,219,.1);
+  border: 1px solid transparent;
+  // border-color: transparent;
+  margin-right: .25rem!important;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+}
+
+.user-circle-left{
+  padding-left: 5px;
+}
+
+.inner-chev{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-weight: 900;
+  font-size: .6rem;
+  color: #3498db;
+}
+
+.light-blue-label{
+  font-size: .74094rem;
+  padding: .3rem .5rem;
+  color: #3498db;
+  background-color: rgba(52,152,219,.1);
+  display: inline-block;
+  font-weight: 500;
+  line-height: 1.3;
+  // margin-bottom: .25rem!important;
+  // margin-top: .25rem!important;
+  border-radius: .25rem!important;
+}
+
+.hr-page {
+  display: block;
+  margin-top: .75rem;
+  margin-bottom: .75rem;
+  opacity: .75;
+  border: 2;
+  border-top: 1px solid #e7eaf3;
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+  min-height: 2px;
+  z-index: 0;
+}
+
+.card-row.g-b-f {
+  border-bottom: .009rem  solid #dbcfce;
+  padding-bottom: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+.first-boi {
+  padding-top: 0rem !important;
+}
+
+.header-block {
+  position: relative;
+  bottom: 2rem;
+  width: 97%;
+}
+
+.btm-divider {
+  border-bottom: .009rem  solid #dbcfce;
+}

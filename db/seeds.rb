@@ -58,3 +58,9 @@ myminers_org_Solo = AddressTypeTag.create!(
   address_type: 'miner',
   name: 'myminers.org: SOLO'
 )
+
+nanopool = AddressTypeTag.create!(
+  address: '0x52bc44d5378309EE2abF1539BF71dE1b7d7bE3b5',
+  address_type: 'miner',
+  name: 'Nanopool'
+)

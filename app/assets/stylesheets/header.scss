@@ -67,6 +67,10 @@ header .container {
   padding: .8rem 1rem;
 }
 
+.color-important-grey {
+  color: #6c757e!important;
+}
+
 .user-header{
   color: #6c757e;
 }
@@ -190,3 +194,11 @@ span.dropdown-toggle, .sign-up-link {
   text-align: center;
 }
 
+.drop-link.big {
+  min-height: 20px;
+}
+
+span.dropdown-toggle.color-important-grey{
+  border-left: none!important;
+  border-right: none!important;
+}

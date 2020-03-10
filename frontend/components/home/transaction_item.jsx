@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Media, } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 import { sliceToDisplayAddress } from '../../util/general_util';
 import { web3 } from '../../util/web3_util'
@@ -7,12 +8,10 @@ import { web3 } from '../../util/web3_util'
 const convertWeiToShowValue = (wei) => web3.utils.fromWei(wei, 'ether').slice(0, 8)
 
 const TransactionItem = ({ tx, age }) => {
-  if (!tx) return(
+  if (!tx) return (
     <div> </div>
   )
   const { hash } = tx;
-  // console.log(tx)
-  // console.log('transactionHash', hash)
   return (
     <div>
       <Row className='feed'>
@@ -24,7 +23,8 @@ const TransactionItem = ({ tx, age }) => {
               </span>
             </div>
             <Media body className='feed ml-1'>
-              <a className='feed ml-1'>{sliceToDisplayAddress(hash)}</a>
+              <Link className='feed ml-1'
+                to={`/block/${tx.blockHash}`}>{sliceToDisplayAddress(hash)}</Link>
               <span
                 className='d-sm-block txt-2 ml-1 ml-sm-9 text-nowrap secondary-small'>
                 {age} {/* time elapsed  */}
@@ -37,10 +37,12 @@ const TransactionItem = ({ tx, age }) => {
           <div className='d-flex justify-content-between'>
             <div className='text-nowrap w-max-100'>
               <span className='d-block mb-1 mb-sm-0 norm-txt'>
-                From: <a className='text-truncate feed name'>{sliceToDisplayAddress(tx.from)}</a>
+                From: <Link className='text-truncate feed name'
+                  to={`/block/${tx.blockHash}`}>{sliceToDisplayAddress(tx.from)}</Link>
               </span>
               <span className='d-sm-block norm-txt'>
-                To: <a className='text-truncate feed name'>{sliceToDisplayAddress(tx.to)}</a>
+                To: <Link className='text-truncate feed name'
+                  to={`/block/${tx.blockHash}`}>{sliceToDisplayAddress(tx.to)}</Link>
               </span>
             </div>
 

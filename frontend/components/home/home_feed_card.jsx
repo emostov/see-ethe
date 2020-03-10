@@ -5,6 +5,7 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
+  Spinner,
 } from 'reactstrap';
 
 
@@ -105,7 +106,7 @@ export default class HomeFeedCard extends React.Component {
         <CardBody className='card-scroll-holder'>
           <div className=''>
             <div className='scroll-items-container'>
-
+              {this.props.items || this.props.blocks ? '' : <Spinner color='dark' />}
               {feedType === 'Blocks' ? this.blockComponents()
                 : this.transactionComponents()}
 
