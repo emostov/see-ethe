@@ -72,7 +72,7 @@ const processBlock = (dispatch, getState) => (err, block) => {
     if (blocks[block.hash] !== undefined) return;
     dispatch(receiveBlock(block, fetchTxRecieptDispatch));
   } else {
-    console.error('Custom ERROR: Block reciept ERROR: ', err);
+    // console.error('Custom ERROR: Block reciept ERROR: ', err);
   }
 };
 

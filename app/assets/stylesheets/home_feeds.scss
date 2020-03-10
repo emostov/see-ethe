@@ -135,7 +135,7 @@ a.feed {
 .reward-badge {
   min-width: 88px;
   position: relative;
-  padding-left: 1.15rem;
+  // padding-left: 1.15rem;
   letter-spacing: .8px;
   border-top-right-radius: .25rem;
   border-bottom-right-radius: .25rem;
@@ -151,6 +151,7 @@ a.feed {
   transition: .2s ease-in-out;
   z-index: 3;
   padding-left: 20px;
+  padding-bottom: .17rem;
 }
 
 .row.feed{
