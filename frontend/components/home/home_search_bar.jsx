@@ -1,4 +1,6 @@
-import React, { useState, useHistory } from 'react';
+import React, { useState } from 'react';
+import ReactDOM from "react-dom"
+import { useHistory } from "react-router-dom";
 import {
   Container,
   Card,
@@ -14,7 +16,6 @@ import {
 } from 'reactstrap';
 
 const HomeSearchBar = ({ blocks }) => {
-  // const [dropdownOpen, setDropdownOpen] = useState(false);
   const [splitButtonOpen, setSplitButtonOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('')
   const [visible, setVisible] = useState(false);
@@ -24,32 +25,36 @@ const HomeSearchBar = ({ blocks }) => {
 
   const updateSearchTerm = (e) => setSearchTerm(e.currentTarget.value);
 
-  const redirect = (hash) => {
+  const redirectToBlockPage = (hash) => {
     const history = useHistory();
-    const path = `/block/${hash}`;
-    history.push(path);
+    // console.log(hash)
+    // console.log('block')
+    console.log(`/block/${hash}`)
+    // history.push(path);
   }
 
   const searchBlock = () => {
     const searchTrimmed = searchTerm.trim();
     console.log('this is the current search term', searchTrimmed);
     if (blocks[searchTrimmed] !== undefined) {
-      redirect(searchTrimmed);
+      redirectToBlockPage(searchTrimmed);
       return;
     }
 
     Object.values(blocks).forEach((block) => {
       console.log(block)
       if (block.number.toString() === searchTrimmed) {
-        console.log('blocknumber:', block.number.toString())
-        console.log('searchterm', searchTrimmed)
-        console.log(block.hash)
-        // redirect(block.hash);
+        console.log('blocknumber:', block.number.toString());
+        console.log('searchterm', searchTrimmed);
+        const hash = block.hash.toString();
+        redirectToBlockPage(hash);
         return;
       }
     })
     setVisible(true);
   }
+
+  // redirectToBlockPage('helllllloooooo')
 
   return (
     <Container fluid="lg" className='md-4'>
