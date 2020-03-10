@@ -1,18 +1,18 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import UserHeaderContainer from './user_header_container';
 
 
 const NavBar = () => {
 
   return (
-    
+
     <ul className='nav-bar'>
 
       <li>
-        <Link className='nav-link home-link' to={'/'} >
+        <NavLink className='nav-link home-link' activeClassName={'active-link'} to={'/'} >
           Home
-        </Link>
+        </NavLink>
       </li>
 
       <li>
@@ -48,7 +48,7 @@ const NavBar = () => {
           <div className='ethe-logo-box'>
             <button type="button" className="btn btn-icon btn-group-sm btn-light nf">
               <img src={window.imgs.etheLogo} className="ethe-img" />
-              
+
             </button>
 
           </div>

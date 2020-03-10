@@ -1,13 +1,13 @@
 import React from 'react';
 import { Row, Col, Media, } from 'reactstrap';
-
+import { Link } from 'react-router-dom';
 import { sliceToDisplayAddress } from '../../util/general_util'
 
 const BlockItem = ({ block, age, mineTime, reward, minerTag }) => {
   const { miner, transactions, number } = block
   const minerDisplayName = minerTag ? minerTag.name
     : sliceToDisplayAddress(miner)
-    
+
   return (
     <div>
       <Row className='feed'>
@@ -19,7 +19,9 @@ const BlockItem = ({ block, age, mineTime, reward, minerTag }) => {
               </span>
             </div>
             <Media body className='feed ml-1'>
-              <a className='feed ml-1'>{number}</a>
+              <Link className='feed ml-1'
+                to={`/block/${block.hash}`}>{number}</Link>
+              {/* <a className='feed ml-1'>{number}</a> */}
               <span
                 className='d-sm-block txt-2 ml-1 ml-sm-9 text-nowrap secondary-small'>
                 {age}
@@ -35,7 +37,9 @@ const BlockItem = ({ block, age, mineTime, reward, minerTag }) => {
                 Miner <a className='text-truncate feed name '>{minerDisplayName}</a>
 
               </span>
-              <a className='feed tx-cnt'>{transactions.length} txns </a>
+              {/* <a className='feed tx-cnt'>{transactions.length} txns </a> */}
+              <Link className='feed tx-cnt'
+                to={`/block/${block.hash}`}>{transactions.length} txns</Link>
               <span
                 className='secondary-small'>
                 in {mineTime} secs

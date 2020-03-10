@@ -102,15 +102,15 @@ h1.grey {
 }
 
 .hr-page {
+  display: block;
   margin-top: .75rem;
   margin-bottom: .75rem;
   opacity: .75;
-  border: 0;
+  border: 2;
   border-top: 1px solid #e7eaf3;
   box-sizing: content-box;
   height: 0;
   overflow: visible;
-
-
-  z-index: 5;
+  min-height: 2px;
+  z-index: 0;
 }

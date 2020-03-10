@@ -1,4 +1,5 @@
 import React from 'react';
+import sizeof from 'object-sizeof';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
@@ -8,7 +9,6 @@ import {
   faClock,
   faQuestionCircle,
 } from "@fortawesome/free-regular-svg-icons"
-
 import {
   Row,
   Col,
@@ -16,6 +16,7 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Spinner,
 } from 'reactstrap';
 
 import {
@@ -46,6 +47,8 @@ const BlockPage = ({ block, addressTypeTags }) => {
   const difficulty = block ? numberWithCommas(block.difficulty) : '...loading';
   const gasUsed = block ? block.gasUsed : '...loading';
   const gasLimit = block ? block.gasLimit : '...loading';
+  const extraData = block ? block.extraData : '...loading';
+  const size = block ? sizeof(block) : '...loading'
   const percentGasUsed = block ? ((block.gasUsed / block.gasLimit) * 100)
     .toString()
     .slice(0, 5)
@@ -61,10 +64,12 @@ const BlockPage = ({ block, addressTypeTags }) => {
         <div className='mb-2 mb-sm-0  d-flex flex-row'>
           <div><h1 className='mb-0 grey'>Block </h1></div>
           <div><span className='sub-txt-3'>&nbsp; #{number}</span></div>
+          <br />
         </div>
       </Container>
       <hr className='hr-page' />
 
+      {block ? '' : <Spinner color='dark' />}
 
       <Container className='pb-2 mb-2 block '>
         <Card className='block'>
@@ -77,7 +82,7 @@ const BlockPage = ({ block, addressTypeTags }) => {
             </a>
           </CardHeader>
           <CardBody>
-            <Container>
+            <Container className='p-0'>
               <Row className='card-row g-b-f'>
                 <Col className='mb-1 ' md='3'>
                   <FontAwesomeIcon icon={faQuestionCircle}
@@ -197,7 +202,7 @@ const BlockPage = ({ block, addressTypeTags }) => {
                   Block size:
                 </Col>
                 <Col className='' md='9'>
-                  FILL THIS IN TODO
+                  {numberWithCommas(size)}
                 </Col>
               </Row>
               <hr className='hr-page' />
@@ -220,14 +225,26 @@ const BlockPage = ({ block, addressTypeTags }) => {
                   <FontAwesomeIcon icon={faQuestionCircle}
                     size="lg" className='user-circle grey'
                   />
-                  Gas Limmit
+                  Gas Limit
                 </Col>
                 <Col className='' md='9'>
-                  {gasLimit} percent gas used
+                  {gasLimit}
                 </Col>
               </Row>
               <hr className='hr-page' />
 
+              <Row className='card-row g-b-f'>
+                <Col className='mb-1 ' md='3'>
+                  <FontAwesomeIcon icon={faQuestionCircle}
+                    size="lg" className='user-circle grey'
+                  />
+                  Extra Data:
+                </Col>
+                <Col className='' md='9'>
+                  {extraData}
+                </Col>
+              </Row>
+              <hr className='hr-page' />
             </Container>
           </CardBody>
         </Card>
