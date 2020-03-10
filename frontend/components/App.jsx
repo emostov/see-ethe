@@ -26,7 +26,7 @@ const App = () => (
           <ProtectedRoute path='/myaccount' component={MyAccountContainer} />
           <Route exact path='/block' component={BlockPageContainer} />
           <Route path='/block/:hash' component={BlockPageRouteContainer} />
-          <Route path='/' component={Home} />
+          <Route exact path='/' component={Home} />
         </Switch>
 
       </div>

@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import UserHeaderContainer from './user_header_container';
+import {
+  Dropdown, DropdownToggle, DropdownMenu, DropdownItem
+} from 'reactstrap';
 
+const BlockChainDropdown = () => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen(prevState => !prevState);
+  return (
+    // <Dropdown className='user-drop' isOpen={dropdownOpen} toggle={toggle}>
+    <Dropdown className='' isOpen={dropdownOpen} toggle={toggle}>
+      <DropdownToggle className='color-important-grey' tag="span" caret>
+        BlockChain
+      </DropdownToggle>
+      <DropdownMenu className='drp-dwn-header'>
+        <DropdownItem className='grey-nav-text ' tag='span'>
+          <Link className='nav-link drop-link big' to={'/block'}>
+            Latest Block
+          </Link>
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  )
+}
 
 const NavBar = () => {
 
@@ -16,9 +39,10 @@ const NavBar = () => {
       </li>
 
       <li>
-        <Link className='nav-link nf' to={'/block'} >
+        {/* <Link className='nav-link nf' to={'/block'} >
           BlockChain
-        </Link>
+        </Link> */}
+        <BlockChainDropdown />
       </li>
 
       <li>
