@@ -5,7 +5,8 @@ import { selectNMostRecentBlocksArray } from '../../reducers/selectors';
 
 const mapStateToProps = (state) => ({
   block: selectNMostRecentBlocksArray(state.entities, 1)[0],
-  transactions: state.entities.transactions,
+  // transactions: state.entities.transactions,
+  addressTypeTags: state.entities.addressTypeTags,
 });
 
-export default connect(mapStateToProps, null)(BlockPage)
+export default connect(mapStateToProps, null)(BlockPage);

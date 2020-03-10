@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { fetchBlocks } from '../actions/web3_actions'
-
+import { fetchAddressTypeTags } from '../actions/address_actions'
 class RunWeb3 extends React.Component {
 
   constructor(props) {
@@ -13,15 +13,13 @@ class RunWeb3 extends React.Component {
   }
 
   componentDidMount() {
-    //this.props.fetchBlocks(100) 
-    // this.props.fetchBlocks(8)
+    this.props.fetchAddressTypeTags();
     this.props.fetchBlocks(5)
-    // this.props.fetchBlocks(1)
- 
 
-    this.state.intervalID = setInterval(() => {
-      this.props.fetchBlocks(1)
-    }, 3 * 1000)
+    // TODO production always comment in
+    // this.state.intervalID = setInterval(() => {
+    //   this.props.fetchBlocks(1)
+    // }, 3 * 1000)
 
     // stop fetches so state does not get to bloated
     setTimeout(() => {
@@ -30,7 +28,7 @@ class RunWeb3 extends React.Component {
   }
 
   componentWillUnmount() {
-    // take down interval Fetch
+    // take down interval Fetch if it hasnt been taken down already
     clearInterval(this.state.intervalID)
   }
 
@@ -45,6 +43,7 @@ class RunWeb3 extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchBlocks: (quantity) => dispatch(fetchBlocks(quantity)),
+  fetchAddressTypeTags: () => dispatch(fetchAddressTypeTags())
 })
 
 export default connect(null, mapDispatchToProps)(RunWeb3);
