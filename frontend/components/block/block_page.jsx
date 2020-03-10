@@ -49,6 +49,7 @@ const BlockPage = ({ block, addressTypeTags }) => {
   const gasLimit = block ? block.gasLimit : '...loading';
   const extraData = block ? block.extraData : '...loading';
   const size = block ? sizeof(block) : '...loading'
+  otherReward = block ? `+ `
   const percentGasUsed = block ? ((block.gasUsed / block.gasLimit) * 100)
     .toString()
     .slice(0, 5)
@@ -60,16 +61,14 @@ const BlockPage = ({ block, addressTypeTags }) => {
 
   return (
     <Container className='inner'>
-      <Container className='pt-pb-3 block d-flex flex-row'>
-        <div className='mb-2 mb-sm-0  d-flex flex-row'>
+
+      <div
+        className='block-page-header d-flex flex-row btm-divider header-block pb-1'>
+        <div className='mb-2  d-flex flex-row  '>
           <div><h1 className='mb-0 grey'>Block </h1></div>
           <div><span className='sub-txt-3'>&nbsp; #{number}</span></div>
-          <br />
         </div>
-      </Container>
-      <hr className='hr-page' />
-
-      {block ? '' : <Spinner color='dark' />}
+      </div>
 
       <Container className='pb-2 mb-2 block '>
         <Card className='block'>
@@ -83,8 +82,9 @@ const BlockPage = ({ block, addressTypeTags }) => {
           </CardHeader>
           <CardBody>
             <Container className='p-0'>
-              <Row className='card-row g-b-f'>
+              <Row className='card-row g-b-f first-boi'>
                 <Col className='mb-1 ' md='3'>
+                  {block ? '' : <Spinner color='dark' />}
                   <FontAwesomeIcon icon={faQuestionCircle}
                     size="lg" className='user-circle grey'
                   />
@@ -104,7 +104,7 @@ const BlockPage = ({ block, addressTypeTags }) => {
                   </a>
                 </Col>
               </Row>
-              <hr className='hr-page' />
+              {/* <hr className='' /> */}
 
               <Row className='card-row g-b-f'>
                 <Col className='mb-1 ' md='3'>
@@ -121,7 +121,7 @@ const BlockPage = ({ block, addressTypeTags }) => {
                 </Col>
 
               </Row>
-              <hr className='hr-page' />
+              {/* <hr className='hr-page' /> */}
 
               <Row className='card-row g-b-f'>
                 <Col className='mb-1 ' md='3'>
@@ -136,7 +136,7 @@ const BlockPage = ({ block, addressTypeTags }) => {
                   </a> in this block
                 </Col>
               </Row>
-              <hr className='hr-page' />
+              {/* <hr className='hr-page' /> */}
 
               <Row className='card-row g-b-f'>
                 <Col className='mb-1 ' md='3'>
@@ -153,7 +153,7 @@ const BlockPage = ({ block, addressTypeTags }) => {
 
                 </Col>
               </Row>
-              <hr className='hr-page' />
+              {/* <hr className='hr-page' /> */}
 
               <Row className='card-row g-b-f'>
                 <Col className='mb-1 ' md='3'>
@@ -166,7 +166,7 @@ const BlockPage = ({ block, addressTypeTags }) => {
                   {reward} Ether (2 + {reward.slice(1)})
                 </Col>
               </Row>
-              <hr className='hr-page' />
+              {/* <hr className='hr-page' /> */}
 
               <Row className='card-row g-b-f'>
                 <Col className='mb-1 ' md='3'>
@@ -179,7 +179,7 @@ const BlockPage = ({ block, addressTypeTags }) => {
                   {unclesReward}
                 </Col>
               </Row>
-              <hr className='hr-page' />
+              {/* <hr className='hr-page' /> */}
 
               <Row className='card-row g-b-f'>
                 <Col className='mb-1 ' md='3'>
@@ -192,7 +192,7 @@ const BlockPage = ({ block, addressTypeTags }) => {
                   {difficulty}
                 </Col>
               </Row>
-              <hr className='hr-page' />
+              {/* <hr className='hr-page' /> */}
 
               <Row className='card-row g-b-f'>
                 <Col className='mb-1 ' md='3'>
@@ -205,7 +205,7 @@ const BlockPage = ({ block, addressTypeTags }) => {
                   {numberWithCommas(size)}
                 </Col>
               </Row>
-              <hr className='hr-page' />
+              {/* <hr className='hr-page' /> */}
 
               <Row className='card-row g-b-f'>
                 <Col className='mb-1 ' md='3'>
@@ -218,7 +218,7 @@ const BlockPage = ({ block, addressTypeTags }) => {
                   {gasUsed} ({percentGasUsed}%)
                 </Col>
               </Row>
-              <hr className='hr-page' />
+              {/* <hr className='hr-page' /> */}
 
               <Row className='card-row g-b-f'>
                 <Col className='mb-1 ' md='3'>
@@ -231,7 +231,7 @@ const BlockPage = ({ block, addressTypeTags }) => {
                   {gasLimit}
                 </Col>
               </Row>
-              <hr className='hr-page' />
+              {/* <hr className='hr-page' /> */}
 
               <Row className='card-row g-b-f'>
                 <Col className='mb-1 ' md='3'>
@@ -244,12 +244,12 @@ const BlockPage = ({ block, addressTypeTags }) => {
                   {extraData}
                 </Col>
               </Row>
-              <hr className='hr-page' />
+              {/* <hr className='hr-page' /> */}
             </Container>
           </CardBody>
         </Card>
       </Container>
-    </Container>
+    </Container >
   )
 }
 

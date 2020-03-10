@@ -7,10 +7,9 @@ import {
 
 const BlockChainDropdown = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const toggle = () => setDropdownOpen(prevState => !prevState);
+
   return (
-    // <Dropdown className='user-drop' isOpen={dropdownOpen} toggle={toggle}>
     <Dropdown className='' isOpen={dropdownOpen} toggle={toggle}>
       <DropdownToggle className='color-important-grey' tag="span" caret>
         BlockChain
@@ -31,7 +30,6 @@ const NavBar = () => {
   return (
 
     <ul className='nav-bar'>
-
       <li>
         <NavLink className='nav-link home-link' activeClassName={'active-link'} to={'/'} >
           Home
@@ -39,9 +37,6 @@ const NavBar = () => {
       </li>
 
       <li>
-        {/* <Link className='nav-link nf' to={'/block'} >
-          BlockChain
-        </Link> */}
         <BlockChainDropdown />
       </li>
 
@@ -72,9 +67,7 @@ const NavBar = () => {
           <div className='ethe-logo-box'>
             <button type="button" className="btn btn-icon btn-group-sm btn-light nf">
               <img src={window.imgs.etheLogo} className="ethe-img" />
-
             </button>
-
           </div>
         </Link>
       </li>
