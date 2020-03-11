@@ -1,4 +1,12 @@
 import React from 'react';
+import Big from 'big.js'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faExternalLinkAlt,
+} from "@fortawesome/free-solid-svg-icons"
+import {
+  faQuestionCircle,
+} from "@fortawesome/free-regular-svg-icons"
 import {
   Row,
   Col,
@@ -7,10 +15,89 @@ import {
   CardBody,
   CardHeader,
   Spinner,
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Button,
+  CardTitle,
+  CardText,
 } from 'reactstrap';
 
+import EtherWrap from '../../contract/ether_wrap';
+import { web3 } from '../../util/web3_util'
+import {
+  numberWithCommas,
+} from '../../util/general_util';
+
+// EtherWrap.methods
+//   .totalSupply()
+//   .call()
+//   .then(console.log)
+
+// EtherWrap.methods
+//   .name()
+//   .call()
+//   .then(console.log)
+
+// EtherWrap.methods
+//   .decimals()
+//   .call()
+//   .then(console.log)
+
+// EtherWrap.methods
+//   .balanceOf('0x21d15d354De0DC27a0A79eC2871606Ea78532052')
+//   .call()
+//   .then(console.log)
+
 export default class ContractPage extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      bigBalance: '0',
+      bigEthUsd: '0',
+      etherValue: '0',
+    };
+  }
+
+  componentDidMount() {
+    this.props.fetchPrices();
+    web3.eth.getBalance('0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2')
+      .then((res) => {
+        // do big calcs here so don't have to do it on every render
+        // combine all calcs into here just to minimizes calls to setState
+        const ethBalance = web3.utils.fromWei(res, 'ether')
+          .toString();
+        const bigEthBalance = new Big(ethBalance, 10);
+        const bigEthUsd = this.props.ethusd ?
+          new Big(this.props.ethusd, 10) : new Big(150, 10);
+        const etherValue = bigEthUsd.mul(bigEthBalance)
+          .toString();
+        this.setState({
+          bigBalance: bigEthBalance,
+          bigEthUsd,
+          etherValue,
+        })
+      });
+    // total supply returns a much bigger number then address balance
+    // EtherWrap.methods.totalSupply()
+  }
+
+  getEtherValue() {
+    const { etherValue } = this.state;
+    const { ethusd } = this.props;
+    if (!etherValue || !ethusd) return (<Spinner color='dark' />);
+    const valC = numberWithCommas(etherValue.slice(0, 9));
+    return `$${valC}${etherValue.slice(9, 12)} (@ ${ethusd}/ETH)`
+  }
+
+
+
   render() {
+
+    const { bigBalance } = this.state;
     return (
       <Container className='inner'>
         <div
@@ -27,45 +114,117 @@ export default class ContractPage extends React.Component {
         </div>
 
         <Container className='inner'>
+
+          {/* card left */}
           <Row className='mb-4 w-100'>
             <Col className=' std-p mb-0' md='6'>
               <Card className='height-all'>
                 <CardHeader
-                  className='d-flex justify-content-between align-items-center' >
+                  className='d-flex justify-content-between align-items-center p-m' >
                   <h2 className='pain-nav-link card-title p-0 m-0'>
                     Contract Overview
                   </h2>
-
-
+                  <div className='foriegn-label'>
+                    Wrapped Ether
+                    <a href='https://weth.io/'>
+                      <FontAwesomeIcon icon={faExternalLinkAlt}
+                        size="lg" className='pl-1'
+                      />
+                    </a>
+                  </div>
                 </CardHeader>
-                <CardBody className='g-b-f'>
-                  <Row className='b-btm-line'>
-                    <Col className='mb-0' md='4'>
-                      Balance: 
+                <CardBody className='g-b-f p-m clr-blk'>
+                  <Row className='b-btm-line p-b-md align-items-center'>
+                    <Col className='mb-0 clr-blk' md='4'>
+                      Balance:
                     </Col>
                     <Col md='8'>
-                      REALLLY BIG NUMBER Ether
+                      {bigBalance.toString().slice(0, 25)} Ether
                     </Col>
                   </Row>
-                  <Row className='b-btm-line'>
-                    <Col className='mb-0' md='4'>
+                  <Row className='b-btm-line p-y-md'>
+                    <Col className='mb-0 ' md='4'>
                       Ether Value:
                     </Col>
                     <Col md='8'>
-                      REALLLY BIG NUMBER Ether
+                      {this.getEtherValue()}
+                    </Col>
+                  </Row>
+                  <Row className='p-y-md'>
+                    <Col className='mb-0 ' md='4'>
+                      Token:
+                    </Col>
+                    <Col md='8'>
+                      /token dropdown/^
                     </Col>
                   </Row>
                 </CardBody>
               </Card>
             </Col>
-            <Col className='std-p mb-0 ' md='6'>
+            {/* card right */}
+            <Col className=' std-p mb-0' md='6'>
               <Card className='height-all'>
+                <CardHeader
+                  className='d-flex justify-content-between align-items-center p-m' >
+                  <h2 className='pain-nav-link card-title p-0 m-0'>
+                    More Info
+                  </h2>
+                </CardHeader>
+                <CardBody className='g-b-f p-m clr-blk'>
+                  <Row className='b-btm-line p-b-md align-items-center'>
+                    <Col className='mb-0 ' md='4'>
+                      <FontAwesomeIcon icon={faQuestionCircle}
+                        size="lg" className='user-circle grey'
+                      />
+                      My Name Tag:
+                    </Col>
+                    <Col md='8'>
+                      feature coming soon
+                    </Col>
+                  </Row>
+                  <Row className='b-btm-line p-y-md'>
+                    <Col className='mb-0 ' md='4'>
+                      Creator
+                    </Col>
+                    <Col md='8'>
+                      <a href='https://etherscan.io/address/0x4f26ffbe5f04ed43630fdc30a87638d53d0b0876'
+                        className='active feed name'>
+                        0x4F26FfBe5F04ED43...
+                      </a>
+                      &nbsp;at txn&nbsp;
+                      <a href='https://etherscan.io/tx/0xb95343413e459a0f97461812111254163ae53467855c0d73e0f1e7c5b8442fa3'
+                        className='active feed name'>
+                        0xb95343413e459...
+                      </a>
 
+                    </Col>
+                  </Row>
+                  <Row className='p-y-md'>
+                    <Col className='mb-0 ' md='4'>
+                      Tracker:
+                    </Col>
+                    <Col md='8'>
+                      <img className='contract-av' src={window.imgs.wethLogo} />
+                      <a href='https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+                        className='active feed name'>
+                        Wrapped Ether (WETH)
+                      </a>
+
+                    </Col>
+                  </Row>
+                </CardBody>
               </Card>
             </Col>
+
           </Row>
         </Container>
 
+        <Card>
+          <CardHeader
+            className='d-flex justify-content-between align-items-center p-0'>
+
+          </CardHeader>
+        </Card>
 
 
       </Container>
