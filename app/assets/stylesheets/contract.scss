@@ -3,10 +3,33 @@
 }
 
 .std-p {
-  padding-right: 7.5px;
-  padding-left: 7.5px;
+  padding-right: 7.5px!important;
+  padding-left: 7.5px!important;
 }
 
 .height-all{
   height: 100%
 }
+
+// w-100
+
+// .size-header {
+
+//   padding:
+// }
+
+.card-title {
+  font-size: .8125rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.b-btm-line {
+  border: 0;
+  border-bottom: 1px solid #e7eaf3;
+  // margin-top: .75rem;
+  // margin-bottom: .75rem;
+  opacity: .75;
+}
+
+

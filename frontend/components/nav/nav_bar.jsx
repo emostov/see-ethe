@@ -16,6 +16,11 @@ const BlockChainDropdown = () => {
       </DropdownToggle>
       <DropdownMenu className='drp-dwn-header'>
         <DropdownItem className='grey-nav-text ' tag='span'>
+          <Link className='nav-link drop-link big' to={'/contract'}>
+            wEth Contract
+          </Link>
+        </DropdownItem>
+        <DropdownItem className='grey-nav-text ' tag='span'>
           <Link className='nav-link drop-link big' to={'/block'}>
             Latest Block
           </Link>

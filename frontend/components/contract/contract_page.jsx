@@ -27,15 +27,38 @@ export default class ContractPage extends React.Component {
         </div>
 
         <Container className='inner'>
-          <Row className='mb-4'>
-            <Col className='md-6 std-p mb-0'>
+          <Row className='mb-4 w-100'>
+            <Col className=' std-p mb-0' md='6'>
               <Card className='height-all'>
-                <CardHeader>
+                <CardHeader
+                  className='d-flex justify-content-between align-items-center' >
+                  <h2 className='pain-nav-link card-title p-0 m-0'>
+                    Contract Overview
+                  </h2>
+
 
                 </CardHeader>
+                <CardBody className='g-b-f'>
+                  <Row className='b-btm-line'>
+                    <Col className='mb-0' md='4'>
+                      Balance: 
+                    </Col>
+                    <Col md='8'>
+                      REALLLY BIG NUMBER Ether
+                    </Col>
+                  </Row>
+                  <Row className='b-btm-line'>
+                    <Col className='mb-0' md='4'>
+                      Ether Value:
+                    </Col>
+                    <Col md='8'>
+                      REALLLY BIG NUMBER Ether
+                    </Col>
+                  </Row>
+                </CardBody>
               </Card>
             </Col>
-            <Col className='md-6 std-p mb-0 '>
+            <Col className='std-p mb-0 ' md='6'>
               <Card className='height-all'>
 
               </Card>
