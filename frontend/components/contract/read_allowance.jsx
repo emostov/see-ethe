@@ -12,10 +12,10 @@ import {
   Input,
 } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileAlt } from "@fortawesome/free-regular-svg-icons"
+
 import { faArrowDown, faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons"
 
-import { EtherWrap, RinkebyWeth } from '../../contract/ether_wrap';
+import { RinkebyWeth } from '../../contract/ether_wrap';
 
 export default class Allowance extends React.Component {
   constructor() {
@@ -93,7 +93,7 @@ export default class Allowance extends React.Component {
                 />
               </FormGroup>
               <Button
-     
+
                 className='query-btn f-13'
                 onClick={this.reqAllowance}
               >

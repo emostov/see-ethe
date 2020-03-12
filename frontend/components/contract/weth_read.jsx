@@ -16,6 +16,8 @@ import { faArrowDown, faAngleDoubleRight } from "@fortawesome/free-solid-svg-ico
 
 import { EtherWrap, RinkebyWeth } from '../../contract/ether_wrap';
 import Allowance from './read_allowance';
+import BalanceOf from './read_balanceOf';
+
 
 export default class WethRead extends React.Component {
   constructor() {
@@ -25,16 +27,8 @@ export default class WethRead extends React.Component {
       totalSupply: '...loading',
       decimals: '...loading',
       symbol: '...loading',
-      balanceOfResult: '...loading',
-      balanceOfInput: '',
-      allowanceResult: '...loading',
-      allowanceA: '',
-      allowanceB: ''
     }
 
-    this.reqBalanceOf = this.reqBalanceOf.bind(this);
-    this.reqAllowance = this.reqAllowance.bind(this);
-    this.testClick = this.testClick.bind(this)
   }
 
   componentDidMount() {
@@ -73,37 +67,6 @@ export default class WethRead extends React.Component {
       [field]: e.currentTarget.value
     });
   }
-
-  testClick() {
-    e.preventDefault()
-    console.log('test')
-    // RinkebyWeth.methods
-    //   .balanceOf(this.state.balanceOfInput.toString().trim())
-    //   .call()
-    //   .then(console.log)
-  }
-
-  reqBalanceOf(e) {
-    console.log('hi ')
-    e.preventDefault();
-    RinkebyWeth.methods
-      .balanceOf(this.state.balanceOfInput.toString().trim())
-      .call()
-      .then((balanceOfResult) => this.setState({ balanceOfResult }))
-  }
-
-  reqAllowance(e) {
-    // console.log('hello')
-    e.preventDefault()
-    const { allowanceA, allowanceB } = this.state;
-    console.log('a', allowanceA)
-    console.log('b', allowanceB)
-    RinkebyWeth.methods
-      .allowance(allowanceA.toString().trim(), allowanceB.toString().trim())
-      .call()
-      .then((allowanceResult) => this.setState({ allowanceResult }))
-  }
-
 
   render() {
 
@@ -194,67 +157,7 @@ export default class WethRead extends React.Component {
           </UncontrolledCollapse>
         </Card>
 
-        <Card className='mb-3 ft-13'>
-          <CardHeader className='d-flex justify-content-between align-items-center p-0 grey-soft-bg'>
-            <span className='pl-1'>4. balanceOf</span>
-            <Button className='pr-2' close aria-label="Cancel" id="balanceOf">
-              <span aria-hidden>
-                <FontAwesomeIcon icon={faArrowDown}
-                  size="lg" className='user-circle down-arrow'
-                />
-              </span>
-            </Button>
-          </CardHeader>
-          <UncontrolledCollapse toggler="#balanceOf">
-            <CardBody>
-              <Form>
-                <FormGroup className='mb-0 w-100'>
-                  <Label className='mb-2 w-100'> {"<input> (address)"}
-                  </Label>
-
-                  <Input
-                    className='w-100 grey mono-txt ft-13'
-                    type="text"
-                    name="balanceOf"
-                    id="balanceof"
-                    placeholder="<input> (address)"
-                    value={this.state.balanceOfInput}
-                    onChange={this.update('balanceOfInput')}
-                  />
-
-                </FormGroup>
-                <Button
-                  id='balanceOfQuery'
-                  className='query-btn f-13'
-                  onClick={this.reqBalanceOf}
-                >
-                  Query
-                </Button>
-                <Button
-                  onClick={this.reqBalanceOf}
-                // id='balanceOfQuery'
-                >
-                  Query 2
-                </Button>
-              </Form>
-              <div className='mono-txt grey'>
-                &nbsp;<i>uint256</i>
-              </div>
-              <UncontrolledCollapse toggler='#balanceOfQuery'>
-                <div className='responseCollapse gray'>
-                  <div>[&nbsp;<b>balanceOf</b> method Response &nbsp;]</div>
-                  <span>
-                    <FontAwesomeIcon icon={faAngleDoubleRight}
-                      size="lg" className='user-circle green'
-                    />
-                  </span>
-                  &nbsp; <i>uint256:</i>&nbsp;  {this.state.balanceOfResult}
-                </div>
-              </UncontrolledCollapse>
-            </CardBody>
-          </UncontrolledCollapse>
-        </Card>
-
+        <BalanceOf />
 
         <Card className='mb-3 ft-13'>
           <CardHeader className='d-flex justify-content-between align-items-center p-0 grey-soft-bg'>
@@ -282,6 +185,7 @@ export default class WethRead extends React.Component {
         </Card>
 
         <Allowance reqAllowance={this.reqAllowance} />
+
       </div>
     )
   }
