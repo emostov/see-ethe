@@ -45,6 +45,9 @@
   font-size: .71094rem;
 }
 
+.ft-13{
+  font-size: 13px!important;
+}
 
 .card-title {
   font-size: .8125rem;
@@ -58,4 +61,55 @@
   opacity: .75;
 }
 
+.green{
+  color: #00c9a7!important
+}
 
+.w-100{
+  width: 100%;
+}
+
+.grey-soft-bg{
+  background-color: #f8f9fa!important;
+}
+
+.pill-nav-grey{
+  // background-color: #77838f;
+  border-color: transparent;
+  margin-left: 3px;
+  margin-right: 3px;
+  border-radius: .125rem;
+  border: 1px solid #d5dae2;
+  font-size: .8125rem;
+}
+
+.selected-pill{
+  background-color: #77838f;
+  color: white!important;
+}
+
+.mono-txt{
+  font-family: 'Courier Prime', monospace !important;
+}
+
+.query-btn{
+  cursor: pointer!important;
+  border: 1px solid #dee2e6!important;
+  color: #212529!important;
+  background-color: #f8f9fa!important;
+  display: inline-block!important;
+  font-weight: 400!important;
+  padding: 4.85px 9.75px!important;
+  font-size: 1rem!important;
+  font-size: 1rem!important;
+  line-height: 1.5!important;
+  border-radius: .25rem!important;
+  margin-top: .6rem!important;
+  margin-bottom: .6rem!important;
+  font-size: 13px!important;
+}
+
+.down-arrow {
+  width: 15px!important;
+  color: #121416!important;
+}

@@ -30,26 +30,9 @@ import { web3 } from '../../util/web3_util'
 import {
   numberWithCommas,
 } from '../../util/general_util';
+import ContractNav from './contract_nav';
 
-// EtherWrap.methods
-//   .totalSupply()
-//   .call()
-//   .then(console.log)
 
-// EtherWrap.methods
-//   .name()
-//   .call()
-//   .then(console.log)
-
-// EtherWrap.methods
-//   .decimals()
-//   .call()
-//   .then(console.log)
-
-// EtherWrap.methods
-//   .balanceOf('0x21d15d354De0DC27a0A79eC2871606Ea78532052')
-//   .call()
-//   .then(console.log)
 
 export default class ContractPage extends React.Component {
   constructor(props) {
@@ -155,7 +138,7 @@ export default class ContractPage extends React.Component {
                       Token:
                     </Col>
                     <Col md='8'>
-                      /token dropdown/^
+                      feature coming soon
                     </Col>
                   </Row>
                 </CardBody>
@@ -219,11 +202,8 @@ export default class ContractPage extends React.Component {
           </Row>
         </Container>
 
-        <Card>
-          <CardHeader
-            className='d-flex justify-content-between align-items-center p-0'>
-
-          </CardHeader>
+        <Card className='w-100'>
+          <ContractNav />
         </Card>
 
 
