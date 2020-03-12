@@ -21,7 +21,7 @@ class RunWeb3 extends React.Component {
       this.props.fetchBlocks(1)
     }, 3 * 1000)
 
-    stop fetches so state does not get to bloated
+    // stop fetches so state does not get to bloated
     setTimeout(() => {
       clearInterval(this.state.intervalID)
     }, 12 * 60 * 1000)
