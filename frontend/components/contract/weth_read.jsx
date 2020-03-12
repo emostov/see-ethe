@@ -15,7 +15,7 @@ import { faFileAlt } from "@fortawesome/free-regular-svg-icons"
 import { faArrowDown, faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons"
 
 import { EtherWrap, RinkebyWeth } from '../../contract/ether_wrap';
-import { Allowance } from './read_sub_comps';
+import Allowance from './read_allowance';
 
 export default class WethRead extends React.Component {
   constructor() {

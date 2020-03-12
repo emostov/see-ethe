@@ -5,6 +5,7 @@ import {
   CardHeader,
   Button,
   UncontrolledCollapse,
+  Collapse,
   FormGroup,
   Form,
   Label,
@@ -16,21 +17,23 @@ import { faArrowDown, faAngleDoubleRight } from "@fortawesome/free-solid-svg-ico
 
 import { EtherWrap, RinkebyWeth } from '../../contract/ether_wrap';
 
-export class Allowance extends React.Component {
+export default class Allowance extends React.Component {
   constructor() {
     super()
     this.state = {
       allowanceResult: '...loading',
       allowanceA: '',
-      allowanceB: ''
+      allowanceB: '',
+      isOpen: false,
     }
-    
+
     this.reqAllowance = this.reqAllowance.bind(this);
   }
 
   reqAllowance(e) {
     // console.log('hello')
     e.preventDefault()
+    this.setState({ isOpen: true })
     const { allowanceA, allowanceB } = this.state;
     console.log('a', allowanceA)
     console.log('b', allowanceB)
@@ -47,6 +50,8 @@ export class Allowance extends React.Component {
   }
 
   render() {
+
+
     return (
       <Card className='mb-3 ft-13' >
         <CardHeader className='d-flex justify-content-between align-items-center p-0 grey-soft-bg'>
@@ -88,7 +93,7 @@ export class Allowance extends React.Component {
                 />
               </FormGroup>
               <Button
-                id='allowanceQuery'
+     
                 className='query-btn f-13'
                 onClick={this.reqAllowance}
               >
@@ -98,7 +103,7 @@ export class Allowance extends React.Component {
             <div className='mono-txt grey'>
               &nbsp;<i>uint256</i>
             </div>
-            <UncontrolledCollapse toggler='#allowanceQuery'>
+            <Collapse isOpen={this.state.isOpen}>
               <div className='responseCollapse gray'>
                 <div>[&nbsp;<b>allowance</b> method Response &nbsp;]</div>
                 <span>
@@ -108,7 +113,7 @@ export class Allowance extends React.Component {
                 </span>
                 &nbsp; <i>uint256:</i>&nbsp;  {this.state.allowanceResult}
               </div>
-            </UncontrolledCollapse>
+            </Collapse>
           </CardBody>
         </UncontrolledCollapse>
       </Card>
