@@ -195,10 +195,15 @@ span.dropdown-toggle, .sign-up-link {
 }
 
 .drop-link.big {
-  min-height: 20px;
+  min-height: 35px!important;
 }
 
 span.dropdown-toggle.color-important-grey{
   border-left: none!important;
   border-right: none!important;
 }
+
+.dropdown-item.big {
+  min-height: 35px;
+}
+

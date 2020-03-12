@@ -1,10 +1,14 @@
 import Web3 from 'web3';
 import Big from 'big.js';
 import { timeDiff } from './general_util';
-import infuraEndPoint from './web3_identity';
+import { infuraEndPoint, rinkebyEndPoint } from './web3_identity';
 
 
 export const web3 = new Web3(new Web3.providers.HttpProvider(infuraEndPoint));
+export const web3Rinkeby = new Web3(
+  new Web3.providers.HttpProvider(rinkebyEndPoint),
+);
+
 
 // utility for creating a number range to loop over
 // TODO move to a general utility file

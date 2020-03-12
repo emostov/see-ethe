@@ -18,10 +18,9 @@ import {
 } from 'reactstrap';
 
 import EtherWrap from '../../contract/ether_wrap';
-import { web3 } from '../../util/web3_util'
-import {
-  numberWithCommas,
-} from '../../util/general_util';
+import { web3, web3Rinkeby } from '../../util/web3_util';
+import { etherWrapRinkebyAddr } from '../../contract/ether_wrap';
+import { numberWithCommas, } from '../../util/general_util';
 import ContractNav from './contract_nav';
 
 
@@ -39,7 +38,7 @@ export default class ContractPage extends React.Component {
 
   componentDidMount() {
     this.props.fetchPrices();
-    web3.eth.getBalance('0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2')
+    web3Rinkeby.eth.getBalance(etherWrapRinkebyAddr)
       .then((res) => {
         // do big calcs here so don't have to do it on every render
         // combine all calcs into here just to minimizes calls to setState
@@ -82,7 +81,8 @@ export default class ContractPage extends React.Component {
             <div><h1 className='mb-0 grey'>Contract </h1></div>
             <div>
               <span className='sub-txt-3'>
-                &nbsp; 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
+                &nbsp; 0xc778417E063141139Fce010982780140Aa0cD5Ab &nbsp;
+                (Rinkeby Test Net)
               </span>
             </div>
           </div>

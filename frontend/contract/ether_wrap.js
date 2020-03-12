@@ -1,4 +1,4 @@
-import { web3 } from '../util/web3_util';
+import { web3, web3Rinkeby } from '../util/web3_util';
 
 const ABIOBJ = [{
   constant: true, inputs: [], name: 'name', outputs: [{ name: '', type: 'string' }], payable: false, stateMutability: 'view', type: 'function',
@@ -32,9 +32,15 @@ const ABIOBJ = [{
   anonymous: false, inputs: [{ indexed: true, name: 'src', type: 'address' }, { indexed: false, name: 'wad', type: 'uint256' }], name: 'Withdrawal', type: 'event',
 }];
 
-const etherWrapAddress = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2';
+
 
 // Create contract instance of EtherWrap
+export const etherWrapRinkebyAddr = '0xc778417E063141139Fce010982780140Aa0cD5Ab';
+export const etherWrapAddress = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2';
+
 const EtherWrap = new web3.eth.Contract(ABIOBJ, etherWrapAddress);
-EtherWrap.options.from = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'
-export default EtherWrap;
+const RinkebyWeth = new web3Rinkeby.eth.Contract(ABIOBJ, etherWrapRinkebyAddr);
+// EtherWrap.options.from = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2';
+
+export { EtherWrap, RinkebyWeth };
+

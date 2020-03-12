@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileAlt } from "@fortawesome/free-regular-svg-icons"
 import { faArrowDown, faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons"
 
-import EtherWrap from '../../contract/ether_wrap';
+import { EtherWrap, RinkebyWeth } from '../../contract/ether_wrap';
 
 export default class WethRead extends React.Component {
   constructor() {
@@ -36,28 +36,31 @@ export default class WethRead extends React.Component {
   }
 
   componentDidMount() {
-    EtherWrap.methods
+
+    RinkebyWeth.methods
       .name()
       .call()
       .then((name) => {
         this.setState({ name })
       })
 
-    EtherWrap.methods
+    RinkebyWeth.methods
       .totalSupply()
       .call()
       .then((totalSupply) => {
         this.setState({ totalSupply })
       })
 
-    EtherWrap.methods
+
+
+    RinkebyWeth.methods
       .decimals()
       .call()
       .then((decimals) => {
         this.setState({ decimals })
       })
 
-    EtherWrap.methods
+    RinkebyWeth.methods
       .symbol()
       .call()
       .then((symbol) => {
