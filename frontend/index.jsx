@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 
 import configureStore from './store/store'
 import Root from './components/root'
-import * as Web3Util from './util/web3_util';
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
@@ -22,6 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     store = configureStore();
   }
 
- 
+
   ReactDOM.render(<Root store={store} />, root);
 });

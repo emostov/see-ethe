@@ -11,6 +11,7 @@ import MyAccountContainer from './account/my_account_container';
 import BlockPageContainer from './block/block_page_container';
 import BlockPageRouteContainer from './block/block_page_route_container';
 import Home from './home/home';
+import ContractPageContainer from './contract/contract_page_container';
 
 const App = () => (
   <div className='app'>
@@ -20,7 +21,6 @@ const App = () => (
     </header >
     <main>
       <div className='container'>
-
         <Switch>
           <AuthRoute exact path="/login" component={LogInFormContainer} />
           <AuthRoute exact path="/signup" component={SignUpFormContainer} />
@@ -28,9 +28,9 @@ const App = () => (
           <Route exact path='/block' component={BlockPageContainer} />
           <Route path='/block/:hash' component={BlockPageRouteContainer} />
           <Route path='/home' component={Home} />
+          <Route path='/contract' component={ContractPageContainer} />
           <Route path='/' render={() => <Redirect to="/home" />} />
         </Switch>
-
       </div>
     </main>
     <footer className='blue-footer'>
