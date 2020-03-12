@@ -20,19 +20,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 
 import { RinkebyWeth } from '../../contract/ether_wrap';
+import { runContractWrite, deposit } from '../../util/meta_mask_util'
 
 export default class WethWrite extends React.Component {
   constructor() {
     super()
     this.state = {
+      depositValue: '',
       guyApprove: '',
       wadApprove: '',
       approveResult: '...loading',
-      account: '',
     }
-
-    this.setupConnection = this.setupConnection.bind(this);
-    this.test = this.test.bind(this)
+    this.reqDeposit = this.reqDeposit.bind(this)
   }
 
 
@@ -42,6 +41,7 @@ export default class WethWrite extends React.Component {
     }
     return false
   }
+
 
   isRinkeby() {
     if (this.isConnected() && window.ethereum.networkVersion === '4') {
@@ -58,65 +58,29 @@ export default class WethWrite extends React.Component {
     return true;
   }
 
-  // takes in a function to execut after setting up meta mask
-  setupConnection() {
-    window.ethereum.enable()
-      .then((accounts) => {
-        console.log(accounts[0])
-        this.setState({ account: accounts[0] })
-      })
-      .catch((err) => {
-        alert('There was an error setting up the meta mask connection', err)
-      })
-  }
-
-  setProvider() {
-    if (typeof window.ethereum !== 'undefined') {
-      this.setState({ provider: window['ethereum'] })
-    }
-  }
-
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
     });
   }
 
-  connectionButton() {
-    return (
-      <Button onClick={this.setupConnection} className='query-btn f-13'>
-        Connect to Web3 with Meta Mask
-      </Button>
-    )
-  }
-
-  test() {
-
-    this.setupConnection()
-    const writeFunc = (account) => {
-      if (this.isRinkebyAlert()) {
-        const options = { from: account, value: 1 }
-        RinkebyWeth.methods.deposit()
-          
-      }
+  reqDeposit() {
+    // if (this.isRinkebyAlert())
+    const { depositValue } = this.state;
+    if (this.isConnected()) {
+      console.log(deposit)
+      runContractWrite(deposit, { value: depositValue.toString() })
+    } else {
+      alert("You need to connect to Meta Mask")
     }
-    console.log(this.state.account)
-    writeFunc(this.state.account)
-
   }
 
-  testButton() {
-    return (
-      <Button onClick={this.test} className='query-btn f-13'>
-        Run transaction
-      </Button>
-    )
-  }
 
   render() {
 
     let circleClass = this.isConnected ? 'user-circle green' : 'user-circle red'
-
+    let connected = this.isConnected ? 'You are connected with Meta Mask' :
+      'You must connect with Meta Mask on the Rinkeby Network to use Write features'
     return (
       <div>
         <div className='d-flex justify-content-between mb-3 pt-2'>
@@ -127,9 +91,60 @@ export default class WethWrite extends React.Component {
             />
             Write Contract
           </p>
-          <a className='ft-13'> {this.connectionButton()}</a>
-          {this.testButton()}
+          <p className='ft-13' >{connected}</p>
         </div>
+
+        <Card className='mb-3 ft-13'>
+          <CardHeader className='d-flex justify-content-between align-items-center p-0 grey-soft-bg'>
+            <span className='pl-1'>5. deposit</span>
+            <Button className='pr-2' close aria-label="Cancel" id="approve">
+              <span aria-hidden>
+                <FontAwesomeIcon icon={faArrowDown}
+                  size="lg" className='user-circle down-arrow'
+                />
+              </span>
+            </Button>
+          </CardHeader>
+
+          <UncontrolledCollapse toggler="approve">
+            <CardBody>
+              <Form>
+                <FormGroup className='mb-0 w-100'>
+                  <Label className='mb-2 w-100'>  </Label>
+                  <Input
+                    className='w-100 grey mono-txt ft-13'
+                    type="text"
+                    name="guyApprove"
+                    id="guyApprove"
+                    placeholder="guy (address)"
+                    value={this.state.depositValue}
+                    onChange={this.update('depositValue')}
+                  />
+                  <Button color='primary' onClick={this.reqDeposit}>
+                    Write
+                  </Button>
+                </FormGroup>
+              </Form>
+
+              <div className='mono-txt grey'>
+                &nbsp;<i>uint256</i>
+              </div>
+
+              <UncontrolledCollapse toggler='#approveQuery'>
+                <div className='responseCollapse gray'>
+                  <div>[&nbsp;<b>deposit</b> method Response &nbsp;]</div>
+                  <span>
+                    <FontAwesomeIcon icon={faAngleDoubleRight}
+                      size="lg" className='user-circle green'
+                    />
+                  </span>
+                  &nbsp; <i>Result: </i>&nbsp;  {this.state.depositResult || '...waiting'}
+                </div>
+              </UncontrolledCollapse>
+
+            </CardBody>
+          </UncontrolledCollapse>
+        </Card>
 
         <Card className='mb-3 ft-13'>
           <CardHeader className='d-flex justify-content-between align-items-center p-0 grey-soft-bg'>
