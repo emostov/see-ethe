@@ -75,17 +75,22 @@
 
 .pill-nav-grey{
   // background-color: #77838f;
-  border-color: transparent;
-  margin-left: 3px;
-  margin-right: 3px;
-  border-radius: .125rem;
-  border: 1px solid #d5dae2;
-  font-size: .8125rem;
+  border-color: transparent!important;
+  margin-left: 3px!important;
+  margin-right: 3px!important;
+  border-radius: .125rem!important;
+  border: 1px solid #d5dae2!important;
+  font-size: .8125rem!important;
+}
+
+.pill-nav-grey:active {
+  background-color: #77838f;
+  color: white!important;
+  
 }
 
 .selected-pill{
-  background-color: #77838f;
-  color: white!important;
+
 }
 
 .mono-txt{
@@ -113,3 +118,8 @@
   width: 15px!important;
   color: #121416!important;
 }
+
+.red {
+  color: #dc3545!important;
+}
+
