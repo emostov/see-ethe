@@ -14,20 +14,66 @@ import {
   Input,
 } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  faCircle } from "@fortawesome/free-regular-svg-icons"
-import { faArrowDown, faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons"
+import { faCircle } from "@fortawesome/free-regular-svg-icons"
+import {
+  faArrowDown, faAngleDoubleRight
+} from "@fortawesome/free-solid-svg-icons"
 
-import EtherWrap from '../../contract/ether_wrap';
+import { RinkebyWeth } from '../../contract/ether_wrap';
 
 export default class WethWrite extends React.Component {
   constructor() {
     super()
     this.state = {
       guyApprove: '',
-      wadApprove: '', 
+      wadApprove: '',
       approveResult: '...loading',
+      account: '',
     }
 
+    this.setupConnection = this.setupConnection.bind(this);
+    this.test = this.test.bind(this)
+  }
+
+
+  isConnected() {
+    if (typeof window.ethereum !== 'undefined') {
+      return true
+    }
+    return false
+  }
+
+  isRinkeby() {
+    if (this.isConnected() && window.ethereum.networkVersion === '4') {
+      return true;
+    }
+    return false;
+  }
+
+  isRinkebyAlert() {
+    if (!this.isRinkeby()) {
+      alert('You are not connected to Rinkbey test net. Please connect to Rinkeby through Meta Mask')
+      return false;
+    }
+    return true;
+  }
+
+  // takes in a function to execut after setting up meta mask
+  setupConnection() {
+    window.ethereum.enable()
+      .then((accounts) => {
+        console.log(accounts[0])
+        this.setState({ account: accounts[0] })
+      })
+      .catch((err) => {
+        alert('There was an error setting up the meta mask connection', err)
+      })
+  }
+
+  setProvider() {
+    if (typeof window.ethereum !== 'undefined') {
+      this.setState({ provider: window['ethereum'] })
+    }
   }
 
   update(field) {
@@ -36,17 +82,53 @@ export default class WethWrite extends React.Component {
     });
   }
 
+  connectionButton() {
+    return (
+      <Button onClick={this.setupConnection} className='query-btn f-13'>
+        Connect to Web3 with Meta Mask
+      </Button>
+    )
+  }
+
+  test() {
+
+    this.setupConnection()
+    const writeFunc = (account) => {
+      if (this.isRinkebyAlert()) {
+        const options = { from: account, value: 1 }
+        RinkebyWeth.methods.deposit()
+          
+      }
+    }
+    console.log(this.state.account)
+    writeFunc(this.state.account)
+
+  }
+
+  testButton() {
+    return (
+      <Button onClick={this.test} className='query-btn f-13'>
+        Run transaction
+      </Button>
+    )
+  }
+
   render() {
+
+    let circleClass = this.isConnected ? 'user-circle green' : 'user-circle red'
+
     return (
       <div>
         <div className='d-flex justify-content-between mb-3 pt-2'>
           <p className='ft-13'>
+            {}
             <FontAwesomeIcon icon={faCircle}
-              size="lg" className='user-circle red'
+              size="lg" className={circleClass}
             />
             Write Contract
           </p>
-          <a>Connect to Web3 with MetaMask</a>
+          <a className='ft-13'> {this.connectionButton()}</a>
+          {this.testButton()}
         </div>
 
         <Card className='mb-3 ft-13'>
@@ -92,7 +174,7 @@ export default class WethWrite extends React.Component {
                 <Button
                   id='approveQuery'
                   className='query-btn f-13'
-                  // onClick={}
+                // onClick={}
                 >
                   Query
                 </Button>
