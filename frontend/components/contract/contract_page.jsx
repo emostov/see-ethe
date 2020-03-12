@@ -15,14 +15,6 @@ import {
   CardBody,
   CardHeader,
   Spinner,
-  TabContent,
-  TabPane,
-  Nav,
-  NavItem,
-  NavLink,
-  Button,
-  CardTitle,
-  CardText,
 } from 'reactstrap';
 
 import EtherWrap from '../../contract/ether_wrap';

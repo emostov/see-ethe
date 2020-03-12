@@ -14,26 +14,13 @@ import {
   Input,
 } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFileAlt,
-} from "@fortawesome/free-regular-svg-icons"
-import {
-  faArrowDown,
-  faAngleDoubleRight,
-} from "@fortawesome/free-solid-svg-icons"
-
-
-
-// EtherWrap.methods
-//   .balanceOf('0x21d15d354De0DC27a0A79eC2871606Ea78532052')
-//   .call()
-//   .then(console.log)
+import { faFileAlt } from "@fortawesome/free-regular-svg-icons"
+import { faArrowDown, faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons"
 
 import EtherWrap from '../../contract/ether_wrap';
-import { faThList } from '@fortawesome/free-solid-svg-icons';
+
 
 export default class WethContractInteract extends React.Component {
-
   constructor() {
     super()
     this.state = {
@@ -42,9 +29,14 @@ export default class WethContractInteract extends React.Component {
       decimals: '...loading',
       symbol: '...loading',
       balanceOfResult: '...loading',
-      balanceOfInput: ''
+      balanceOfInput: '',
+      allowanceResult: '...loading',
+      allowanceA: '',
+      allowanceB: ''
     }
+
     this.reqBalanceOf = this.reqBalanceOf.bind(this);
+    this.reqAllowance = this.reqAllowance.bind(this);
   }
 
   componentDidMount() {
@@ -75,6 +67,14 @@ export default class WethContractInteract extends React.Component {
       .then((symbol) => {
         this.setState({ symbol })
       })
+
+    EtherWrap.methods
+      .allowance(
+        '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+        '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'
+      )
+      .call()
+      .then(console.log)
   }
 
   update(field) {
@@ -89,6 +89,17 @@ export default class WethContractInteract extends React.Component {
       .balanceOf(this.state.balanceOfInput.toString().trim())
       .call()
       .then((balanceOfResult) => this.setState({ balanceOfResult }))
+  }
+
+  reqAllowance(e) {
+    e.preventDefault()
+    const { allowanceA, allowanceB } = this.state;
+    console.log('a', allowanceA)
+    console.log('b', allowanceB)
+    EtherWrap.methods
+      .allowance(allowanceA.toString().trim(), allowanceB.toString().trim())
+      .call()
+      .then((allowanceResult) => this.setState({ allowanceResult }))
   }
 
   render() {
@@ -145,7 +156,7 @@ export default class WethContractInteract extends React.Component {
             <span className='pl-1'>2. totalSupply</span>
             <Button className='pr-2' close aria-label="Cancel" id="totalSupply">
               <span aria-hidden>
-                    <FontAwesomeIcon icon={faArrowDown}
+                <FontAwesomeIcon icon={faArrowDown}
                   size="lg" className='user-circle down-arrow'
                 />
               </span>
@@ -206,19 +217,19 @@ export default class WethContractInteract extends React.Component {
             <CardBody>
               <Form>
                 <FormGroup className='mb-0 w-100'>
-                  <Label className='mb-2 w-100'> {"<input> (address)"} 
+                  <Label className='mb-2 w-100'> {"<input> (address)"}
                   </Label>
                   {/* <br/> */}
-                    <Input
-                      className='w-100 grey mono-txt ft-13'
-                      type="text"
-                      name="balanceOf"
-                      id="balanceof"
-                      placeholder="<input> (address) - try 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
-                      value={this.state.balanceOfInput}
-                      onChange={this.update('balanceOfInput')}
-                    />
-              
+                  <Input
+                    className='w-100 grey mono-txt ft-13'
+                    type="text"
+                    name="balanceOf"
+                    id="balanceof"
+                    placeholder="<input> (address) - try 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+                    value={this.state.balanceOfInput}
+                    onChange={this.update('balanceOfInput')}
+                  />
+
                 </FormGroup>
                 <Button
                   id='balanceOfQuerry'
@@ -290,22 +301,32 @@ export default class WethContractInteract extends React.Component {
                 <FormGroup className='mb-0 w-100'>
                   <Label className='mb-2 w-100'> {"<input> (address)"}
                   </Label>
-                  
                   <Input
                     className='w-100 grey mono-txt ft-13'
                     type="text"
-                    name="allowance"
-                    id="balanceof"
-                    placeholder="<input> (address) - try 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
-                    value={this.state.balanceOfInput}
-                    onChange={this.update('balanceOfInput')}
+                    name="allowanceA"
+                    id="allowanceA"
+                    placeholder="<input> (address)"
+                    value={this.state.allowanceA}
+                    onChange={this.update('allowanceA')}
                   />
 
+                  <Label className='mb-2 mt-3 w-100'> {"<input> (address)"}
+                  </Label>
+                  <Input
+                    className='w-100 grey mono-txt ft-13'
+                    type="text"
+                    name="allowanceB"
+                    id="allowanceB"
+                    placeholder="<input> (address)"
+                    value={this.state.allowanceB}
+                    onChange={this.update('allowanceB')}
+                  />
                 </FormGroup>
                 <Button
-                  id='balanceOfQuerry'
+                  id='allowanceQuery'
                   className='query-btn f-13'
-                  onClick={this.reqBalanceOf}
+                  onClick={this.reqAllowance}
                 >
                   Query
                 </Button>
@@ -313,24 +334,20 @@ export default class WethContractInteract extends React.Component {
               <div className='mono-txt grey'>
                 &nbsp;<i>uint256</i>
               </div>
-              <UncontrolledCollapse toggler='#balanceOfQuerry'>
+              <UncontrolledCollapse toggler='#allowanceQuery'>
                 <div className='responseCollapse gray'>
-                  <div>[&nbsp;<b>balanceOf</b> method Response &nbsp;]</div>
+                  <div>[&nbsp;<b>allowance</b> method Response &nbsp;]</div>
                   <span>
                     <FontAwesomeIcon icon={faAngleDoubleRight}
                       size="lg" className='user-circle green'
                     />
                   </span>
-                  &nbsp; <i>uint256:</i>&nbsp;  {this.state.balanceOfResult}
+                  &nbsp; <i>uint256:</i>&nbsp;  {this.state.allowanceResult}
                 </div>
               </UncontrolledCollapse>
             </CardBody>
           </UncontrolledCollapse>
         </Card>
-
-
-
-
       </CardBody>
     )
   }
