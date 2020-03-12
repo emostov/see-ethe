@@ -12,7 +12,6 @@ import {
   Input,
 } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faArrowDown, faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons"
 
 import { RinkebyWeth } from '../../contract/ether_wrap';

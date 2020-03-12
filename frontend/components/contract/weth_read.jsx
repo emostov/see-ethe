@@ -28,11 +28,9 @@ export default class WethRead extends React.Component {
       decimals: '...loading',
       symbol: '...loading',
     }
-
   }
 
   componentDidMount() {
-
     RinkebyWeth.methods.name().call()
       .then((name) => {
         this.setState({ name })
@@ -53,23 +51,10 @@ export default class WethRead extends React.Component {
       .then((symbol) => {
         this.setState({ symbol })
       })
-
-    // tests 
-    RinkebyWeth.methods
-      .balanceOf('0x2a678290f52da75abe8d53a47022560f11e55046')
-      .call()
-      .then(console.log)
-
   }
 
-  update(field) {
-    return e => this.setState({
-      [field]: e.currentTarget.value
-    });
-  }
 
   render() {
-
     return (
       <div>
         <div className='d-flex justify-content-between mb-3 pt-2'>
