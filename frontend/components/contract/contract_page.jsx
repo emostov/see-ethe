@@ -162,14 +162,14 @@ export default class ContractPage extends React.Component {
                       Creator
                     </Col>
                     <Col md='8'>
-                      <a href='https://etherscan.io/address/0x4f26ffbe5f04ed43630fdc30a87638d53d0b0876'
+                      <a href='https://rinkeby.etherscan.io/address/0x4f26ffbe5f04ed43630fdc30a87638d53d0b0876'
                         className='active feed name'>
                         0x4F26FfBe5F04ED43...
                       </a>
                       &nbsp;at txn&nbsp;
-                      <a href='https://etherscan.io/tx/0xb95343413e459a0f97461812111254163ae53467855c0d73e0f1e7c5b8442fa3'
+                      <a href='https://rinkeby.etherscan.io/tx/0x7bc8e85f99556aa23a41dd3c107e92ec76f057e4cea39f376ffb1b15d514b11f'
                         className='active feed name'>
-                        0xb95343413e459...
+                        0x7bc8e85f99556aa...
                       </a>
 
                     </Col>

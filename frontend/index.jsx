@@ -24,5 +24,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   ReactDOM.render(<Root store={store} />, root);
-  // runContractWrite(deposit, { value: '21000' });
 });
