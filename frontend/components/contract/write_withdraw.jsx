@@ -15,6 +15,7 @@ import {
   faArrowDown,
 } from '@fortawesome/free-solid-svg-icons';
 
+import {web3} from '../../util/web3_util'
 import { runContractWrite, withdraw, isConnected } from '../../util/meta_mask_util';
 
 export default class WriteWithdraw extends React.Component {
@@ -46,7 +47,8 @@ export default class WriteWithdraw extends React.Component {
 
     const { withdrawValue } = this.state;
     if (isConnected()) {
-      runContractWrite(withdraw(s))
+      const withdrawValBig = web3.utils.toBN(withdrawValue)
+      runContractWrite(withdraw(s, withdrawValBig))
     } else {
       alert("You need to connect to Meta Mask")
     }
@@ -59,8 +61,8 @@ export default class WriteWithdraw extends React.Component {
       <div>
         <Card className='mb-3 ft-13'>
           <CardHeader className='d-flex justify-content-between align-items-center p-0 grey-soft-bg'>
-            <span className='pl-1'>5. deposit</span>
-            <Button className='pr-2' close aria-label="Cancel" id="approve">
+            <span className='pl-1'>2. withdraw</span>
+            <Button className='pr-2' close aria-label="Cancel" id="withdraw">
               <span aria-hidden>
                 <FontAwesomeIcon icon={faArrowDown}
                   size="lg" className='user-circle down-arrow'
@@ -69,11 +71,11 @@ export default class WriteWithdraw extends React.Component {
             </Button>
           </CardHeader>
 
-          <UncontrolledCollapse toggler="approve">
+          <UncontrolledCollapse toggler="withdraw">
             <CardBody>
               <Form>
                 <FormGroup className='mb-0 w-100'>
-                  <Label className='mb-2 w-100'> deposit </Label>
+                  <Label className='mb-2 w-100'> withdraw </Label>
                   <Input
                     className='w-100 grey mono-txt ft-13'
                     type="text"

@@ -26,7 +26,7 @@ const WethWrite = () => {
       </div>
 
       <WriteDeposit />
-      
+      <WriteWithdraw />
     </div>
   )
 

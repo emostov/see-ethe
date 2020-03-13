@@ -34,7 +34,7 @@ const App = () => (
       </div>
     </main>
     <footer className='blue-footer'>
-      footer content here
+      
     </footer>
 
   </div>

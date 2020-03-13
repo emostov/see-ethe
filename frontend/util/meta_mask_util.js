@@ -18,7 +18,7 @@ export function runContractWrite(methodCB, otherOptions) {
     const contract = new cWeb3.eth.Contract(ABIOBJ, etherWrapAddress);
     methodCB(combinedOptions, contract);
   }).catch((err) => {
-    console.log('sign up err ', err);
+    console.log('enable err: ', err);
   });
 }
 
@@ -27,7 +27,6 @@ export const deposit = (success) => (options, contract) => {
   contract.methods.deposit()
     .send(options, (err, res) => {
       if (!err) {
-        console.log(res);
         success(res);
         return res;
       }
@@ -37,11 +36,10 @@ export const deposit = (success) => (options, contract) => {
     .catch((err) => console.log('caught err: ', err));
 };
 
-export const withdraw = (success) => (options, contract, wad) => {
+export const withdraw = (success, wad) => (options, contract) => {
   contract.methods.withdraw(wad)
     .send(options, (err, res) => {
       if (!err) {
-        console.log(res);
         success(res);
         return res;
       }
