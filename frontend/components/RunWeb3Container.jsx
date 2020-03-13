@@ -17,14 +17,15 @@ class RunWeb3 extends React.Component {
     this.props.fetchBlocks(1)
 
     // TODO production always comment in
-    // this.state.intervalID = setInterval(() => {
-    //   this.props.fetchBlocks(1)
-    // }, 3 * 1000)
+    this.state.intervalID = setInterval(() => {
+      this.props.fetchBlocks(1)
+    }, 3 * 1000)
 
-    // // stop fetches so state does not get to bloated
-    // setTimeout(() => {
-    //   clearInterval(this.state.intervalID)
-    // }, 12 * 60 * 1000)
+    // stop fetches after 12 minutes so state does not get to bloated
+    // TODO come up with solution to clear state
+    setTimeout(() => {
+      clearInterval(this.state.intervalID)
+    }, 12 * 60 * 1000)
   }
 
   componentWillUnmount() {

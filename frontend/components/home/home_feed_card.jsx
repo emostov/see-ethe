@@ -36,7 +36,7 @@ export default class HomeFeedCard extends React.Component {
       this.setState({
         count: this.state.count + 1
       })
-    }, 1 * 1000) //TODO change back to one sec 
+    }, 1 * 1000)
 
     this.setState({ intervalID });
   }
@@ -82,13 +82,12 @@ export default class HomeFeedCard extends React.Component {
     return latestTxs;
   }
 
-  blockComponents() { //TODO modify for Txns
+  blockComponents() { 
     const { items } = this.props;
     if (items === null || items.length < 1) { return '' }
     return this.mapItems()
   }
 
-  // TODO dry up this code with block components
   transactionComponents() {
     const { blocks } = this.props;
     if (blocks === null || blocks.length < 1) { return '' }
@@ -97,7 +96,6 @@ export default class HomeFeedCard extends React.Component {
 
   render() {
     const { feedType } = this.props
-    // console.log(this.props.addressTypeTags)
     return (
       <Card className='h-100'>
         <CardHeader tag="h3" className='card-header-title'>

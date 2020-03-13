@@ -11,7 +11,6 @@ export const receievePrice = (replyObj) => ({
 });
 
 export const receiveBlockChairStates = (replyObj) => {
-  // console.log(replyObj);
   return {
     type: RECEIVE_BLOCK_CHAIR_STATS,
     totalTransactions: replyObj.data.transactions,

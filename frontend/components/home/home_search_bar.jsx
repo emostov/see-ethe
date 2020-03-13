@@ -35,7 +35,6 @@ const HomeSearchBar = ({ blocks }) => {
 
   const searchBlock = () => {
     const searchTrimmed = searchTerm.trim();
-    console.log('this is the current search term', searchTrimmed);
     if (blocks[searchTrimmed] !== undefined) {
       redirectToBlockPage(searchTrimmed);
       return;
@@ -44,8 +43,6 @@ const HomeSearchBar = ({ blocks }) => {
     Object.values(blocks).forEach((block) => {
       console.log(block)
       if (block.number.toString() === searchTrimmed) {
-        console.log('blocknumber:', block.number.toString());
-        console.log('searchterm', searchTrimmed);
         const hash = block.hash.toString();
         redirectToBlockPage(hash);
         return;

@@ -39,7 +39,6 @@ export default class WriteWithdraw extends React.Component {
     e.preventDefault();
 
     const succes = (res) => {
-      console.log(res);
       this.setState({ withdrawResult: res })
     }
 

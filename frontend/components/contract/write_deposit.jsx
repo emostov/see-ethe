@@ -38,7 +38,6 @@ export default class WriteDeposit extends React.Component {
     e.preventDefault();
 
     const succes = (res) => {
-      console.log(res);
       this.setState({ depositResult: res })
     }
 

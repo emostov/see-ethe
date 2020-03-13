@@ -10,7 +10,7 @@ import WriteWithdraw from './write_withdraw';
 
 const WethWrite = () => {
   let circleClass = isConnected() ? 'user-circle green' : 'user-circle red';
-  let connected = isConnected() ? 'You are connected with Meta Mask' :
+  let connected = isConnected() ? 'You are connected with Meta Mask (must use Rinkeby)' :
     'You must connect with Meta Mask on the Rinkeby Network to use Write features';
   return (
     <div>

@@ -30,12 +30,9 @@ export default class Allowance extends React.Component {
   }
 
   reqAllowance(e) {
-    // console.log('hello')
     e.preventDefault()
     this.setState({ isOpen: true })
     const { allowanceA, allowanceB } = this.state;
-    console.log('a', allowanceA)
-    console.log('b', allowanceB)
     RinkebyWeth.methods
       .allowance(allowanceA.toString().trim(), allowanceB.toString().trim())
       .call()
