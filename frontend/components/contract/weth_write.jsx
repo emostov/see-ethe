@@ -27,9 +27,10 @@ export default class WethWrite extends React.Component {
     super()
     this.state = {
       depositValue: '',
-      guyApprove: '',
-      wadApprove: '',
-      approveResult: '...loading',
+      depositResult: '',
+      // guyApprove: '',
+      // wadApprove: '',
+      // approveResult: '...loading',
     }
     this.reqDeposit = this.reqDeposit.bind(this)
   }
@@ -64,15 +65,21 @@ export default class WethWrite extends React.Component {
     });
   }
 
-  reqDeposit() {
-    // if (this.isRinkebyAlert())
+  reqDeposit(e) {
+    e.preventDefault();
+
+    const succes = (res) => {
+      console.log(res);
+      this.setState({ depositResult: res })
+    }
+    let s = succes.bind(this)
     const { depositValue } = this.state;
     if (this.isConnected()) {
-      console.log(deposit)
-      runContractWrite(deposit, { value: depositValue.toString() })
+      runContractWrite(deposit(s), { value: depositValue.toString() })
     } else {
       alert("You need to connect to Meta Mask")
     }
+
   }
 
 
@@ -116,31 +123,27 @@ export default class WethWrite extends React.Component {
                     type="text"
                     name="guyApprove"
                     id="guyApprove"
-                    placeholder="guy (address)"
+                    placeholder="payableAmount (wei)"
                     value={this.state.depositValue}
                     onChange={this.update('depositValue')}
                   />
-                  <Button color='primary' onClick={this.reqDeposit}>
+                  <Button color='primary' className='ft-13 mt-2 mb-2'
+                    onClick={this.reqDeposit}
+                  >
                     Write
                   </Button>
+
+                  {
+                    this.state.depositResult ?
+                      <Button tag='a' className='ft-13 mt-2 mb-2 ml-3'
+                        href={`https://rinkeby.etherscan.io/tx/${this.state.depositResult}`}
+                      >Go to transaction</Button>
+                      : ''
+                  }
+
                 </FormGroup>
               </Form>
 
-              <div className='mono-txt grey'>
-                &nbsp;<i>uint256</i>
-              </div>
-
-              <UncontrolledCollapse toggler='#approveQuery'>
-                <div className='responseCollapse gray'>
-                  <div>[&nbsp;<b>deposit</b> method Response &nbsp;]</div>
-                  <span>
-                    <FontAwesomeIcon icon={faAngleDoubleRight}
-                      size="lg" className='user-circle green'
-                    />
-                  </span>
-                  &nbsp; <i>Result: </i>&nbsp;  {this.state.depositResult || '...waiting'}
-                </div>
-              </UncontrolledCollapse>
 
             </CardBody>
           </UncontrolledCollapse>

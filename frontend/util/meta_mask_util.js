@@ -12,19 +12,20 @@ export function runContractWrite(methodCB, otherOptions) {
     const options = { from: accounts[0], gas: 10 * 21000 };
     const combinedOptions = { ...options, ...otherOptions };
     const contract = new cWeb3.eth.Contract(ABIOBJ, etherWrapAddress);
-    methodCB(combinedOptions, contract);
+    methodCB(combinedOptions, contract)
   }).catch((err) => {
     console.log('sign up err ', err);
   });
 }
 
 // below are functions for the weth contract
-export const deposit = (options, contract) => {
+export const deposit = (success) => (options, contract) => {
   console.log('executing');
   contract.methods.deposit()
     .send(options, (err, res) => {
       if (!err) {
         console.log(res);
+        success(res);
         return res;
       }
       console.log('execution err: ', err);
