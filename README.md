@@ -15,12 +15,9 @@
 
 ###### [Jump to Technologies](#technologies)
 
-See-The-Ethe, an Etherscan clone, is a blockchain explorer that provides rich data feeds on blocks and transactions, a network health overview, and smart contract Read and Write interaction. A user can sign up, login, or use a demo
-login. However, following the ethos of privacy the App does not require login to
-use any of the key features.
+See-The-Ethe, an Etherscan clone, is a blockchain explorer that provides rich data feeds on blocks and transactions, a network health overview, detailed block show pages, block search bar, and smart contract Read and Write interaction with MetaMask. A user can sign up, login, or use a demo login. However, following the ethos of privacy the App does not require login to use any of the key features.
 
-This site uses Ruby On Rails and PostgreSQL for the backend to store user and
-session info, photos, and account tags. React + Redux was utilized to create a performant user interface implemented with future scalability in mind. The App fetches directly from an Infura node using Web3js as a convenience library to provide real time updates on blocks, transactions, and the wEth smart contract. To facilitate transaction signatures for smart contract Write operations the App integrates with the chrome MetaMask extension.
+This site uses Ruby On Rails and PostgreSQL for the backend to store user and session info, photos, and account tags. React + Redux was utilized to create a performant single page web app implemented with future scalability in mind. The App fetches directly from an Infura node using Web3js as a convenience library to provide real time updates on blocks, transactions, and smart contracts. To facilitate transaction signatures for smart contract Write operations the App integrates with the chrome MetaMask extension.
 
 --- 
 
@@ -31,12 +28,13 @@ session info, photos, and account tags. React + Redux was utilized to create a p
 * Web3js
 * Infura
 * MetaMask
-* React.js
-* Redux.js
-* Node.js
+* Reactjs
+* Reduxjs
+* Nodejs
 * Ruby on Rails
 * PostgreSQL
 * Webpack
+* Heroku
 
 ---
 
