@@ -18,10 +18,9 @@ import {
 } from 'reactstrap';
 
 import EtherWrap from '../../contract/ether_wrap';
-import { web3 } from '../../util/web3_util'
-import {
-  numberWithCommas,
-} from '../../util/general_util';
+import { web3, web3Rinkeby } from '../../util/web3_util';
+import { etherWrapRinkebyAddr } from '../../contract/ether_wrap';
+import { numberWithCommas, } from '../../util/general_util';
 import ContractNav from './contract_nav';
 
 
@@ -39,7 +38,7 @@ export default class ContractPage extends React.Component {
 
   componentDidMount() {
     this.props.fetchPrices();
-    web3.eth.getBalance('0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2')
+    web3Rinkeby.eth.getBalance(etherWrapRinkebyAddr)
       .then((res) => {
         // do big calcs here so don't have to do it on every render
         // combine all calcs into here just to minimizes calls to setState
@@ -82,7 +81,8 @@ export default class ContractPage extends React.Component {
             <div><h1 className='mb-0 grey'>Contract </h1></div>
             <div>
               <span className='sub-txt-3'>
-                &nbsp; 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
+                &nbsp; 0xc778417E063141139Fce010982780140Aa0cD5Ab &nbsp;
+                (Rinkeby Test Net)
               </span>
             </div>
           </div>
@@ -162,14 +162,14 @@ export default class ContractPage extends React.Component {
                       Creator
                     </Col>
                     <Col md='8'>
-                      <a href='https://etherscan.io/address/0x4f26ffbe5f04ed43630fdc30a87638d53d0b0876'
+                      <a href='https://rinkeby.etherscan.io/address/0x4f26ffbe5f04ed43630fdc30a87638d53d0b0876'
                         className='active feed name'>
                         0x4F26FfBe5F04ED43...
                       </a>
                       &nbsp;at txn&nbsp;
-                      <a href='https://etherscan.io/tx/0xb95343413e459a0f97461812111254163ae53467855c0d73e0f1e7c5b8442fa3'
+                      <a href='https://rinkeby.etherscan.io/tx/0x7bc8e85f99556aa23a41dd3c107e92ec76f057e4cea39f376ffb1b15d514b11f'
                         className='active feed name'>
-                        0xb95343413e459...
+                        0x7bc8e85f99556aa...
                       </a>
 
                     </Col>
