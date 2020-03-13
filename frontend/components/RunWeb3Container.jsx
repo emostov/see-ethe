@@ -14,7 +14,7 @@ class RunWeb3 extends React.Component {
 
   componentDidMount() {
     this.props.fetchAddressTypeTags();
-    this.props.fetchBlocks(1)
+    this.props.fetchBlocks(8)
 
     // TODO production always comment in
     this.state.intervalID = setInterval(() => {

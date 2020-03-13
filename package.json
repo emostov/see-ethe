@@ -14,7 +14,6 @@
     "big.js": "^5.2.2",
     "bn.js": "^5.1.1",
     "font-awesome": "^4.7.0",
-    "fs": "0.0.1-security",
     "jquery": "^1.9.1",
     "object-sizeof": "^1.5.3",
     "react": "^16.13.0",

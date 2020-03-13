@@ -69,7 +69,6 @@ export const extractTxnObjectsFromBlock = (block) => {
     const txnsObject = {};
     const txnsHashArray = [];
     transactions.forEach((txn) => {
-      // txReciept = await web3.eth.getTransactionReceipt(txn)
       txnsHashArray.push(txn.hash);
       txnsObject[txn.hash] = txn;
     });

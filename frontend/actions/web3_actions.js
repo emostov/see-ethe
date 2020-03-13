@@ -44,7 +44,6 @@ export const fetchTransactionReciept = (dispatch, getState) => (txHash) => (
   Web3Util.getTransactionReciept(txHash)
     .then((txReceipt) => {
       if (!txReceipt) {
-        //err
         return;
       }
 
