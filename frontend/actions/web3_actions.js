@@ -16,7 +16,6 @@ export const updateBlockReward = (blockHash, reward) => ({
   reward,
 });
 
-
 export const receiveBlock = (blk, fetchTxRecieptDispatch) => {
   const {
     txnsObject,
@@ -38,7 +37,6 @@ export const receiveBlock = (blk, fetchTxRecieptDispatch) => {
     txnsHashArray,
   };
 };
-
 
 export const fetchTransactionReciept = (dispatch, getState) => (txHash) => (
   Web3Util.getTransactionReciept(txHash)

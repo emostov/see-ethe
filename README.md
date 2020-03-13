@@ -15,14 +15,14 @@
 
 ###### [Jump to Technologies](#technologies)
 
-See-The-Ethe, an Etherscan clone, is a blockchain explorer that provides rich
-data feeds on blocks and transactions, a network health overview, and smart
-contract Read and Write interaction. A user can sign up, login, or use a demo
+See-The-Ethe, an Etherscan clone, is a blockchain explorer that provides rich data feeds on blocks and transactions, a network health overview, and smart contract Read and Write interaction. A user can sign up, login, or use a demo
 login. However, following the ethos of privacy the App does not require login to
 use any of the key features.
 
 This site uses Ruby On Rails and PostgreSQL for the backend to store user and
 session info, photos, and account tags. React + Redux was utilized to create a performant user interface implemented with future scalability in mind. The App fetches directly from an Infura node using Web3js as a convenience library to provide real time updates on blocks, transactions, and the wEth smart contract. To facilitate transaction signatures for smart contract Write operations the App integrates with the chrome MetaMask extension.
+
+--- 
 
 ## Technologies
 ###### [Jump to Features](#features)
@@ -43,7 +43,7 @@ session info, photos, and account tags. React + Redux was utilized to create a p
 ## Features
 
 ### Live Block and Transaction Feeds
-###### [Next Feature]()
+###### [Jump to Next Feature](#direct-contract-interaction-and-metamask-integration)
 
 ##### Overview
 
@@ -66,16 +66,19 @@ The initial implementation of the redux cycle and associated calculations suffer
 * On re-render, while mapping over blocks, calculate each block reward so it updates with with each transaction reciept
 * Once a block hits an arbirtrary age (i.e 30 seconds), save the reward as a block attribute, dispatch to state, and skip future reward calculations
 
-Bottlenecks:
-
-* Big number calculations on every render block the stack and hinder realtime page interaction
+__Bottlenecks witht the aformentioned flow:__
+* Big number calculations on every render block the stack and hinder real time page interaction
 * Redundant calculations are made since they are done based on renders and not when the relevent information is recieved
 * Picking an arbitrary age to stop updates can result in incomplete results
 * Dispatching an action from the render cycle does not follow React philosophy
 
-Solution: Decouple reward updates from the render cycle.
-In order to do this I created additional callbacks for dispatching updated transaction gas costs and updated block rewards. These are then threaded down starting with the initial fetch of the block. This process elimated redundant Big.js calculations and instead saves them to state so they can be asynchronously built upon.
+__Solution:__
 
+Decouple reward updates from the render cycle.
+
+In order to do this I created additional callbacks for calculating and dispatching updated transaction gas costs and updated block rewards. These are then threaded down starting with the initial fetch of the block. This process elimated redundant Big.js calculations and instead saves them to state so they can be asynchronously built upon.
+
+##### Code highlights for the above solution
 ```javascript
 // web3_util.js
 
@@ -240,5 +243,112 @@ export const calculateUpdatedRewad = (block, transaction) => {
   const newReward = bigCost.add(bigReward);
   return newReward.toString();
 }
+```
 
+---
+
+### Direct Contract Interaction and MetaMask Integration
+
+##### Overview:
+
+* Facilitates call (read) and send (write) interactions with smart contracts
+* MetaMask is used for write interactions to sign transactions and set gas
+* After a succesful write a link to the relevant transaction shows up as a button
+* Currently available for the Rinkeby test-net so the feature can be demoed with no real risk
+* At the moment the feature is only available for the Wrapped Ether (wEth) smart contract
+* The Wrapped Eth contract facilatates a one-to-one transfer of Ether to an ERC-20 with equivalent value in order to get around the fact that Eth does not comply to the ERC-20 standard
+* Since the Write feature was the last feature I worked on, it is not yet been implemented for every write function of the wEth contract and I can only confirm that the deposit function is working
+
+##### Challenges:
+
+The primary challenges for this feature were 1) simply learning solidity well enough to thoroughly understand the contract, 2) facilating MetaMask integration with a UX that closely mimiced Etherscan, and 3) having user input _consistently_ correctly propagate to the method call for write methods. For the former I spent about a day going through the solidity docs and to get a deeper understanding of the nuances of the language and code execution in the EVM. The latter two challenges are still a work in progress and due to time scale I have only spent minimal time on addressing them
+
+
+##### Code highlights for calling the deposit function on the wEth contract
+```javascript
+// meta_mask_util.js
+
+export function isConnected() {
+  // This line verifies that MetaMask has injected intself  into the window
+  return (typeof window.ethereum !== 'undefined');
+};
+
+export function runContractWrite(methodCB, otherOptions) {
+  // Prompt user sign in with MetaMask if they have
+  window.ethereum.enable().then((accounts) => {
+
+    // Create instance of web3 with user's MetaMask provided connection
+    const cWeb3 = new Web3(Web3.givenProvider);
+
+    // Set default options for sending method call
+    const options = { from: accounts[0], gas: 10 * 21000 };
+
+    // Combine default options with method specific options fed in by calling 
+    // functions
+    const combinedOptions = { ...options, ...otherOptions };
+
+    // Create instance of contract from the the contract's ABI 
+    // (compiled earlier and imported into this file)
+    const contract = new cWeb3.eth.Contract(ABIOBJ, etherWrapAddress);
+
+    // Call the function passed in that deals with sending specific contract 
+    // methods
+    methodCB(combinedOptions, contract);
+  }).catch((err) => {
+    console.log('enable err: ', err);
+  });
+}
+
+// Curried method for calling deposit function of wEth smart contract
+// First takes in a success callback from the React component and then later
+// takes in options and contract instance passed when runContractWrite() calls it
+export const deposit = (success) => (options, contract) => {
+
+  // Calls the deposit method of the contract and sends with options object and
+  // callback function for handling errors and result
+  contract.methods.deposit()
+    .send(options, (err, res) => {
+      if (!err) {
+
+        // call passed in react success function with the result
+        success(res);
+        return res;
+      }
+      console.log('execution err: ', err);
+      return err;
+    })
+    .catch((err) => console.log('caught err: ', err));
+};
+```
+
+```javascript
+// write_deposit.jsx (react component for the deposit method interface)
+
+  reqDeposit(e) {
+    
+    // Prevent default button behaviour
+    e.preventDefault();
+
+    // Define callback that sets the state variable to the return value of the 
+    // deposit method call, which is the address of the transaction
+    const succes = (res) => {
+      this.setState({ depositResult: res })
+    }
+
+    // Bind context of this react component
+    let s = succes.bind(this)
+
+    //Grab the user input from state
+    const { depositValue } = this.state;
+
+    // Check connection, and if they are connected pass the curried deposit()
+    // function with the amount entered by the user (depositValue) to
+    // runContractWrite() *note both aformentioned are in the above code snippet
+    if (isConnected()) {
+      runContractWrite(deposit(s), { value: depositValue.toString() })
+    } else {
+      alert("You need to connect to Meta Mask")
+    }
+
+  }
 ```
