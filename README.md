@@ -15,9 +15,9 @@
 
 ###### [Jump to Technologies](#technologies)
 
-See The Ethe, an Etherscan clone, is a blockchain explorer that providesdat live data feeds for blocks and transactions, network health overview, detailed block show pages, block search bar, and smart contract Read and Write interactions with MetaMask. A user can sign up, login, or use a demo login. However, following the ethos of privacy the App does not require login to use any of the key features.
+See The Ethe, an Etherscan clone, is a blockchain explorer that providesdat live data feeds for blocks and transactions, network health overview, detailed block show pages, block search bar, and smart contract Read and Write interactions with MetaMask. A user can sign up, login, or use a demo login. However, following the ethos of privacy, the App does not require login to use any of the key features.
 
-This site uses Ruby On Rails and PostgreSQL for the backend to store user and session info, and account tags. React + Redux was utilized to create a performant single page web app implemented with future scalability in mind. The App fetches directly from an Infura node to provide real time updates on blocks, transactions, and smart contracts. Web3js is used as a convenience library to interface with the contract and Infura. To facilitate transaction signatures for smart contract Write operations the App integrates with the chrome MetaMask extension.
+This site uses Ruby On Rails and PostgreSQL for the backend to store user and session info, and account tags. React + Redux was utilized to create a performant single page web app implemented with future scalability in mind. The App fetches directly from an Infura node to provide real time updates on blocks, transactions, and smart contracts. Web3js is used as a convenience library to interface with the contract and Infura. To facilitate transaction signatures for smart contract Write operations the App integrates with the Chrome MetaMask extension.
 
 ---
 
@@ -45,37 +45,37 @@ This site uses Ruby On Rails and PostgreSQL for the backend to store user and se
 
 ##### Overview
 
-* Block requests use the Web3js batch feature to provide synchronous behaviour in order to avoid sorting on reciept. The sync-like batched requests have a performance hit for response time, but a batched request is only used once on the initial React component mount and all subsequent requests are for single blocks.
-* A block reward field is initially set to a baseline of 2 Eth + relevant uncle.
+* Block requests use the Web3js batch feature to provide synchronous behavior in order to avoid sorting on receipt. The sync-like batched requests have a performance hit for response time, but a batched request is only used once on the initial React component mount and all subsequent requests are for single blocks.
+* A block reward field is initially set to a baseline of 2 Eth + relevant uncle reward.
 * Full transaction objects are included in block requests to avoid a N+1 fetch.
-* After the reciept of a block, a transaction reciept is fetched for each transaction in order to obtain the exact amount of gas used in processing the transaction. Upon succesful retrieval the reciept is merged with the transaction object and the actual wei payed for gas for the used gas is calculated.
-* The block reward is incremented every time a transaction reciept is recieved.
+* After the receipt of a block, a transaction receipt is fetched for each transaction in order to obtain the exact amount of gas used in processing the transaction. Upon successful retrieval the receipt is merged with the transaction object and the actual wei payed for gas for the used gas is calculated.
+* The block reward is incremented every time a transaction receipt is received.
 * Clicking on the block number and any other of the blue links in either of the feeds will take the user to the detailed show page for the respective block
 
 ##### Challenges
 
-The major challenge was fetching transaction reciepts and then calculating block reward in a performant manner that would not diminish user exprience. Below I elaborate on the issues of my initial and naive implementation, followed by key sections of code from the current strategy.
+The major challenge was fetching transaction receipts and then calculating block reward in a performant manner that would not diminish user experience. Below, I elaborate on the issues of my initial and naive implementation, followed by key sections of code from the current strategy.
 
 The initial implementation of the redux cycle and associated calculations suffered from major performance issues that would delay user interaction. The initial flow was something like:
 
 * Fetch blocks with associated transactions.
-* Fetch associated transaction reciept for each transaction.
-* Combine reciept and transaction object.
-* On re-render, while mapping over blocks, calculate each block reward so it updates with each transaction reciept.
-* Once a block hits an arbirtrary age (i.e 30 seconds), save the reward as a block attribute, dispatch to state, and skip future reward calculations
+* Fetch associated transaction receipt for each transaction.
+* Combine receipt and transaction object.
+* On re-render, while mapping over blocks, calculate each block reward so it updates if a new transaction receipt was recieved.
+* Once a block hits an arbitrary age (e.g. 30 seconds), save the reward as a block attribute, dispatch to state, and skip future reward calculations.
 
-__Bottlenecks with the aformentioned flow:__
+##### Bottlenecks with the aforementioned flow:
 
 * Big.js number calculations on every render block the stack and hinder real time page interaction.
-* Redundant calculations are made since they are done based on renders and not when the relevent information is recieved.
+* Redundant calculations are made since they are done based on renders and not when the relevant information is received.
 * Picking an arbitrary age to stop updates can result in incomplete results.
 * Dispatching an action from the render cycle does not follow React philosophy.
 
-__Solution:__
+##### Solution:
 
 Decouple reward updates from the render cycle.
 
-In order to do this I created additional callbacks for calculating and dispatching updated transaction gas costs and updated block rewards. These are then threaded down starting with the initial fetch of the block. This process elimated redundant Big.js calculations and instead saves each calculation to state so they can be asynchronously built upon.
+In order to do this I created additional callbacks for calculating and dispatching updated transaction gas costs and updated block rewards. These are then threaded down starting with the initial fetch of the block. This process eliminated redundant Big.js calculations and instead saves each calculation to state so they can be asynchronously built upon.
 
 ##### Code highlights for the above solution
 
@@ -100,7 +100,7 @@ export const getNLatestBlocks = (n, processBlockCB) => {
     blockRange.forEach((blockNum) => {
 
       // Each request added to the batch includes a callback that will handle
-      // state insertion, transactionReciept fetching, transaction updates
+      // state insertion, transactionReceipt fetching, transaction updates
       // with the reciept and cost of actual gas used, and calculations to
       // update block reward
       batch.add(web3.eth.getBlock.request(
@@ -171,11 +171,11 @@ const processBlock = (dispatch, getState) => (err, block) => {
     // used later on when looping through the blocks transactions.
     dispatch(receiveBlock(block, fetchTxRecieptDispatch));
   } else {
-    console.error('Block reciept ERROR: ', err);
+    console.error('Block receipt ERROR: ', err);
   }
 };
 
-// Takes in dispatch and getState in order to fetch a transaction reciept for
+// Takes in dispatch and getState in order to fetch a transaction receipt for
 // the given transactionHash. This function is passed as callback to receive
 // block
 export const fetchTransactionReciept = (dispatch, getState) => (txHash) => (
@@ -187,7 +187,7 @@ export const fetchTransactionReciept = (dispatch, getState) => (txHash) => (
         return;
       }
 
-      // Dispatch reciept so it can be merged with relevant transaction and
+      // Dispatch receipt so it can be merged with relevant transaction and
       // inserted into state. This will calculate and add the total cost of the
       // gas use to the transaction so it can be refferenced later when
       // calculating block reward
@@ -207,7 +207,7 @@ export const fetchTransactionReciept = (dispatch, getState) => (txHash) => (
 ```javascript
 // web3_util.js (cost of gas used & reward update functions)
 
-// Once the transaction reciept is merged with the original transaction
+// Once the transaction receipt is merged with the original transaction
 // this function is called in order to calculate the costOfGasUsed and add it as
 // an attribute of the transaction object so it can be saved in state
 const calcGasUsed = (txObj) => {
@@ -255,15 +255,15 @@ export const calculateUpdatedRewad = (block, transaction) => {
 
 * Facilitates call (read) and send (write) interactions with smart contracts
 * MetaMask is used for write interactions to sign transactions and set gas
-* After a succesful write a link to the relevant transaction shows up as a button
+* After a successful write a link to the relevant transaction shows up as a button
 * Currently available for the Rinkeby test-net so the feature can be demoed with no real risk
 * At the moment the feature is only available for the Wrapped Ether (wEth) smart contract
-* The Wrapped Eth contract facilatates a one-to-one transfer of Ether to an ERC-20 with equivalent value in order to get around the fact that Eth does not comply to the ERC-20 standard
+* The Wrapped Eth contract facilitates a one-to-one transfer of Ether to an ERC-20 with equivalent value in order to get around the fact that Eth does not comply to the ERC-20 standard
 * Since the Write feature was the last feature I worked on, it is not yet been implemented for every write function of the wEth contract and I can only confirm that the deposit function is working
 
 ##### Challenges
 
-The primary challenges for this feature were 1) simply learning solidity well enough to thoroughly understand the contract, 2) facilating MetaMask integration with a UX that closely mimiced Etherscan, and 3) having user input _consistently_ propagate correctly to the solidity method call for write methods. For the former I spent about a day going through the solidity docs to get a deeper understanding of the language and code execution in the EVM. The latter two challenges are still a work in progress and due to time scale I have only spent minimal time on addressing them.
+The primary challenges for this feature were 1) simply learning Solidity well enough to thoroughly understand the contract, 2) facilitating MetaMask integration with a UX that closely mimicked Etherscan, and 3) having user input _consistently_ propagate correctly to the solidity method call for write methods. For the former I spent about a day going through the Solidity docs to get a deeper understanding of the language and code execution in the EVM. The latter two challenges are still a work in progress and due to time scale I have only spent minimal time on addressing them. For example, to use the deposit() function of the smart contract, the user input propagates until MetaMask starts handling the transaction, at which point the msg.value gets set to 0. I hypothesize that I just need to better understand the MetaMask api, which I have not had a chance to do yet.
 
 ##### Code highlights for calling the deposit function on the wEth contract
 
@@ -332,7 +332,7 @@ export const deposit = (success) => (options, contract) => {
 
   reqDeposit(e) {
     
-    // Prevent default button behaviour
+    // Prevent default button behavior
     e.preventDefault();
 
     // Define callback that sets the state variable to the return value of the 
@@ -349,7 +349,7 @@ export const deposit = (success) => (options, contract) => {
 
     // Check connection, and if they are connected pass the curried deposit()
     // function with the amount entered by the user (depositValue) to
-    // runContractWrite() *note both aformentioned are in the above code snippet
+    // runContractWrite() *note both aforementioned are in the above code snippet
     if (isConnected()) {
       runContractWrite(deposit(s), { value: depositValue.toString() })
     } else {
