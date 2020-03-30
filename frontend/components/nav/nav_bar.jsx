@@ -36,6 +36,13 @@ const NavBar = () => {
 
     <ul className='nav-bar'>
       <li>
+        {<a href="https://github.com/emostov/see-ethe"
+          target="_blank" rel="noopener noreferrer" >
+          <img src={window.imgs.github} className='online-presence-icon' alt="github" />
+        </a>}
+      </li>
+
+      <li>
         <NavLink className='nav-link home-link' activeClassName={'active-link'} to={'/home'} >
           Home
         </NavLink>

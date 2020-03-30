@@ -27,6 +27,7 @@ const UserHeader = ({ currentUser, logout }) => {
     < div className='user-header nav-link' >
       {inner}
       {/* hi */}
+      
     </div >
   )
 }
