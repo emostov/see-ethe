@@ -13,8 +13,13 @@ class SessionForm extends React.Component {
         this.state = { username: '', password: '', email: '', checkPassword: '' }
       )
 
-
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidUpdate(prevProps){
+    if (this.props.formType !== prevProps.formType){
+      this.props.clearErrors();
+    }
   }
 
   update(field) {
@@ -23,10 +28,12 @@ class SessionForm extends React.Component {
     });
   }
 
+
   // check for password match if creating account
   handleSubmit(e) {
     e.preventDefault();
     const { username, password, email, checkPassword } = this.state
+    this.props.clearErrors();
     if (this.props.formType == 'login') {
       this.props.processForm({ username, password });
     } else if (checkPassword !== password) {
@@ -34,10 +41,11 @@ class SessionForm extends React.Component {
     } else {
       this.props.processForm({ username, password, email })
     }
+    
   }
 
   renderErrors() {
-    return (
+    const msgs =  (
       <ul>
         {this.props.errors.map((error, i) => (
           <li className='session-form-error' key={i}>
@@ -48,6 +56,13 @@ class SessionForm extends React.Component {
         ))}
       </ul>
     );
+
+    // Redux action to clear errors
+    // if (this.props.errors.length){
+      
+    // }
+    return msgs;
+
   }
 
 
