@@ -20,9 +20,10 @@ const mapDispatchToProps = dispatch => {
     processForm: (user) => dispatch(login(user)),
     dispatchErrors: (errorsArray) => dispatch(receiveErrors(errorsArray)),
     clearErrors: () => dispatch(clearSessionErrors()),
-    navLink: <Link to="/signup"
+    navLink: <Link
+      to="/signup"
       onClick={() => dispatch(clearSessionErrors())}
-    >Click to sign up</Link>,
+      >Click to sign up</Link>,
   };
 };
 
