@@ -77,7 +77,8 @@ export default class HomeFeedCard extends React.Component {
     range(0, loop_len).forEach((i) => {
       const txHash = block.transactions[i];
       const tx = transactions[txHash];
-      latestTxs.push(< TransactionItem tx={tx} age={age} key={txHash} />);
+      // latestTxs.push(< TransactionItem tx={tx} age={age} key={txHash} />);
+      latestTxs.push(< TransactionItem tx={tx} age={age} key={Math.random()} />);
     })
     return latestTxs;
   }

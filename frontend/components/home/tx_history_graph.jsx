@@ -19,7 +19,7 @@ const TXHistoryGraph = ({ tetherTXHistory }) => {
 
   return (
 
-    <LineChart width={335} height={105} data={cleanData} >
+    <LineChart width={270} height={105} data={cleanData} >
       <Tooltip />
       <Line type="monotone" dataKey="txs_k" stroke="#1E2002" />
       <XAxis
@@ -40,7 +40,7 @@ const TXHistoryGraph = ({ tetherTXHistory }) => {
         type="number" domain={['dataMin', 'dataMax + 5']}
 
         tickSize
-        padding={{ left: 0, right: 15 }}
+        padding={{ left: 0, right: 5 }}
       />
 
     </LineChart>
