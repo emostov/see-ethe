@@ -11,7 +11,6 @@ const mapStateToProps = ({ errors }) => {
   return {
     errors: errors.session,
     formType: 'login',
-    // navLink: <Link to="/signup" onClick={() =>}>Click to sign up</Link>,
   };
 };
 
@@ -23,7 +22,7 @@ const mapDispatchToProps = dispatch => {
     navLink: <Link
       to="/signup"
       onClick={() => dispatch(clearSessionErrors())}
-      >Click to sign up</Link>,
+    >Click to sign up</Link>,
   };
 };
 
