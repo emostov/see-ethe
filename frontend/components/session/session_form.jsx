@@ -57,10 +57,6 @@ class SessionForm extends React.Component {
       </ul>
     );
 
-    // Redux action to clear errors
-    // if (this.props.errors.length){
-      
-    // }
     return msgs;
 
   }

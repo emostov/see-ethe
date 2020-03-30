@@ -23,6 +23,7 @@ export const clearSessionErrors = () => ({
   type: CLEAR_SESSION_ERRORS,
 });
 
+
 export const signup = (user) => (dispatch) => (
   APIUtil.signup(user)
     .then(
