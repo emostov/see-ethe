@@ -33,7 +33,7 @@ class MyAccount extends React.Component {
     const { user } = this.props;
     return (
       <div>
-        <Card className='std-box'>
+        <Card className='std-box account-overview-card'>
           <CardHeader>
             <a id='overview-tab' className='pain-nav-link active'>
               Overview

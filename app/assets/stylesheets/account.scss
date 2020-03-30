@@ -52,6 +52,10 @@ th, td {
   color: #3498db;
 }
 
+.account-overview-card {
+  z-index: 0!important;
+}
+
 // @media (mid-width: 1000){
   .row.account{
     min-width: 940px;
