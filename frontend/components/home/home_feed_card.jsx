@@ -78,7 +78,6 @@ export default class HomeFeedCard extends React.Component {
       const txHash = block.transactions[i];
       const tx = transactions[txHash];
       latestTxs.push(< TransactionItem tx={tx} age={age} key={txHash} />);
-      // latestTxs.push(< TransactionItem tx={tx} age={age} key={Math.random()} />);
     })
     return latestTxs;
   }
