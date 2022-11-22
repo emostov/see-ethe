@@ -29,7 +29,7 @@
     "solc": "^0.6.4",
     "web3": "^1.2.5",
     "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.3.12"
   },
   "description": "This README would normally document whatever steps are necessary to get the application up and running.",
   "version": "1.0.0",
